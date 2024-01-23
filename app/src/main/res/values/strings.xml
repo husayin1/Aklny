@@ -1,0 +1,17 @@
+<resources>
+    <!--application Name-->
+    <string name="app_name">FoodFusion</string>
+    <!--onBoardingTitles-->
+    <string name="screen1">Personalized Recipe Discovery</string>
+    <string name="screen2">Grocery List for When You Shop</string>
+    <string name="screen3">All Your Favorite Recipes In One Place</string>
+    <!--onBoardingDescriptions-->
+    <string name="description1">Tell us your food preferences and we\'ll server you delicious recipes ideas</string>
+    <string name="description2">Take the grocery list from your cart to your nearest grocery store and buy the ingredients</string>
+    <string name="description3">Save time on planning by having your favorite recipes within reach</string>
+    <!--start Desc-->
+    <string name="startDesc">Start Desc</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    g>
+</resources>
