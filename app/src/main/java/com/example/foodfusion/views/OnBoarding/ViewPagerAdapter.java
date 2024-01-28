@@ -1,4 +1,4 @@
-package com.example.foodfusion.OnBoarding;
+package com.example.foodfusion.views.OnBoarding;
 
 import android.content.Context;
 import android.view.LayoutInflater;
