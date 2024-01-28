@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--application Name-->
+    <string name="app_name">FoodFusion</string>
+    <!--onBoardingTitles-->
+    <string name="screen1">اكتشاف وصفة شخصية</string>
+    <string name="screen2">قائمة البقالة عند التسوق</string>
+    <string name="screen3">جميع وصفاتك المفضلة في مكان واحد</string>
+    <!--onBoardingDescriptions-->
+    <string name="description1">أخبرنا بتفضيلاتك الغذائية وسنقوم بتزويدك بأفكار وصفات لذيذة</string>
+    <string name="description2">خذ قائمة البقالة من عربة التسوق الخاصة بك إلى أقرب محل بقالة وشراء المكونات</string>
+    <string name="description3">وفر الوقت في التخطيط من خلال جعل وصفاتك المفضلة في متناول اليد</string>
+    <!--start Desc-->
+    <string name="startDesc">Start Desc</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back_btn">العودة</string>
+    <string name="signup_screen_text">احفظ الوصفات اللذيذة واحصل على محتوى مخصص.</string>
+    <string name="email_field">الحساب</string>
+    <string name="password_field">الرقم السري</string>
+    <string name="password_confirm_text">تأكيد الرقم السري</string>
+    <string name="signup_button">التسجيل</string>
+    <string name="login_text">تسجيل الدخول</string>
+    <string name="guest">ضيف</string>
+    <string name="login_description">مرحباً بك مرة أخرى! أنت على بعد نقرة واحدة من شيء لذيذ.</string>
+    <string name="login_button">ابدأ الطهي الأن!</string>
+    <string name="dont_have_account">ليس لديك حساب؟</string>
+    <string name="signup_txt">تسجيل حساب</string>
+    <string name="skip_button">تخطي</string>
+    <string name="next_button">التالي</string>
+
+    <string name="home_icon">الرئيسية</string>
+    <string name="search_icon">بحث</string>
+    <string name="favorite_icon">المفضلة</string>
+    <string name="calendar_icon">المخطط</string>
+    <string name="next">التالي</string>
+    <string name="finish">انهاء</string>
+    <string name="inspiration_text">وجبة اليوم</string>
+    <string name="rest_meals">الرائج الان</string>
+
+    <string name="meal_title_home_name">اسم الوجبة</string>
+    <string name="meal_name">اسم الوجبة</string>
+    <string name="meal_description">وصف الوجبة</string>
+    <string name="tvMealNameDetails">اسم الوجبة</string>
+    <string name="mealCategoryItemDetails">نوع الوجبة</string>
+    <string name="textViewIngredients">المكونات</string>
+    <string name="textViewVideo">الفيديو</string>
+    <string name="textViewProcedures">الخطوات بالتفصيل</string>
+    <string name="procedure">الخطوات</string>
+
+</resources>

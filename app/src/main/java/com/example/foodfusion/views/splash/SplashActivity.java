@@ -1,4 +1,4 @@
-package com.example.foodfusion.splash;
+package com.example.foodfusion.views.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.foodfusion.Authentication.AuthenticationActivity;
-import com.example.foodfusion.OnBoarding.OnBoardingActivity;
+import com.example.foodfusion.views.Authentication.AuthenticationActivity;
+import com.example.foodfusion.views.OnBoarding.OnBoardingActivity;
 import com.example.foodfusion.R;
 
 public class SplashActivity extends AppCompatActivity {
