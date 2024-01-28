@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Authentication.signup.view.SignUpFragment">
+    tools:context=".views.Authentication.signup.view.SignUpFragment">
 
     <TextView
         android:id="@+id/txt_signup"
@@ -12,72 +12,71 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:padding="20dp"
-        android:text="SignUp"
+        android:text="@string/signup_txt"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/haveAccountButton" />
 
-    <EditText
-        android:id="@+id/edt_txt_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="Display Name"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_signup_word" />
 
-    <EditText
-        android:id="@+id/edt_txt_password"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEmailSignUp"
+        style="?attr/textInputOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_txt_email" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_signup_word">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextEmailSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_field"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            />
 
-    <EditText
-        android:id="@+id/edt_txt_email"
-        android:layout_width="match_parent"
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPasswordSignUp"
+        style="?attr/textInputOutlinedStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="text"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_txt_name" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailSignUp"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailSignUp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_field"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            />
 
-    <EditText
-        android:id="@+id/edt_txt_confirm_password"
-        android:layout_width="match_parent"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutConfirmPasswordSignUp"
+        style="?attr/textInputOutlinedStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="coniform password"
-        android:inputType="text"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_txt_password" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordSignUp"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutPasswordSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordSignUp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextConfirmPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_confirm_text"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/txt_signup_word"
@@ -88,7 +87,7 @@
         android:layout_marginEnd="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Save delicious recipes and get personalized content."
+        android:text="@string/signup_screen_text"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,12 +98,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="32dp"
-        android:text="SignUp"
+        android:text="@string/signup_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_txt_confirm_password" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutConfirmPasswordSignUp" />
 
     <Button
         android:id="@+id/haveAccountButton"
@@ -114,11 +114,23 @@
         android:layout_marginTop="16dp"
         android:background="#00000000"
         android:padding="8dp"
-        android:text="Back"
+        android:text="@string/back_btn"
         android:textColor="@color/green"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/googleSignIN"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="28dp"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/google_96"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/btnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
