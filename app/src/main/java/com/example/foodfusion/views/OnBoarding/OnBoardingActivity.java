@@ -1,21 +1,17 @@
-package com.example.foodfusion.OnBoarding;
+package com.example.foodfusion.views.OnBoarding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.foodfusion.Authentication.AuthenticationActivity;
-import com.example.foodfusion.MainActivity;
+import com.example.foodfusion.views.Authentication.AuthenticationActivity;
 import com.example.foodfusion.R;
 
 public class    OnBoardingActivity extends AppCompatActivity {
@@ -119,10 +115,10 @@ public class    OnBoardingActivity extends AppCompatActivity {
             if (position == 2) {
                 backButton.setVisibility(View.INVISIBLE);
                 skipButton.setVisibility(View.INVISIBLE);
-                nextButton.setText("Finish");
+                nextButton.setText(R.string.finish);
 
             } else {
-                nextButton.setText("Next");
+                nextButton.setText(R.string.next);
                 backButton.setVisibility(View.VISIBLE);
                 skipButton.setVisibility(View.VISIBLE);
             }

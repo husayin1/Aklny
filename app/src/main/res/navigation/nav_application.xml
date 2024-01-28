@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_application"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.foodfusion.views.home.home.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_mealDetailsFragment2"
+            app:destination="@id/MealDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/FavoriteFragment"
+        android:name="com.example.foodfusion.views.home.favorite.view.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/SearchFragment"
+        android:name="com.example.foodfusion.views.home.search.view.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/MealPlanFragment"
+        android:name="com.example.foodfusion.views.home.mealPlan.view.MealPlanFragment"
+        android:label="fragment_meal_plan"
+        tools:layout="@layout/fragment_meal_plan" />
+    <fragment
+        android:id="@+id/MealDetailsFragment"
+        android:name="com.example.foodfusion.views.home.meal_details.view.MealDetailsFragment"
+        android:label="MealDetailsFragment" />
+</navigation>

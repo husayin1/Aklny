@@ -6,12 +6,43 @@
     <string name="screen2">Grocery List for When You Shop</string>
     <string name="screen3">All Your Favorite Recipes In One Place</string>
     <!--onBoardingDescriptions-->
-    <string name="description1">Tell us your food preferences and we\'ll server you delicious recipes ideas</string>
+    <string name="description1">Tell us your food preferences and we will server you delicious recipes ideas</string>
     <string name="description2">Take the grocery list from your cart to your nearest grocery store and buy the ingredients</string>
     <string name="description3">Save time on planning by having your favorite recipes within reach</string>
     <!--start Desc-->
     <string name="startDesc">Start Desc</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    g>
+    <string name="back_btn">Back</string>
+    <string name="signup_screen_text">Save delicious recipes and get personalized content.</string>
+    <string name="email_field">Email</string>
+    <string name="password_field">Password</string>
+    <string name="password_confirm_text">Confirm Password</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="login_text">Login</string>
+    <string name="guest">Guest</string>
+    <string name="login_description">Welcome back! You are just a tap away from something delicious.</string>
+    <string name="login_button">Start Cooking!</string>
+    <string name="dont_have_account">Don t Have an Account?</string>
+    <string name="signup_txt">Sign Up</string>
+    <string name="skip_button">Skip</string>
+    <string name="next_button">Next</string>
+    <string name="home_icon">Home</string>
+    <string name="search_icon">Search</string>
+    <string name="favorite_icon">Favorite</string>
+    <string name="calendar_icon">Planner</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="inspiration_text">Daily Inspiration</string>
+    <string name="rest_meals">Trending Now</string>
+    <string name="meal_title_home_name">Meal Name</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="meal_description">Meal Description</string>
+    <string name="tvMealNameDetails">Meal Name</string>
+    <string name="mealCategoryItemDetails">Category</string>
+    <string name="textViewIngredients">Ingredients</string>
+    <string name="textViewVideo">Video</string>
+    <string name="textViewProcedures">STEP 1\nTO MAKE SUSHI ROLLS: Pat out some rice. Lay a nori sheet on the mat, shiny-side down. Dip your hands in the vinegared water, then pat handfuls of rice on top in a 1cm thick layer, leaving the furthest edge from you clear.r\nr\nSTEP 2r\nSpread over some Japanese mayonnaise. Use a spoon to spread out a thin layer of mayonnaise down the middle of the rice.\nr\nSTEP 3r\nAdd the filling. Get your child to top the mayonnaise with a line of their favourite fillings – here we’ve used tuna and cucumber.\n\nSTEP 4r\nRoll it up. Lift the edge of the mat over the rice, applying a little pressure to keep everything in a tight roll.r\nr\nSTEP 5r\nStick down the sides like a stamp. When you get to the edge without any rice, brush with a little water and continue to roll into a tight roll.r\nr\nSTEP 6r\nWrap in cling film. Remove the mat and roll tightly in cling film before a grown-up cuts the sushi into thick slices, then unravel the cling film.r\nr\nSTEP 7r\nTO MAKE PRESSED SUSHI: Layer over some smoked salmon. Line a loaf tin with cling film, then place a thin layer of smoked salmon inside on top of the cling film.r\nr\nSTEP 8r\nCover with rice and press down. Press about 3cm of rice over the fish, fold the cling film over and press down as much as you can, using another tin if you have one.r\nr\nSTEP 9r\nTip it out like a sandcastle. Turn block of sushi onto a chopping board. Get a grown-up to cut into fingers, then remove the cling film.r\nr\nSTEP 10r\nTO MAKE SUSHI BALLS: Choose your topping. Get a small square of cling film and place a topping, like half a prawn or a small piece of smoked salmon, on it. Use damp hands to roll walnut-sized balls of rice and place on the topping.r\nr\nSTEP 11r\nMake into tight balls. Bring the corners of the cling film together and tighten into balls by twisting it up, then unwrap and serve.</string>
+    <string name="procedure">Procedure</string>
+
 </resources>

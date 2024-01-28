@@ -4,17 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OnBoarding.OnBoardingActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/onboarding_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".OnBoarding.OnBoardingFragment">
-
+    tools:context=".views.OnBoarding.OnBoardingActivity">
 
         <Button
             android:id="@+id/skipButton"
@@ -22,9 +12,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
-            android:drawableRight="@drawable/baseline_skip_next_24"
+            android:drawableEnd="@drawable/baseline_skip_next_24"
             android:padding="8dp"
-            android:text="Skip"
+            android:text="@string/skip_button"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +37,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
             android:padding="8dp"
-            android:text="Next"
+            android:text="@string/next_button"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -56,11 +46,10 @@
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
             android:background="#00000000"
             android:padding="8dp"
-            android:text="Back"
+            android:text="@string/back_btn"
             android:textColor="@color/green"
             android:textSize="18sp"
             android:visibility="invisible"
@@ -90,5 +79,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
