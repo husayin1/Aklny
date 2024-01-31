@@ -6,7 +6,8 @@ public class PojoCategory {
     public String strCategoryThumb;
     public String strCategoryDescription;
 
-    public PojoCategory() {}
+    public PojoCategory() {
+    }
 
     public PojoCategory(String idCategory, String strCategory, String strCategoryThumb, String strCategoryDescription) {
         this.idCategory = idCategory;

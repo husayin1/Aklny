@@ -2,7 +2,8 @@ package com.example.foodfusion.model.repositories.meal_models;
 
 public class PojoArea {
     public String strArea;
-    public PojoArea(){
+
+    public PojoArea() {
 
     }
 

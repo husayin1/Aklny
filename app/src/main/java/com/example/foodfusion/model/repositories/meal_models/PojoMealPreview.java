@@ -5,7 +5,7 @@ public class PojoMealPreview {
     public String strMealThumb;
     public String idMeal;
 
-    public PojoMealPreview(){
+    public PojoMealPreview() {
 
     }
 

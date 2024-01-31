@@ -6,9 +6,10 @@ public class PojoIngredient {
     public String strDescription;
     public Object strType;
 
-    public PojoIngredient(){
+    public PojoIngredient() {
 
     }
+
     public PojoIngredient(String idIngredient, String strIngredient, String strDescription, Object strType) {
         this.idIngredient = idIngredient;
         this.strIngredient = strIngredient;

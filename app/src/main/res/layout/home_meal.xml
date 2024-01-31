@@ -4,21 +4,21 @@
     android:id="@+id/carView_home_meal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
     app:cardMaxElevation="6dp"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="16dp">
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imageView_item_main"
+            android:id="@+id/imageViewHomeMeal"
             android:layout_width="match_parent"
             android:layout_height="164dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/molokhia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +26,7 @@
             app:riv_corner_radius_top_right="16dip" />
 
         <TextView
-            android:id="@+id/meal_title_home_name"
+            android:id="@+id/textViewHomeMealName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_item_main" />
+            app:layout_constraintTop_toBottomOf="@+id/imageViewHomeMeal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

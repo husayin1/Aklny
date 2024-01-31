@@ -1,13 +1,26 @@
 package com.example.foodfusion.model.repositories.meal_models;
 
-public class PojoMeal {
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
+
+@Entity(tableName = "meals_table")
+
+public class PojoMeal implements Serializable {
+    @PrimaryKey
+    @NonNull
     public String idMeal;
     public String strMeal;
+    @Ignore
     public Object strDrinkAlternate;
     public String strCategory;
     public String strArea;
     public String strInstructions;
     public String strMealThumb;
+    @Ignore
     public Object strTags;
     public String strYoutube;
     public String strIngredient1;
@@ -527,8 +540,11 @@ public class PojoMeal {
     public String strMeasure19;
     public String strMeasure20;
     public String strSource;
+    @Ignore
     public Object strImageSource;
+    @Ignore
     public Object strCreativeCommonsConfirmed;
+    @Ignore
     public Object dateModified;
 
     public String getStrMeal() {

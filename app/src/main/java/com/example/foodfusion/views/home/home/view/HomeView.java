@@ -9,9 +9,14 @@ import java.util.List;
 
 public interface HomeView {
     void showRandomData(List<PojoMeal> meals);
+
     void showRandomErrorMsg(String error);
+
     void showCategoriesData(List<PojoCategory> categories);
+
     void showCategoriesErrorMsg(String error);
+
     void showIngredientsData(List<PojoIngredient> meals);
+
     void showIngredientsErrorMsg(String error);
 }

@@ -23,14 +23,15 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
     private static MealsRemoteDataSource client = null;
     private MealService mealService;
 
-    private MealsRemoteDataSource(){
+    private MealsRemoteDataSource() {
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson)).build();
         mealService = retrofit.create(MealService.class);
     }
-    public static MealsRemoteDataSource getInstance(){
-        if(client == null){
+
+    public static MealsRemoteDataSource getInstance() {
+        if (client == null) {
             client = new MealsRemoteDataSource();
         }
         return client;
@@ -42,18 +43,19 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
         call.enqueue(new Callback<RootMeal>() {
             @Override
             public void onResponse(Call<RootMeal> call, Response<RootMeal> response) {
-                Log.i(TAG, "onResponse:RandomMeal "+response.body().meals);
-                if(response.isSuccessful()){
+                Log.i(TAG, "onResponse:RandomMeal " + response.body().meals);
+                if (response.isSuccessful()) {
                     networkCallBack.onSuccessRandom(response.body().meals);
-                    Log.i(TAG, "onResponse: random "+response.body().meals.get(0).getStrMeal());
-                }else{
-                    Log.i(TAG, "onResponse: "+response.message());
+                    Log.i(TAG, "onResponse: random " + response.body().meals.get(0).getStrMeal());
+                } else {
+                    Log.i(TAG, "onResponse: " + response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<RootMeal> call, Throwable t) {
                 networkCallBack.onFailureRandom(t.getMessage());
-                Log.i(TAG, "onFailure: randomfailure "+t.getMessage());
+                Log.i(TAG, "onFailure: randomfailure " + t.getMessage());
             }
         });
         Log.i(TAG, "makeNetworkCall: execute enqueue random NetworkCall");
@@ -65,43 +67,44 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
         call.enqueue(new Callback<RootCategory>() {
             @Override
             public void onResponse(Call<RootCategory> call, Response<RootCategory> response) {
-                Log.i(TAG, "onResponse:Category "+response.body().categories);
-                if(response.isSuccessful()){
+                Log.i(TAG, "onResponse:Category " + response.body().categories);
+                if (response.isSuccessful()) {
                     networkCallBack.onSuccessCategory(response.body().categories);
-                    Log.i(TAG, "onResponse: categories "+response.body().categories.get(0).strCategoryDescription);
-                }else{
-                    Log.i(TAG, "onResponse: "+response.message());
+                    Log.i(TAG, "onResponse: categories " + response.body().categories.get(0).strCategoryDescription);
+                } else {
+                    Log.i(TAG, "onResponse: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<RootCategory> call, Throwable t) {
                 networkCallBack.onFailureCategory(t.getMessage());
-                Log.i(TAG, "onFailure: categoryfailure "+t.getMessage());
+                Log.i(TAG, "onFailure: categoryfailure " + t.getMessage());
 
             }
         });
         Log.i(TAG, "makeNetworkCall: execute enqueue category NetworkCall");
     }
+
     @Override
     public void makeIngredientsCall(NetworkCallBack networkCallBack) {
         Call<RootIngredient> call = mealService.getIngredients();
         call.enqueue(new Callback<RootIngredient>() {
             @Override
             public void onResponse(Call<RootIngredient> call, Response<RootIngredient> response) {
-                Log.i(TAG, "onResponse:Ingredients "+response.body().ingredients);
-                if(response.isSuccessful()){
+                Log.i(TAG, "onResponse:Ingredients " + response.body().ingredients);
+                if (response.isSuccessful()) {
                     networkCallBack.onSuccessIngredients(response.body().ingredients);
-                    Log.i(TAG, "onResponse: ingredients "+response.body().ingredients.get(0).strIngredient);
-                }else{
-                    Log.i(TAG, "onResponse: "+response.message());
+                    Log.i(TAG, "onResponse: ingredients " + response.body().ingredients.get(0).strIngredient);
+                } else {
+                    Log.i(TAG, "onResponse: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<RootIngredient> call, Throwable t) {
                 networkCallBack.onFailureIngredients(t.getMessage());
-                Log.i(TAG, "onFailure: ingredientsfailure "+t.getMessage());
+                Log.i(TAG, "onFailure: ingredientsfailure " + t.getMessage());
             }
         });
         Log.i(TAG, "makeNetworkCall: execute enqueue ingredient NetworkCall");

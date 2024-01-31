@@ -6,17 +6,17 @@ import java.util.List;
 
 public class RootArea {
     @SerializedName("meals")
-    public List<PojoArea> cuisines;
+    public List<PojoArea> areas;
 
-    public RootArea(){
+    public RootArea() {
 
     }
 
     public List<PojoArea> getCuisines() {
-        return cuisines;
+        return areas;
     }
 
     public void setCuisines(List<PojoArea> cuisines) {
-        this.cuisines = cuisines;
+        this.areas = cuisines;
     }
 }

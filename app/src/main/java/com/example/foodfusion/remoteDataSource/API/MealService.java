@@ -14,20 +14,28 @@ public interface MealService {
 
     @GET("random.php")
     Call<RootMeal> getRandomMeal();
+
     @GET("categories.php")
     Call<RootCategory> getCategories();
+
     @GET("list.php?i=list")
     Call<RootIngredient> getIngredients();
+
     @GET("list.php?a=list")
     Call<RootArea> getAreas();
+
     @GET("filter.php")
     Call<RootMealPreview> getMealsByIngredient(@Query("i") String ingredient);
+
     @GET("filter.php")
     Call<RootMealPreview> getMealsByCategory(@Query("c") String category);
+
     @GET("filter.php")
     Call<RootMealPreview> getMealsByArea(@Query("a") String cuisine);
+
     @GET("search.php")
-    Call<RootMeal>searchByName(@Query("s") String mealName);
+    Call<RootMeal> searchByName(@Query("s") String mealName);
+
     @GET("lookup.php")
     Call<RootMeal> getMealById(@Query("i") String id);
 }

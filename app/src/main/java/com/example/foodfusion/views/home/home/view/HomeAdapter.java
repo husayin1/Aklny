@@ -20,23 +20,23 @@ import com.example.foodfusion.model.repositories.meal_models.PojoMeal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     List<PojoCategory> categories;
     OnClickListener clickListener;
     Context context;
 
 
-    public HomeAdapter(Context _context,List<PojoCategory> categories, OnClickListener onClickListener) {
+    public HomeAdapter(Context _context, List<PojoCategory> categories, OnClickListener onClickListener) {
         this.categories = categories;
-        this.context=_context;
+        this.context = _context;
         clickListener = onClickListener;
     }
 
     @NonNull
     @Override
     public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.home_meal, parent, false);
         Log.i("TAG", "onCreateViewHolder:   Creating Home Meal");
         return new ViewHolder(v);
@@ -44,20 +44,20 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
-        Log.i("TAG", "onBindViewHolder: "+categories.get(0).getStrCategory());
+        Log.i("TAG", "onBindViewHolder: " + categories.get(0).getStrCategory());
 
         holder.textViewName.setText(categories.get(position).strCategory);
         Glide.with(holder.getView().getContext()).load(categories.get(position).strCategoryThumb).placeholder(R.drawable.ic_launcher_foreground).into(holder.getImageView());
-        holder.getView().setOnClickListener(v->{
+        holder.getView().setOnClickListener(v -> {
             clickListener.onClick(categories.get(position));
-            Log.i("TAG", "onBindViewHolder: "+position);
+            Log.i("TAG", "onBindViewHolder: " + position);
         });
     }
 
     @Override
     public int getItemCount() {
 
-        Log.i("TAG", "getItemCount: "+categories.size());
+        Log.i("TAG", "getItemCount: " + categories.size());
         return categories.size();
     }
 
@@ -74,8 +74,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
-            imageView = itemView.findViewById(R.id.imageView_item_main);
-            textViewName = itemView.findViewById(R.id.meal_title_home_name);
+            imageView = itemView.findViewById(R.id.imageViewHomeMeal);
+            textViewName = itemView.findViewById(R.id.textViewHomeMealName);
         }
 
         public ImageView getImageView() {

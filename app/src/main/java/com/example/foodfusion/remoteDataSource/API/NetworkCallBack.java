@@ -10,12 +10,16 @@ import java.util.List;
 
 public interface NetworkCallBack {
     void onSuccessRandom(List<PojoMeal> meals);
-    void onFailureRandom(String errorMsg);
-    void onSuccessCategory(List<PojoCategory> categories);
-    void onFailureCategory(String errorMsg);
-    void onSuccessIngredients(List<PojoIngredient> ingredients);
-    void onFailureIngredients(String errorMsg);
 
+    void onFailureRandom(String errorMsg);
+
+    void onSuccessCategory(List<PojoCategory> categories);
+
+    void onFailureCategory(String errorMsg);
+
+    void onSuccessIngredients(List<PojoIngredient> ingredients);
+
+    void onFailureIngredients(String errorMsg);
 
 
 }

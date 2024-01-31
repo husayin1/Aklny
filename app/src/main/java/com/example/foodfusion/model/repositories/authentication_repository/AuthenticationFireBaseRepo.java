@@ -13,26 +13,29 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class AuthenticationFireBaseRepo implements AuthenticationRepository {
     private static final String TAG = "AuthenticationFireBase";
-    private static AuthenticationFireBaseRepo authenticationFireBaseRepo=null;
+    private static AuthenticationFireBaseRepo authenticationFireBaseRepo = null;
     private FireBaseAuthenticationWrapper fireBaseAuthenticationWrapper;
 
-    private AuthenticationFireBaseRepo(){
+    private AuthenticationFireBaseRepo() {
         this.fireBaseAuthenticationWrapper = FireBaseAuthenticationWrapper.getInstance();
     }
-    public static synchronized AuthenticationFireBaseRepo getInstance(){
-        if(authenticationFireBaseRepo==null){
+
+    public static synchronized AuthenticationFireBaseRepo getInstance() {
+        if (authenticationFireBaseRepo == null) {
             authenticationFireBaseRepo = new AuthenticationFireBaseRepo();
         }
         return authenticationFireBaseRepo;
     }
+
     @Override
     public void signIn(String email, String password, LoginNetworkCallBack loginNetwork) {
-        Log.i(TAG, "login:  Login in with : "+email+" password is : "+password);
-        fireBaseAuthenticationWrapper.getFirebaseAuth().signInWithEmailAndPassword(email,password)
+        Log.i(TAG, "login:  Login in with : " + email + " password is : " + password);
+        fireBaseAuthenticationWrapper.getFirebaseAuth().signInWithEmailAndPassword(email, password)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -50,7 +53,7 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepository {
 
     @Override
     public void signUp(String email, String password, SignUpNetworkCallBack signupNetwork) {
-        fireBaseAuthenticationWrapper.getFirebaseAuth().createUserWithEmailAndPassword(email,password)
+        fireBaseAuthenticationWrapper.getFirebaseAuth().createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
@@ -72,7 +75,7 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepository {
         fireBaseAuthenticationWrapper.logout();
     }
 
-    public FirebaseUser getUser(){
+    public FirebaseUser getUser() {
         return fireBaseAuthenticationWrapper.getCurrentUser();
     }
 
@@ -113,8 +116,8 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepository {
     }
 
 
-    public boolean isAuthenticated(){
-        return AuthenticationFireBaseRepo.getInstance().getUser()!=null;
+    public boolean isAuthenticated() {
+        return AuthenticationFireBaseRepo.getInstance().getUser() != null;
     }
 
 

@@ -36,16 +36,19 @@
     <string name="next">التالي</string>
     <string name="finish">انهاء</string>
     <string name="inspiration_text">وجبة اليوم</string>
-    <string name="rest_meals">الرائج الان</string>
+    <string name="rest_meals">قد يعجبك</string>
 
-    <string name="meal_title_home_name">اسم الوجبة</string>
-    <string name="meal_name">اسم الوجبة</string>
+    <string name="meal_title_home_name">ملوخية</string>
+    <string name="meal_name">ملوخية</string>
     <string name="meal_description">وصف الوجبة</string>
-    <string name="tvMealNameDetails">اسم الوجبة</string>
+    <string name="tvMealNameDetails">ملوخية</string>
     <string name="mealCategoryItemDetails">نوع الوجبة</string>
     <string name="textViewIngredients">المكونات</string>
-    <string name="textViewVideo">الفيديو</string>
+    <string name="textViewVideo">مشاهدة الفيديو</string>
     <string name="textViewProcedures">الخطوات بالتفصيل</string>
     <string name="procedure">الخطوات</string>
+    <string name="client_id">555667483551-p94tuutqrtkt2gvl3iicu0ejipcr3q8n.apps.googleusercontent.com</string>
+    <string name="favorite_meal">وجباتي المفضلة</string>
+    <string name="plannedMeals">الوجبات المخطط لها</string>
 
 </resources>
