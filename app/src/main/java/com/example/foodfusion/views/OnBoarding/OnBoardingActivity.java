@@ -14,11 +14,11 @@ import android.widget.TextView;
 import com.example.foodfusion.views.Authentication.AuthenticationActivity;
 import com.example.foodfusion.R;
 
-public class    OnBoardingActivity extends AppCompatActivity {
+public class OnBoardingActivity extends AppCompatActivity {
     private ViewPager slideViewPager;
     private LinearLayout dotIndicator;
     private ViewPagerAdapter viewPagerAdapter;
-    private Button nextButton, skipButton,backButton;
+    private Button nextButton, skipButton, backButton;
     private TextView[] dots;
 
     @Override
@@ -34,9 +34,9 @@ public class    OnBoardingActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getItem(0)>0){
+                if (getItem(0) > 0) {
 
-                    slideViewPager.setCurrentItem(getItem(-1),true);
+                    slideViewPager.setCurrentItem(getItem(-1), true);
                 }
             }
         });
@@ -44,9 +44,9 @@ public class    OnBoardingActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getItem(0)<2){
-                    slideViewPager.setCurrentItem(getItem(1),true);
-                }else{
+                if (getItem(0) < 2) {
+                    slideViewPager.setCurrentItem(getItem(1), true);
+                } else {
                     Intent intent = new Intent(OnBoardingActivity.this, AuthenticationActivity.class);
                     startActivity(intent);
                     finish();
@@ -72,28 +72,29 @@ public class    OnBoardingActivity extends AppCompatActivity {
 
     }
 
-    private void initUI(){
+    private void initUI() {
 
         backButton = (Button) findViewById(R.id.backButton);
         nextButton = (Button) findViewById(R.id.nextButton);
         skipButton = (Button) findViewById(R.id.skipButton);
 
         slideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
-        dotIndicator =(LinearLayout) findViewById(R.id.dotIndicator);
+        dotIndicator = (LinearLayout) findViewById(R.id.dotIndicator);
 
     }
-    public void setUptIndicator(int position){
+
+    public void setUptIndicator(int position) {
         dots = new TextView[3];
         dotIndicator.removeAllViews();
 
-        for( int i=0 ; i<dots.length ; i++ ){
+        for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(OnBoardingActivity.this);
-            dots[i].setText(Html.fromHtml("&#8226",Html.FROM_HTML_MODE_LEGACY));
+            dots[i].setText(Html.fromHtml("&#8226", Html.FROM_HTML_MODE_LEGACY));
             dots[i].setTextSize(35);
             dots[i].setTextColor(getResources().getColor(R.color.grey, getApplicationContext().getTheme()));
             dotIndicator.addView(dots[i]);
         }
-        dots[position].setTextColor(getResources().getColor(R.color.green,getApplicationContext().getTheme()));
+        dots[position].setTextColor(getResources().getColor(R.color.green, getApplicationContext().getTheme()));
     }
 
 
@@ -107,9 +108,9 @@ public class    OnBoardingActivity extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             setUptIndicator(position);
-            if(position>0){
+            if (position > 0) {
                 backButton.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 backButton.setVisibility(View.INVISIBLE);
             }
             if (position == 2) {
@@ -129,8 +130,9 @@ public class    OnBoardingActivity extends AppCompatActivity {
 
         }
     };
-    private int getItem(int i){
-        return slideViewPager.getCurrentItem()+i;
+
+    private int getItem(int i) {
+        return slideViewPager.getCurrentItem() + i;
     }
 
 }

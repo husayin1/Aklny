@@ -32,5 +32,12 @@
     <fragment
         android:id="@+id/MealDetailsFragment"
         android:name="com.example.foodfusion.views.home.meal_details.view.MealDetailsFragment"
-        android:label="MealDetailsFragment" />
+        android:label="MealDetailsFragment" >
+        <argument
+            android:name="TransferMeal"
+            app:argType="com.example.foodfusion.model.repositories.meal_models.PojoMeal" />
+        <action
+            android:id="@+id/action_MealDetailsFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
 </navigation>

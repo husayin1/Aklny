@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/cardViewMealDetails"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="78dp"
+            android:background="@drawable/background_item"
+            app:cardCornerRadius="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mealDetailsImage"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mealDetailsImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="45dp"
+            android:src="@drawable/molokhia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/textViewMealCateItemDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/txtViewMealNameItemDetails"
+            app:layout_constraintStart_toStartOf="@+id/txtViewMealNameItemDetails"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewMealNameItemDetails"
+            tools:text="category" />
+
+        <TextView
+            android:id="@+id/textViewMealCountryItemDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/barrier2"
+            app:layout_constraintEnd_toEndOf="@+id/textViewMealCateItemDetails"
+            app:layout_constraintStart_toStartOf="@+id/textViewMealCateItemDetails"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMealCateItemDetails"
+            tools:text="Egyptian food" />
+
+        <ImageView
+            android:id="@+id/imageViewAddToFavITemDetails"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/favorite_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.342"
+            app:layout_constraintStart_toEndOf="@+id/mealDetailsImage"
+            app:layout_constraintTop_toTopOf="@+id/cardViewMealDetails" />
+
+        <ImageView
+            android:id="@+id/imageViewAddToCalendarItemDetails"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/baseline_edit_calendar_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewAddToFavITemDetails"
+            app:layout_constraintEnd_toStartOf="@+id/textViewMealCateItemDetails"
+            app:layout_constraintHorizontal_bias="0.235"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageViewAddToFavITemDetails"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/txtViewMealNameItemDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealDetailsImage"
+            tools:text="Mulukhiyah" />
+
+        <TextView
+            android:id="@+id/textViewIngredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/textViewIngredients"
+            android:textColor="@color/green"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier2" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="txtViewMealNameItemDetails,imageViewAddToFavITemDetails,imageViewAddToCalendarItemDetails,textViewMealCountryItemDetails,textViewMealCateItemDetails"
+            tools:layout_editor_absoluteY="364dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewIngredientsItemDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/cardViewMealDetails"
+            app:layout_constraintStart_toStartOf="@+id/cardViewMealDetails"
+            app:layout_constraintTop_toBottomOf="@+id/textViewIngredients"
+            tools:itemCount="10"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/ingredients_meal_details"
+            tools:orientation="horizontal" />
+
+        <TextView
+            android:id="@+id/textViewProced"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/procedure"
+            android:textAlignment="center"
+            android:textColor="@color/green"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewIngredients"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsItemDetails" />
+
+        <TextView
+            android:id="@+id/textViewProcedures"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textViewProced"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProced"
+            tools:text="@string/textViewProcedures" />
+
+        <TextView
+            android:id="@+id/textViewVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/textViewVideo"
+            android:textAlignment="center"
+            android:textColor="@color/green"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewProced"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProcedures" />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youTubePlayerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/youtube_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewVideo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

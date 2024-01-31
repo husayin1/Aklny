@@ -1,4 +1,4 @@
-package com.example.foodfusion.OnBoarding;
+package com.example.foodfusion.views.OnBoarding;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -33,6 +33,7 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.string.description2,
             R.string.description3
     };
+
     public ViewPagerAdapter(Context context) {
         this.context = context;
     }
@@ -44,7 +45,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view ==(LinearLayout) object;
+        return view == (LinearLayout) object;
     }
 
     @NonNull
@@ -52,7 +53,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
-        View view = layoutInflater.inflate(R.layout.slider_screen,container,false);
+        View view = layoutInflater.inflate(R.layout.slider_screen, container, false);
 
         ImageView sliderImage = (ImageView) view.findViewById(R.id.sliderImage);
         TextView sliderTitle = (TextView) view.findViewById(R.id.sliderTitle);
@@ -68,6 +69,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((LinearLayout)object);
+        container.removeView((LinearLayout) object);
     }
 }

@@ -8,30 +8,31 @@ import com.example.foodfusion.remoteDataSource.remoteFireBaes.LoginNetworkCallBa
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginPresenter implements  LoginPresenterInterface, LoginNetworkCallBack, SignInWithGoogleNetworkCallBack {
+public class LoginPresenter implements LoginPresenterInterface, LoginNetworkCallBack, SignInWithGoogleNetworkCallBack {
     private LoginViewInterface loginViewInterface;
     private AuthenticationRepository authenticationRepository;
-    private static LoginPresenter loginPresenter=null;
-    private LoginPresenter(LoginViewInterface loginViewInterface){
+    private static LoginPresenter loginPresenter = null;
+
+    private LoginPresenter(LoginViewInterface loginViewInterface) {
         this.loginViewInterface = loginViewInterface;
         authenticationRepository = AuthenticationFireBaseRepo.getInstance();
     }
-    public static LoginPresenter getInstance(LoginViewInterface loginViewInterface){
-        if(loginPresenter==null){
+
+    public static LoginPresenter getInstance(LoginViewInterface loginViewInterface) {
+        if (loginPresenter == null) {
             loginPresenter = new LoginPresenter(loginViewInterface);
         }
         return loginPresenter;
     }
 
-
     @Override
     public void login(String email, String password) {
-        authenticationRepository.signIn(email,password,this);
+        authenticationRepository.signIn(email, password, this);
     }
 
     @Override
     public void signInWithGoogle(AuthCredential authCredential) {
-        authenticationRepository.signInWithGoogle(authCredential,this);
+        authenticationRepository.signInWithGoogle(authCredential, this);
     }
 
     @Override

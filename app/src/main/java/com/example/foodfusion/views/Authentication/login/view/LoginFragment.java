@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +29,12 @@ import com.example.foodfusion.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -42,15 +45,17 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     TextView tv_signUp;
     TextInputEditText TextInputEditTextEmailLogin;
     TextInputEditText TextInputEditTextPasswordLogin;
-
     Button btn_login;
     LoginPresenterInterface loginPresenter;
-//    GoogleSignInClient signInAccount;
-    
-//    RoundedImageView googleSignIN;
+    FirebaseAuth firebaseAuth;
+    GoogleSignInClient googleSignInClient;
+    ImageView googleSignInImage;
+
+
     public LoginFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +76,17 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         txt_login = view.findViewById(R.id.txt_login);
         txt_login_description = view.findViewById(R.id.txt_login_description);
         tv_signUp = view.findViewById(R.id.tv_signUp);
-//        googleSignIN = view.findViewById(R.id.googleSignIN);
+        googleSignInImage = view.findViewById(R.id.googleSignInImage);
+        firebaseAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
 
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
+
+        googleSignInImage.setOnClickListener(v -> {
+            Intent intent = googleSignInClient.getSignInIntent();
+            activityResultLauncher.launch(intent);
+            Toast.makeText(this.getContext(), "This Is login Google", Toast.LENGTH_SHORT).show();
+        });
 
 
         TextInputEditTextEmailLogin = view.findViewById(R.id.TextInputEditTextEmailLogin);
@@ -85,12 +99,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             }
         });
 
-        btn_login.setOnClickListener(v->login());
-//        googleSignIN.setOnClickListener(v->{
-//            Intent intent = signInAccount.getSignInIntent();
-//            activityResultLauncher.launch(intent);
-//
-//        });
+        btn_login.setOnClickListener(v -> login());
+
     }
 
     @Override
@@ -114,16 +124,17 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void OnFailureSignInGoogle(String message) {
-        Toast.makeText(requireContext(),"Failed to signin with google", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Failed to signin with google", Toast.LENGTH_SHORT).show();
     }
 
-    private void login(){
+    private void login() {
         String userName = TextInputEditTextEmailLogin.getText().toString();
         String password = TextInputEditTextPasswordLogin.getText().toString();
-        if(checkValidation()&&isValidEmail(userName)){
-            loginPresenter.login(userName,password);
+        if (checkValidation() && isValidEmail(userName)) {
+            loginPresenter.login(userName, password);
         }
     }
+
     private boolean checkValidation() {
         if (
                 TextInputEditTextEmailLogin.getText() != null
@@ -137,28 +148,31 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             return false;
         }
     }
-    private boolean isValidEmail(String valid){
+
+    private boolean isValidEmail(String valid) {
         String email = valid.trim();
         String emailPattern = "[a-zA-Z\\d._-]+@[a-z]+\\.+[a-z]+";
         return email.matches(emailPattern);
     }
+
     private void goToMainActivity() {
         Intent intent = new Intent(this.getContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.getContext().startActivity(intent);
     }
+
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode() == Activity.RESULT_OK){
+            if (result.getResultCode() == Activity.RESULT_OK) {
                 Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                try{
+                try {
                     GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
-                    if(signInAccount!=null){
-                        AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(),null);
+                    if (signInAccount != null) {
+                        AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
                         loginPresenter.signInWithGoogle(authCredential);
                     }
-                }catch (ApiException e){
+                } catch (ApiException e) {
                     e.printStackTrace();
                 }
             }

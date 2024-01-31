@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id ("androidx.navigation.safeargs")
 }
 
 android {
@@ -47,6 +48,7 @@ dependencies {
     //retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    //gosn
     implementation ("com.google.code.gson:gson:2.10.1")
     //glide
     implementation ("com.github.bumptech.glide:glide:4.14.2")
@@ -65,9 +67,13 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.6")
     //rounded image
     implementation ("com.makeramen:roundedimageview:2.3.0")
+    //circle imageView
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     //youtube player
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
     //lottie file
     implementation ("com.airbnb.android:lottie:3.4.0")
+    //room
+    implementation("androidx.room:room-runtime:2.4.1")
+    annotationProcessor("androidx.room:room-compiler:2.4.1")
 }

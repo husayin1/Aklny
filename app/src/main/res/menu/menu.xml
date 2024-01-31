@@ -4,7 +4,7 @@
     <item
         android:id="@+id/HomeFragment"
         android:title="@string/home_icon"
-        android:icon="@drawable/baseline_home_24"/>
+        android:icon="@drawable/baseline_home_24" />
 
     <item
         android:id="@+id/SearchFragment"
@@ -14,10 +14,10 @@
     <item
         android:id="@+id/FavoriteFragment"
         android:title="@string/favorite_icon"
-        android:icon="@drawable/favorite"/>
+        android:icon="@drawable/saveicon" />
 
     <item
         android:id="@+id/MealPlanFragment"
         android:title="@string/calendar_icon"
-        android:icon="@drawable/baseline_calendar_today_24"/>
+        android:icon="@drawable/calendar"/>
 </menu>

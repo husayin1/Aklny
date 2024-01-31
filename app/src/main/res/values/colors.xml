@@ -2,7 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#32B768</color>
+    <color name="green">#327052</color>
     <color name="grey">#808080</color>
-
+    <color name="ingredient">#45C887</color>
+    <color name="peige">#b3e4a3</color>
+    <color name="yellow">#EAF3E6</color>
+    <color name="red">#DA1D16</color>
 </resources>

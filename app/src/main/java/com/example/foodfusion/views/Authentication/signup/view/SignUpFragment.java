@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import com.example.foodfusion.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,9 +56,8 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     TextView txt_signup_word;
     SignUpPresenterInterface signUpPresenter;
     FirebaseAuth firebaseAuth;
-    Context context;
-    GoogleSignInClient signInAccount;
-    RoundedImageView googleSignIN;
+    GoogleSignInClient googleSignInClient;
+    ImageView googleSignUpImage;
     public static final String TAG = "SignUpFragment";
 
     public SignUpFragment() {
@@ -81,7 +82,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
         backBtn = view.findViewById(R.id.haveAccountButton);
         signupBtn = view.findViewById(R.id.btnSignUp);
-//        googleSignIN = view.findViewById(R.id.googleSignIN);
+        googleSignUpImage = view.findViewById(R.id.googleSignUpImage);
 
         txt_signup = view.findViewById(R.id.txt_signup);
         txt_signup_word = view.findViewById(R.id.txt_signup_word);
@@ -94,14 +95,19 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigateUp();
+                Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment);
             }
         });
         signupBtn.setOnClickListener(v->signUp());
-//        googleSignIN.setOnClickListener(v->{
-//            Intent intent = signInAccount.getSignInIntent();
-//            activityResultLauncher.launch(intent);
-//        });
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
+
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
+
+        googleSignUpImage.setOnClickListener(v->{
+            Intent intent = googleSignInClient.getSignInIntent();
+            activityResultLauncher.launch(intent);
+            Toast.makeText(this.getContext(), "This Is SignupNBy Google", Toast.LENGTH_SHORT).show();
+        });
 
     }
 
@@ -109,7 +115,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     private void signUp() {
         String userName = textInputEditTextEmailSignUp.getText().toString();
         String password = textInputEditTextPasswordSignUp.getText().toString();
-        if (isAllDataFilled() && checkValidation(userName, password)) {
+        if (checkValidation(userName, password) && isAllDataFilled()) {
             signUpPresenter.signUp(userName, password);
         }
     }
@@ -130,7 +136,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         )
             return true;
         else {
-            Toast.makeText(context, "please fill data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), "please fill data", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
