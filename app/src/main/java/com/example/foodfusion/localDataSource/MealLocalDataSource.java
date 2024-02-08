@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.foodfusion.model.repositories.meal_models.PojoMeal;
-import com.example.foodfusion.model.repositories.meal_models.RootMeal;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
 
 import java.util.List;
 
@@ -52,5 +52,31 @@ public class MealLocalDataSource implements MealLocalDataSourceInterface {
     @Override
     public LiveData<List<PojoMeal>> getAllStoredMeals() {
         return storedMeals;
+    }
+
+    @Override
+    public LiveData<List<PojoPlanner>> getAllPlannedMeals(String date) {
+        return dao.getAllPlannerMealsAtDate(date);
+    }
+
+
+    @Override
+    public void insertMealToPlanner(PojoPlanner meal) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dao.insertMealToPlanner(meal);
+            }
+        }).start();
+    }
+
+    @Override
+    public void deleteMealFromPlanner(PojoPlanner meal) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dao.deleteMealFromPlanner(meal);
+            }
+        }).start();
     }
 }

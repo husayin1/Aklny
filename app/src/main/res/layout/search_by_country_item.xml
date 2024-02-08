@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/countryItemLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:layout_marginTop="16dp">
+    <!--
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/textViewCountrySearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/country_chip"
+            android:text="@string/country"
+            android:padding="8dp"
+            android:gravity="center"
+            android:textAlignment="center" />
+
+
+    -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutFragmentHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgView"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:foregroundGravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/molokhia"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius_top_left="16dp"
+                app:riv_corner_radius_top_right="16dp" />
+
+            <TextView
+                android:id="@+id/textViewCountrySearch"
+                android:layout_width="80sp"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:text="@string/country"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

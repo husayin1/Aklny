@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.home.home.view.HomeFragment"
+    tools:context=".features.home.home.view.HomeFragment"
     tools:ignore="SpeakableTextPresentCheck">
 
 
@@ -18,6 +18,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="16dp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/homeNetwork"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/recycelrViewTrendingMeals"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/connectivity" />
+
 
         <TextView
             android:id="@+id/inspired_meal"
@@ -70,7 +85,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="18dp"
                     android:background="@drawable/ingredients_item_background"
-                    android:backgroundTint="@color/yellow"
+                    android:backgroundTint="@color/background"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:riv_oval="true" />
@@ -108,8 +123,8 @@
                     android:id="@+id/meal_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
                     android:text="@string/meal_description"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -150,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:text="@string/rest_meals"
+            android:text="@string/trending_now"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/bottom_barrier" />
