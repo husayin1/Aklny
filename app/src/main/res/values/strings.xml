@@ -11,7 +11,6 @@
     <string name="description3">Save time on planning by having your favorite recipes within reach</string>
     <!--start Desc-->
     <string name="startDesc">Start Desc</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="back_btn">Back</string>
     <string name="signup_screen_text">Save delicious recipes and get personalized content.</string>
@@ -35,9 +34,9 @@
     <string name="finish">Finish</string>
     <string name="inspiration_text">Daily Inspiration</string>
     <string name="rest_meals">More You Might Like</string>
-    <string name="meal_title_home_name">Mulukhiyah</string>
-    <string name="meal_name">Mulukhiyah</string>
-    <string name="meal_description">Meal Country</string>
+    <string name="meal_title_home_name">Summer Pistou</string>
+    <string name="meal_name">Summer Pistou</string>
+    <string name="meal_description">Egyptian</string>
     <string name="tvMealNameDetails">Meal Name</string>
     <string name="mealCategoryItemDetails">Category</string>
     <string name="textViewIngredients">Ingredients</string>
@@ -47,5 +46,23 @@
     <string name="client_id">555667483551-p94tuutqrtkt2gvl3iicu0ejipcr3q8n.apps.googleusercontent.com</string>
     <string name="favorite_meal">My Saved Recipes</string>
     <string name="plannedMeals">Planned Meals</string>
+    <string name="country">country</string>
+    <string name="view_all">View All</string>
+    <string name="search_by_categories">Most Popular Categories</string>
+    <string name="search_by_area">Search By Area</string>
+    <string name="search_by_meal">Search Recipes</string>
+    <string name="search_by_ingredients">Search By Ingredients</string>
+    <string name="result">Meals By</string>
+    <string name="trending_now">Trending Now</string>
+    <string name="logout">Logout</string>
+    <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="sign_up_for_more_features">Sign Up for More Features</string>
+    <string name="add_your_food_preferences_plan_your_meals_and_more">Add your food preferences, plan your meals and more!</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_check_your_internet_connection_and_try_again">Please Check Your Internet Connection And Try Again</string>
+    <string name="removed_item">Removed Item</string>
 
 </resources>

@@ -1,19 +1,17 @@
 package com.example.foodfusion.remoteDataSource.API;
 
-import android.util.Log;
-
-import com.example.foodfusion.model.repositories.meal_models.RootCategory;
-import com.example.foodfusion.model.repositories.meal_models.RootIngredient;
-import com.example.foodfusion.model.repositories.meal_models.RootMeal;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMeal;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,8 +23,10 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
 
     private MealsRemoteDataSource() {
         Gson gson = new GsonBuilder().setLenient().create();
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson)).build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build();
         mealService = retrofit.create(MealService.class);
     }
 
@@ -38,6 +38,53 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
     }
 
     @Override
+    public Single<RootMeal> getRandomMeal() {
+        return mealService.getRandomMeal();
+    }
+
+    @Override
+    public Single<RootMeal> getTrendingMeals() {
+        Random random = new Random();
+        char c = (char) (random.nextInt(26) + 'A');
+        return mealService.searchByName(String.valueOf(c));
+    }
+    @Override
+    public Single<RootCategory> getCategories() {
+        return mealService.getCategories();
+    }
+    @Override
+    public Single<RootIngredient> getIngredients() {
+        return mealService.getIngredients();
+    }
+
+    @Override
+    public Single<RootArea> getAreas() {
+        return mealService.getAreas();
+    }
+
+    @Override
+    public Single<RootMainMeal> getMealsByIngredient(String ingredient) {
+        return mealService.getMealsByIngredient(ingredient);
+    }
+    @Override
+    public Single<RootMainMeal> getMealsByCategory(String category) {
+        return mealService.getMealsByCategory(category);
+    }
+    @Override
+    public Single<RootMainMeal> getMealsByArea(String country) {
+        return mealService.getMealsByArea(country);
+    }
+
+    @Override
+    public Single<RootMeal> searchMealByName(String name) {
+        return mealService.searchByName(name);
+    }
+
+    public Single<RootMeal> getMealById(String id){
+        return mealService.getMealById(id);
+    }
+
+/*@Override
     public void makeRandomCall(NetworkCallBack networkCallBack) {
         Call<RootMeal> call = mealService.getRandomMeal();
         call.enqueue(new Callback<RootMeal>() {
@@ -59,8 +106,9 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
             }
         });
         Log.i(TAG, "makeNetworkCall: execute enqueue random NetworkCall");
-    }
+    }*/
 
+/*
     @Override
     public void makeCategoriesCall(NetworkCallBack networkCallBack) {
         Call<RootCategory> call = mealService.getCategories();
@@ -84,9 +132,9 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
             }
         });
         Log.i(TAG, "makeNetworkCall: execute enqueue category NetworkCall");
-    }
+    }*/
 
-    @Override
+/*@Override
     public void makeIngredientsCall(NetworkCallBack networkCallBack) {
         Call<RootIngredient> call = mealService.getIngredients();
         call.enqueue(new Callback<RootIngredient>() {
@@ -108,7 +156,5 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
             }
         });
         Log.i(TAG, "makeNetworkCall: execute enqueue ingredient NetworkCall");
-    }
-
-
+    }*/
 }

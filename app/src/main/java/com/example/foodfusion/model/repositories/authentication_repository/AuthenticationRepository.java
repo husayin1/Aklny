@@ -1,9 +1,9 @@
 package com.example.foodfusion.model.repositories.authentication_repository;
 
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.LoginNetworkCallBack;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.SignInWithGoogleNetworkCallBack;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.SignUpNetworkCallBack;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.SignUpWithGoogleNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.LoginNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignInWithGoogleNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignUpNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignUpWithGoogleNetworkCallBack;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 

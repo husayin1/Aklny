@@ -62,6 +62,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
     implementation ("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-database")
+
     //fragmentNavigation
     implementation("androidx.navigation:navigation-fragment:2.7.6")
     implementation("androidx.navigation:navigation-ui:2.7.6")
@@ -74,6 +76,11 @@ dependencies {
     //lottie file
     implementation ("com.airbnb.android:lottie:3.4.0")
     //room
-    implementation("androidx.room:room-runtime:2.4.1")
-    annotationProcessor("androidx.room:room-compiler:2.4.1")
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    //Rx
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.6")
+    implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
+    implementation("androidx.room:room-rxjava3:$2.6.1")
 }

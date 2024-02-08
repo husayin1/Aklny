@@ -1,41 +1,33 @@
 package com.example.foodfusion.remoteDataSource.API;
 
-import com.example.foodfusion.model.repositories.meal_models.RootCategory;
-import com.example.foodfusion.model.repositories.meal_models.RootArea;
-import com.example.foodfusion.model.repositories.meal_models.RootIngredient;
-import com.example.foodfusion.model.repositories.meal_models.RootMeal;
-import com.example.foodfusion.model.repositories.meal_models.RootMealPreview;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMeal;
+import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
 
-import retrofit2.Call;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MealService {
 
     @GET("random.php")
-    Call<RootMeal> getRandomMeal();
-
+    Single<RootMeal> getRandomMeal();
     @GET("categories.php")
-    Call<RootCategory> getCategories();
-
+    Single<RootCategory> getCategories();
     @GET("list.php?i=list")
-    Call<RootIngredient> getIngredients();
-
+    Single<RootIngredient> getIngredients();
     @GET("list.php?a=list")
-    Call<RootArea> getAreas();
-
+    Single<RootArea> getAreas();
     @GET("filter.php")
-    Call<RootMealPreview> getMealsByIngredient(@Query("i") String ingredient);
-
+    Single<RootMainMeal> getMealsByIngredient(@Query("i") String ingredient);
     @GET("filter.php")
-    Call<RootMealPreview> getMealsByCategory(@Query("c") String category);
-
+    Single<RootMainMeal> getMealsByCategory(@Query("c") String category);
     @GET("filter.php")
-    Call<RootMealPreview> getMealsByArea(@Query("a") String cuisine);
-
+    Single<RootMainMeal> getMealsByArea(@Query("a") String area);
     @GET("search.php")
-    Call<RootMeal> searchByName(@Query("s") String mealName);
-
+    Single<RootMeal> searchByName(@Query("s") String mealName);
     @GET("lookup.php")
-    Call<RootMeal> getMealById(@Query("i") String id);
+    Single<RootMeal> getMealById(@Query("i") String id);
 }

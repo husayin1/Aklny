@@ -7,37 +7,104 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.foodfusion.views.home.home.view.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:name="com.example.foodfusion.features.home.home.view.HomeFragment"
+        android:label="Aklny"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment2_to_mealDetailsFragment2"
             app:destination="@id/MealDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/FavoriteFragment"
-        android:name="com.example.foodfusion.views.home.favorite.view.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        android:name="com.example.foodfusion.features.home.favorite.view.FavoriteFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_FavoriteFragment_to_MealDetailsFragment"
+            app:destination="@id/MealDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/SearchFragment"
-        android:name="com.example.foodfusion.views.home.search.view.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        android:name="com.example.foodfusion.features.home.search.view.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_SearchFragment_to_countryFragment"
+            app:destination="@id/countryFragment" />
+        <action
+            android:id="@+id/action_SearchFragment_to_ingredientFragment"
+            app:destination="@id/ingredientFragment" />
+        <action
+            android:id="@+id/action_SearchFragment_to_searchMealFragment"
+            app:destination="@id/searchMealFragment" />
+        <action
+            android:id="@+id/action_SearchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/MealPlanFragment"
-        android:name="com.example.foodfusion.views.home.mealPlan.view.MealPlanFragment"
-        android:label="fragment_meal_plan"
-        tools:layout="@layout/fragment_meal_plan" />
+        android:name="com.example.foodfusion.features.home.mealPlan.view.MealPlanFragment"
+        android:label="Planner"
+        tools:layout="@layout/fragment_meal_plan">
+        <action
+            android:id="@+id/action_MealPlanFragment_to_MealDetailsFragment"
+            app:destination="@id/MealDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/MealDetailsFragment"
-        android:name="com.example.foodfusion.views.home.meal_details.view.MealDetailsFragment"
-        android:label="MealDetailsFragment" >
+        android:name="com.example.foodfusion.features.home.meal_details.view.MealDetailsFragment"
+        android:label="Meal Details">
         <argument
             android:name="TransferMeal"
-            app:argType="com.example.foodfusion.model.repositories.meal_models.PojoMeal" />
+            app:argType="com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal" />
         <action
             android:id="@+id/action_MealDetailsFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_MealDetailsFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryFragment"
+        android:name="com.example.foodfusion.features.home.search.view.country.CountryFragment"
+        android:label="Countries"
+        tools:layout="@layout/fragment_country">
+        <action
+            android:id="@+id/action_countryFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingredientFragment"
+        android:name="com.example.foodfusion.features.home.search.view.ingredient.IngredientFragment"
+        android:label="Ingredients">
+        <action
+            android:id="@+id/action_ingredientFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+        <action
+            android:id="@+id/action_ingredientFragment_to_searchResultFragment2"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchMealFragment"
+        android:name="com.example.foodfusion.features.home.search.view.mealname.SearchMealFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search_meal">
+        <action
+            android:id="@+id/action_searchMealFragment_to_MealDetailsFragment"
+            app:destination="@id/MealDetailsFragment" />
+        <action
+            android:id="@+id/action_searchMealFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.foodfusion.features.home.search.view.result.SearchResultFragment"
+        android:label="Search Result">
+        <action
+            android:id="@+id/action_searchResultFragment_to_MealDetailsFragment"
+            app:destination="@id/MealDetailsFragment" />
+        <argument
+            android:name="resultMeal"
+            app:argType="com.example.foodfusion.features.home.search.view.result.SearchType" />
     </fragment>
 </navigation>

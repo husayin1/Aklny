@@ -4,16 +4,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.FireBaseAuthenticationWrapper;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.LoginNetworkCallBack;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.SignInWithGoogleNetworkCallBack;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.SignUpNetworkCallBack;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.SignUpWithGoogleNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.FireBaseAuthenticationWrapper;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.LoginNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignInWithGoogleNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignUpNetworkCallBack;
+import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignUpWithGoogleNetworkCallBack;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class AuthenticationFireBaseRepo implements AuthenticationRepository {

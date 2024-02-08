@@ -66,7 +66,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="48dp"
-            android:src="@drawable/favorite_dark"
+            android:src="@drawable/save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.342"
             app:layout_constraintStart_toEndOf="@+id/mealDetailsImage"
@@ -105,8 +105,8 @@
             android:layout_marginTop="16dp"
             android:text="@string/textViewIngredients"
             android:textColor="@color/green"
+            android:layout_marginStart="16dp"
             android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/barrier2" />
 
@@ -137,26 +137,26 @@
         <TextView
             android:id="@+id/textViewProced"
             android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/procedure"
-            android:textAlignment="center"
             android:textColor="@color/green"
             android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="@+id/textViewIngredients"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsItemDetails" />
 
         <TextView
             android:id="@+id/textViewProcedures"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="16dp"
             android:textColor="@color/grey"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/textViewProced"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewProced"
             tools:text="@string/textViewProcedures" />
 
@@ -179,7 +179,8 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="32dp"
+            android:paddingBottom="12dp"
             android:background="@drawable/youtube_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

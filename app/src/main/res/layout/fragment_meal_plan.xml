@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.home.mealPlan.view.MealPlanFragment">
+        tools:context=".features.home.mealPlan.view.MealPlanFragment">
 
         <CalendarView
             android:id="@+id/calendarView"
@@ -29,6 +29,21 @@
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/imageViewEmptyListMeals"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:foregroundGravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPlannedMeals"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            android:layout_marginTop="48dp"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/emptymeals"
+            android:visibility="gone"/>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMealPlan"
             android:layout_width="match_parent"
@@ -40,7 +55,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewPlannedMeals"
             tools:itemCount="8"
-            tools:listitem="@layout/favorite_meal" />
+            tools:listitem="@layout/planned_meal"/>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -12,7 +12,6 @@
     <string name="description3">وفر الوقت في التخطيط من خلال جعل وصفاتك المفضلة في متناول اليد</string>
     <!--start Desc-->
     <string name="startDesc">Start Desc</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="back_btn">العودة</string>
     <string name="signup_screen_text">احفظ الوصفات اللذيذة واحصل على محتوى مخصص.</string>
@@ -50,5 +49,25 @@
     <string name="client_id">555667483551-p94tuutqrtkt2gvl3iicu0ejipcr3q8n.apps.googleusercontent.com</string>
     <string name="favorite_meal">وجباتي المفضلة</string>
     <string name="plannedMeals">الوجبات المخطط لها</string>
+    <string name="country">البلد</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="search_by_categories">البحث بالنوع</string>
+    <string name="search_by_area">البحث بالبلد</string>
+    <string name="search_by_meal">البحث باسم الوجبة</string>
+    <string name="search_by_ingredients">البحث بالمكونات</string>
+    <string name="result">الوجبات الخاصة ب</string>
+    <string name="trending_now">قد يعجبك</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="are_you_sure_you_want_to_log_out">هل تريد تسجيل الخروج؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="sign_up_for_more_features">سجل للحصول علي مميزات اكثر</string>
+    <string name="add_your_food_preferences_plan_your_meals_and_more">اضف طعامك المفضل وخطط لوجباتك واكثر</string>
+    <string name="sign_up">سجل حساب</string>
+    <string name="cancel">الغاء</string>
+    <string name="please_check_your_internet_connection_and_try_again">رجاءا تأكد من اتصالك بالانترنت وحاول مجددا</string>
+    <string name="removed_item">تمت عملية الحذف</string>
+
+
 
 </resources>

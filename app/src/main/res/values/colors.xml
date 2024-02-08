@@ -3,9 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#327052</color>
+    <color name="darkgreen">#12372A</color>
     <color name="grey">#808080</color>
-    <color name="ingredient">#45C887</color>
+    <color name="ingredient">#436850</color>
+    <color name="semigreen">#ADBC9F</color>
+    <color name="background">#FBFADA</color>
     <color name="peige">#b3e4a3</color>
     <color name="yellow">#EAF3E6</color>
     <color name="red">#DA1D16</color>
+    <color name="pure">#EDEFF4</color>
 </resources>

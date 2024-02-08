@@ -1,11 +1,9 @@
 package com.example.foodfusion.remoteDataSource.API;
 
-import com.example.foodfusion.model.repositories.meal_models.PojoCategory;
-import com.example.foodfusion.model.repositories.meal_models.PojoIngredient;
-import com.example.foodfusion.model.repositories.meal_models.PojoMeal;
-import com.example.foodfusion.model.repositories.meal_models.RootMeal;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoCategory;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoIngredient;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface NetworkCallBack {
