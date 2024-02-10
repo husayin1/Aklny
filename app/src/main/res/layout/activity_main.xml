@@ -45,8 +45,8 @@
 
         <ImageView
             android:id="@+id/endIcon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="end"
              android:src="@drawable/log_out" />
     </androidx.appcompat.widget.Toolbar>

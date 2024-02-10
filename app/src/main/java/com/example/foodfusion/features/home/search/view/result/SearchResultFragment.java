@@ -157,7 +157,7 @@ public class SearchResultFragment extends Fragment implements OnSearchResultClic
 
     @Override
     public void onResultClick(String name) {
-        Toast.makeText(getContext(), name+ " from search result fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), name+ " from search result fragment", Toast.LENGTH_SHORT).show();
         searchPresenter.getMealById(name).subscribe((rootMeal ,t)->{
             PojoMeal meal = rootMeal.meals.get(0);
             SearchResultFragmentDirections.ActionSearchResultFragmentToMealDetailsFragment action = SearchResultFragmentDirections.actionSearchResultFragmentToMealDetailsFragment(meal);

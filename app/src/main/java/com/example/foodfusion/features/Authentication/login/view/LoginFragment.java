@@ -126,7 +126,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void onFailure(String message) {
-        Toast.makeText(this.getContext(), "Cant SignIn", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(), "email or password is not valid", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -176,6 +176,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         Intent intent = new Intent(getActivity(), MainActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        getActivity().finish();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {

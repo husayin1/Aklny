@@ -38,4 +38,9 @@ public class MealDetailsPresenter implements MealDetailsPresenterInterface{
         return _repo.getMealFromFavById(id);
     }
 
+    @Override
+    public void removeFromFavorite(PojoMeal meal) {
+            _repo.deleteMealFromFavorites(meal);
+    }
+
 }

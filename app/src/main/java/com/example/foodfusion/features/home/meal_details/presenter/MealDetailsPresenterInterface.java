@@ -10,5 +10,6 @@ public interface MealDetailsPresenterInterface {
     void addToFav(PojoMeal meal, OnClickAddListener onClickAddListener);
     void addToPlanner(PojoPlanner meal,OnClickAddListener onClickAddListener);
     public LiveData<PojoMeal> getFavMealById(String id);
+    void removeFromFavorite(PojoMeal meal);
 
 }

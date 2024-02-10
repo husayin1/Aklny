@@ -107,8 +107,10 @@ public class SearchPresenter implements SearchPresenterInterface{
 
     @Override
     public void searchMealByName(String name) {
-         mealsRepository.searchMealByName(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+         mealsRepository.searchMealByName(name).subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((rootMeal ,t )->{
+
                     searchView.showSearchedMealData(rootMeal.meals);
                 });
     }

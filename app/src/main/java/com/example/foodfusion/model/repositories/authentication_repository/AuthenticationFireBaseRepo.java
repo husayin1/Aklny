@@ -74,6 +74,7 @@ public class AuthenticationFireBaseRepo implements AuthenticationRepository {
         fireBaseAuthenticationWrapper.logout();
     }
 
+
     public FirebaseUser getUser() {
         return fireBaseAuthenticationWrapper.getCurrentUser();
     }

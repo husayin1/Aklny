@@ -1,5 +1,6 @@
 package com.example.foodfusion;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -20,6 +21,11 @@ import com.example.foodfusion.features.Authentication.AuthenticationActivity;
 import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationFireBaseRepo;
 import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
 import com.example.foodfusion.utilities.Connectivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,11 +33,16 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottom_navigation;
     NavController navController;
     ImageView endIcon;
+    GoogleSignInClient googleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("555667483551-p94tuutqrtkt2gvl3iicu0ejipcr3q8n.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this,gso);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         endIcon = findViewById(R.id.endIcon);
         endIcon.setOnClickListener(new View.OnClickListener() {
@@ -46,9 +57,14 @@ public class MainActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Log.i("TAG", "onClick: after logout"+ AuthenticationFireBaseRepo.getInstance().getUser());
                                     AuthenticationFireBaseRepo.getInstance().signOut();
-                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllFav();
-                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllWeekPlan();
-                                    goToAuthActivity();
+                                    googleSignInClient.signOut().addOnCompleteListener(MainActivity.this, new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllFav();
+                                            FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllWeekPlan();
+                                            goToAuthActivity();
+                                        }
+                                    });
                                 }
                             }).setNegativeButton(R.string.no,null).show();
                 }
@@ -97,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         */
 
         if(!AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
+            toolbar.setVisibility(View.GONE);
             Log.i("TAG", "onClick: get user from main activity after guest"+ AuthenticationFireBaseRepo.getInstance().getUser());
             Log.i("TAG", "onClick: get isauth from main after guest"+ AuthenticationFireBaseRepo.getInstance().isAuthenticated());
             navController.addOnDestinationChangedListener((controller,destination,args)->{
@@ -127,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 

@@ -1,6 +1,8 @@
 package com.example.foodfusion.features.home.mealPlan.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodfusion.MainActivity;
 import com.example.foodfusion.R;
+import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationFireBaseRepo;
+import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
@@ -61,7 +68,16 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "onClick: FROM MEAL PLAN ADAPTER");
-                listener.onClickListener(pojo);
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle("Delete From Planner")
+                        .setMessage("Are you sure?")
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                listener.onClickListener(pojo);
+                            }
+                        }).setNegativeButton(R.string.no,null).show();
+//                listener.onClickListener(pojo);
             }
         });
         holder.carView_planned_meal.setOnClickListener(new View.OnClickListener() {
