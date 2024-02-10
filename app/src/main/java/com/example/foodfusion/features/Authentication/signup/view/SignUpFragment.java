@@ -114,6 +114,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private boolean checkValidation(String userName, String password) {
+        Toast.makeText(this.getContext(), "email or password is not valid", Toast.LENGTH_SHORT).show();
         return isValidEmail(userName) && isPassLengthGT7(password)&&checkPasswordEquality()  ;
     }
 
@@ -134,6 +135,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private boolean checkPasswordEquality() {
+        Toast.makeText(this.getContext(), "passwords are not equal", Toast.LENGTH_SHORT).show();
         return textInputEditTextPasswordSignUp.getText().toString().equals(textInputEditTextConfirmPasswordSignUp.getText().toString());
     }
 

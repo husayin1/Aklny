@@ -1,6 +1,8 @@
 package com.example.foodfusion.features.home.favorite.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +64,16 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         holder.imageViewRandomMealFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onFavoriteClick(pojo);
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle("Delete From Saves")
+                        .setMessage("Are you sure?")
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                listener.onFavoriteClick(pojo);
+                            }
+                        }).setNegativeButton(R.string.no,null).show();
+//                listener.onFavoriteClick(pojo);
 
             }
         });

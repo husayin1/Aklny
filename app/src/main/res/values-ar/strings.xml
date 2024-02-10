@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--application Name-->
-    <string name="app_name">FoodFusion</string>
+    <string name="app_name">هوم شيف</string>
     <!--onBoardingTitles-->
     <string name="screen1">اكتشاف وصفة شخصية</string>
     <string name="screen2">قائمة البقالة عند التسوق</string>

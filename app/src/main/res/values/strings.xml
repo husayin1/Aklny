@@ -1,6 +1,6 @@
 <resources>
     <!--application Name-->
-    <string name="app_name">FoodFusion</string>
+    <string name="app_name">HomeChef</string>
     <!--onBoardingTitles-->
     <string name="screen1">Personalized Recipe Discovery</string>
     <string name="screen2">Grocery List for When You Shop</string>

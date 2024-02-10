@@ -125,7 +125,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
         txtViewMealNameItemDetails.setText(pojo.getStrMeal());
         textViewMealCateItemDetails.setText(pojo.getStrCategory());
         textViewMealCountryItemDetails.setText(pojo.getStrArea());
-        textViewProcedures.setText(pojo.getStrInstructions());
+        textViewProcedures.setText(formatText(pojo.getStrInstructions()));
         Glide.with(this.getContext())
                 .load(pojo.getStrMealThumb())
                 .centerCrop()
@@ -137,18 +137,31 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
             public void onClick(View view) {
                 if(connectivity.isConnectedMobile()||connectivity.isConnectedWifi()){
                     if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
-                        mealDetailsPresenterInterface.addToFav(pojo, new OnClickAddListener() {
-                            @Override
-                            public void onSuccess() {
-                                Toast.makeText(getContext(), "Added"+pojo.getStrMeal()+" to favorite", Toast.LENGTH_SHORT).show();
-                                imageViewAddToFavITemDetails.setImageResource(R.drawable.saveicon);
-                            }
+                        if(!isSaved){
+                            mealDetailsPresenterInterface.addToFav(pojo, new OnClickAddListener() {
+                                @Override
+                                public void onSuccess() {
+                                    Toast.makeText(getContext(), "Added"+pojo.getStrMeal()+" to favorite", Toast.LENGTH_SHORT).show();
+                                    imageViewAddToFavITemDetails.setImageResource(R.drawable.saveicon);
+                                }
 
-                            @Override
-                            public void onFailure(String err) {
-                                Toast.makeText(getContext(), "Failed To Add", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                                @Override
+                                public void onFailure(String err) {
+                                    Toast.makeText(getContext(), "Failed To Add", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }else{
+                            new AlertDialog.Builder(view.getContext())
+                                    .setTitle("UnSave")
+                                    .setMessage("Are you sure?")
+                                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            mealDetailsPresenterInterface.removeFromFavorite(pojo);
+                                            imageViewAddToFavITemDetails.setImageResource(R.drawable.save);
+                                        }
+                                    }).setNegativeButton(R.string.no,null).show();
+                        }
                     }else{
                         //signin
 
@@ -295,6 +308,10 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
             return link.split("\\?v=")[1];
         else return "";
     }
+    private String formatText(String strInstructions) {
+        strInstructions = strInstructions.replace(". ", ".\n\n");
+        return strInstructions;
+    }
 
     @Override
     public void onIngredientClickListener(PojoIngredientWithMeasure ingredient) {
@@ -302,6 +319,10 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
         MealDetailsFragmentDirections.ActionMealDetailsFragmentToSearchResultFragment action = MealDetailsFragmentDirections.actionMealDetailsFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);
 
-
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        youTubePlayerView.release();
     }
 }
