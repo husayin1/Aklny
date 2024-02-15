@@ -47,7 +47,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchResultFragment extends Fragment implements OnSearchResultClick, SearchView {
-    private static final String TAG = " SearchResultFragment ";
+    private static final String TAG = " SearchResult ";
     RecyclerView recyclerViewMealsResult;
     TextView textViewSearchResult;
     SearchResultAdapter searchResultAdapter;
