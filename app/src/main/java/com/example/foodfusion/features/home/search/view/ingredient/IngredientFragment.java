@@ -145,7 +145,7 @@ public class IngredientFragment extends Fragment implements OnIngredientClickLis
     @Override
     public void onIngredientClick(String name) {
         editTextSearchByIngredient.setText("");
-        Toast.makeText(getContext(), name + "from ingredient fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), name + "from ingredient fragment", Toast.LENGTH_SHORT).show();
         SearchType searchType = new SearchType(SearchType.ingredient, name);
 
         IngredientFragmentDirections.ActionIngredientFragmentToSearchResultFragment action = IngredientFragmentDirections.actionIngredientFragmentToSearchResultFragment(searchType);

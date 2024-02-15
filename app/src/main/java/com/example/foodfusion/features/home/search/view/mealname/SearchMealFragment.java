@@ -25,6 +25,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.foodfusion.R;
 import com.example.foodfusion.features.home.home.view.HomeAdapter;
 import com.example.foodfusion.features.home.home.view.HomeFragmentDirections;
@@ -74,11 +75,27 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
         searchAdapter = new SearchMealAdapter(this.getContext(), new ArrayList<>(), this);
         searchByMealNameRecyclerView.setLayoutManager(gridLayoutManager);
         searchByMealNameRecyclerView.setAdapter(searchAdapter);
-        searchPresenter.searchMealByName("");
+        editTextSearchByMealName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchPresenter.searchMealByName(charSequence+"");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
         return view;
     }
+/*
 
     private void searching(List<PojoMeal> meals) {
         Observable.create(new ObservableOnSubscribe<String>() {
@@ -132,6 +149,7 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
 
                 });
     }
+*/
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -156,10 +174,14 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
 
     @Override
     public void showSearchedMealData(List<PojoMeal> meals) {
-        searchAdapter.setMeals(meals);
-        searchAdapter.notifyDataSetChanged();
-        searching(meals);
-
+        if(meals!=null){
+            searchAdapter.setMeals(meals);
+            searchAdapter.notifyDataSetChanged();
+        }else{
+            searchAdapter.setMeals(new ArrayList<>());
+            searchAdapter.notifyDataSetChanged();
+        }
+//        searching(meals);
     }
 
     @Override
@@ -170,7 +192,7 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
 
     @Override
     public void onClick(PojoMeal meal, View view) {
-        Toast.makeText(getContext(), meal.getStrMeal() + " from search meal fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), meal.getStrMeal() + " from search meal fragment", Toast.LENGTH_SHORT).show();
         SearchMealFragmentDirections.ActionSearchMealFragmentToMealDetailsFragment action = SearchMealFragmentDirections.actionSearchMealFragmentToMealDetailsFragment(meal);
         Navigation.findNavController(getView()).navigate(action);
     }

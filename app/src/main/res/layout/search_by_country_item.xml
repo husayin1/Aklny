@@ -32,13 +32,15 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         app:cardMaxElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutFragmentHome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imgView"
@@ -51,8 +53,7 @@
                 android:src="@drawable/molokhia"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:riv_corner_radius_top_left="16dp"
-                app:riv_corner_radius_top_right="16dp" />
+                app:riv_corner_radius="16dp" />
 
             <TextView
                 android:id="@+id/textViewCountrySearch"

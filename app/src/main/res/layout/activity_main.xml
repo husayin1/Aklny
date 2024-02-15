@@ -11,7 +11,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/pure"
+        android:background="@color/yellow"
         android:elevation="16dp"
         app:itemIconTint="@color/green"
         app:itemTextColor="@color/green"

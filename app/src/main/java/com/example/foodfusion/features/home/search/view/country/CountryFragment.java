@@ -136,7 +136,7 @@ public class CountryFragment extends Fragment implements OnCountryClickListener,
     @Override
     public void onCountryClick(String name) {
         editTextSearchByCountry.setText("");
-        Toast.makeText(getContext(), name+" from country fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), name+" from country fragment", Toast.LENGTH_SHORT).show();
         SearchType searchType = new SearchType(SearchType.country,name);
         CountryFragmentDirections.ActionCountryFragmentToSearchResultFragment action= CountryFragmentDirections.actionCountryFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);

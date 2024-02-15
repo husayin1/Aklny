@@ -93,7 +93,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         googleSignInImage.setOnClickListener(v -> {
             Intent intent = googleSignInClient.getSignInIntent();
             activityResultLauncher.launch(intent);
-            Toast.makeText(this.getContext(), "This Is login Google", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this.getContext(), "This Is login Google", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -141,7 +141,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void OnFailureSignInGoogle(String message) {
-        Toast.makeText(requireContext(), "Failed to signin with google", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Failed to Sign in with google", Toast.LENGTH_SHORT).show();
     }
 
     private void login() {
@@ -161,7 +161,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         )
             return true;
         else {
-            Toast.makeText(this.getContext(), "please fill data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), "Please fill data", Toast.LENGTH_SHORT).show();
             return false;
         }
     }

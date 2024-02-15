@@ -100,7 +100,6 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         googleSignUpImage.setOnClickListener(v -> {
             Intent intent = googleSignInClient.getSignInIntent();
             activityResultLauncher.launch(intent);
-            Toast.makeText(this.getContext(), "This Is SignupNBy Google", Toast.LENGTH_SHORT).show();
         });
 
     }
@@ -115,7 +114,6 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private boolean checkValidation(String userName, String password) {
-        Toast.makeText(this.getContext(), "email or password is not valid", Toast.LENGTH_SHORT).show();
         return isValidEmail(userName) && isPassLengthGT7(password) && checkPasswordEquality();
     }
 
@@ -130,7 +128,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         )
             return true;
         else {
-            Toast.makeText(this.getContext(), "please fill data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), "Please Fill data", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -174,11 +172,12 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void OnSignUpFailure(String message) {
-        Toast.makeText(this.getContext(), "Cant SignUp now", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this.getContext(), "Cant SignUp now", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccessSignUpGoogle() {
+        Toast.makeText(this.getContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this.getContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -186,7 +185,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void OnFailureSignUpGoogle(String message) {
-        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
     }
 
     public boolean isPassLengthGT7(String pass) {

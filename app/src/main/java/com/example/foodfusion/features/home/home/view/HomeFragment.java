@@ -173,7 +173,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                 }
             }
         });
-        Toast.makeText(this.getContext(), "Check The Daily Meal", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this.getContext(), "Check The Daily Meal", Toast.LENGTH_SHORT).show();
         constraintLayoutFragmentHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

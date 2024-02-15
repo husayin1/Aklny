@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        _repo = MealsRepository.getInstance();
+        _repo.getRandomMeal();
+        _repo.getTrendingMeals();
         connectivity = new Connectivity(this);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("555667483551-p94tuutqrtkt2gvl3iicu0ejipcr3q8n.apps.googleusercontent.com")
