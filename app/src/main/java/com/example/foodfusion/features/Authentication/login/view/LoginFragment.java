@@ -43,9 +43,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginFragment extends Fragment implements LoginViewInterface {
-    TextView txt_login;
+    ImageView txt_login;
     TextView txt_login_description;
-    TextView tv_signUp,skip_textView_login;
+    TextView tv_signUp, skip_textView_login;
     TextInputEditText TextInputEditTextEmailLogin;
     TextInputEditText TextInputEditTextPasswordLogin;
     Button btn_login;
@@ -105,16 +105,16 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         });
 
         btn_login.setOnClickListener(v -> login());
-        skip_textView_login.setOnClickListener(v->{
-                    new AlertDialog.Builder(getContext())
-                            .setTitle("Wait! Are you sure?")
-                            .setMessage("You will miss out on personalized content and saving our delicious recipes.")
-                            .setPositiveButton("Yes, Iam sure", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    goToMainActivity();
-                                }
-                            }).setNegativeButton("No, Go Back",null).show();
+        skip_textView_login.setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Wait! Are you sure?")
+                    .setMessage("You will miss out on personalized content and saving our delicious recipes.")
+                    .setPositiveButton("Yes, Iam sure", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            goToMainActivity();
+                        }
+                    }).setNegativeButton("No, Go Back", null).show();
         });
     }
 
@@ -132,10 +132,10 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     @Override
     public void onSuccessSignInGoogle() {
 //        Toast.makeText(this.getContext(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(requireContext(), MainActivity.class);
+        Intent intent = new Intent(requireContext(), MainActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(intent);
-        goToMainActivity();
+        startActivity(intent);
+//        goToMainActivity();
     }
     //husayn@
 
@@ -173,10 +173,10 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(requireContext(), MainActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {

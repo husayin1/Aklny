@@ -33,10 +33,10 @@ public class MealDetailsAdapter extends RecyclerView.Adapter<MealDetailsAdapter.
         this.ingredientWithMeasuresList = ingredientWithMeasuresList;
     }
 
-    public MealDetailsAdapter(Context _context, List<PojoIngredientWithMeasure> ingredientWithMeasuresList,OnIngredientClickListener _listener) {
+    public MealDetailsAdapter(Context _context, List<PojoIngredientWithMeasure> ingredientWithMeasuresList, OnIngredientClickListener _listener) {
         this.ingredientWithMeasuresList = ingredientWithMeasuresList;
         this.context = _context;
-        this._listener=_listener;
+        this._listener = _listener;
     }
 
     @NonNull

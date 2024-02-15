@@ -19,7 +19,7 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
     private static final String TAG = "MealsRemoteDataSource";
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
     private static MealsRemoteDataSource client = null;
-    private MealService mealService;
+    private final MealService mealService;
 
     private MealsRemoteDataSource() {
         Gson gson = new GsonBuilder().setLenient().create();
@@ -48,10 +48,12 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
         char c = (char) (random.nextInt(26) + 'A');
         return mealService.searchByName(String.valueOf(c));
     }
+
     @Override
     public Single<RootCategory> getCategories() {
         return mealService.getCategories();
     }
+
     @Override
     public Single<RootIngredient> getIngredients() {
         return mealService.getIngredients();
@@ -66,10 +68,12 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
     public Single<RootMainMeal> getMealsByIngredient(String ingredient) {
         return mealService.getMealsByIngredient(ingredient);
     }
+
     @Override
     public Single<RootMainMeal> getMealsByCategory(String category) {
         return mealService.getMealsByCategory(category);
     }
+
     @Override
     public Single<RootMainMeal> getMealsByArea(String country) {
         return mealService.getMealsByArea(country);
@@ -80,7 +84,7 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInterface {
         return mealService.searchByName(name);
     }
 
-    public Single<RootMeal> getMealById(String id){
+    public Single<RootMeal> getMealById(String id) {
         return mealService.getMealById(id);
     }
 

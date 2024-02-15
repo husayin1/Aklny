@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface MealPlanView {
     void showData(List<PojoPlanner> meal);
+
     void deleteMeal(PojoPlanner meal);
 }

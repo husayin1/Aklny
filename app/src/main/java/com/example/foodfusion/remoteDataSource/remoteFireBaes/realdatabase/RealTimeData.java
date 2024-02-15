@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class RealTimeData {
     private static final String TAG = "RealTimeData";
-    FirebaseDatabase firebaseDatabase ;
+    FirebaseDatabase firebaseDatabase;
     private DatabaseReference favDatabase;
     private DatabaseReference planDatabase;
     private AuthenticationFireBaseRepo authenticationFireBaseRepo;
@@ -33,37 +33,37 @@ public class RealTimeData {
     }
 
     public void addFavMeal(PojoMeal pojoMeal, RealTimeInsertDelegation realTimeInsertDelegation) {
-        if(authenticationFireBaseRepo.isAuthenticated()){
+        if (authenticationFireBaseRepo.isAuthenticated()) {
             favDatabase.child(pojoMeal.idMeal).setValue(pojoMeal)
-                    .addOnCompleteListener(result-> realTimeInsertDelegation.onSuccess())
-                    .addOnFailureListener(err-> realTimeInsertDelegation.onFailure(err.getMessage().toString()));
+                    .addOnCompleteListener(result -> realTimeInsertDelegation.onSuccess())
+                    .addOnFailureListener(err -> realTimeInsertDelegation.onFailure(err.getMessage().toString()));
         }
 
     }
 
-    public void addPlannerMeal(PojoPlanner pojoMeal, RealTimeInsertDelegation realTimeInsertDelegation){
-        if(authenticationFireBaseRepo.isAuthenticated()){
+    public void addPlannerMeal(PojoPlanner pojoMeal, RealTimeInsertDelegation realTimeInsertDelegation) {
+        if (authenticationFireBaseRepo.isAuthenticated()) {
             planDatabase.child(pojoMeal.id).setValue(pojoMeal)
-                    .addOnCompleteListener(result-> realTimeInsertDelegation.onSuccess())
-                    .addOnFailureListener(err-> realTimeInsertDelegation.onFailure(err.getMessage().toString()));
+                    .addOnCompleteListener(result -> realTimeInsertDelegation.onSuccess())
+                    .addOnFailureListener(err -> realTimeInsertDelegation.onFailure(err.getMessage().toString()));
         }
     }
 
-    public void deleteFavMeal(String id,RealTimeIDeletionDelegation realTimeIDeletionDelegation){
-            favDatabase.child(id).removeValue(new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            realTimeIDeletionDelegation.onSuccess();
-                        }
-                    }).start();
-                }
-            });
+    public void deleteFavMeal(String id, RealTimeIDeletionDelegation realTimeIDeletionDelegation) {
+        favDatabase.child(id).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        realTimeIDeletionDelegation.onSuccess();
+                    }
+                }).start();
+            }
+        });
     }
 
-    public void deletePlannedMeal(String id,RealTimeIDeletionDelegation realTimeIDeletionDelegation){
+    public void deletePlannedMeal(String id, RealTimeIDeletionDelegation realTimeIDeletionDelegation) {
         planDatabase.child(id).removeValue(new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
@@ -72,12 +72,12 @@ public class RealTimeData {
         });
     }
 
-    public void getFavoriteMeals(RealTimeFavoriteDelegation realTimeFavoriteDelegation){
+    public void getFavoriteMeals(RealTimeFavoriteDelegation realTimeFavoriteDelegation) {
         ValueEventListener _listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<PojoMeal> meals =new ArrayList<>();
-                for(DataSnapshot data:snapshot.getChildren()){
+                ArrayList<PojoMeal> meals = new ArrayList<>();
+                for (DataSnapshot data : snapshot.getChildren()) {
                     meals.add(data.getValue(PojoMeal.class));
                 }
                 realTimeFavoriteDelegation.onSuccess(meals);

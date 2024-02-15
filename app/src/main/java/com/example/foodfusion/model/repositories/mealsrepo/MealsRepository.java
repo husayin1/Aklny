@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class MealsRepository implements MealsRepositoryInterface{
+public class MealsRepository implements MealsRepositoryInterface {
     private static final String TAG = "MealsRepo";
     private MealsRemoteDataSourceInterface mealsRemoteDataSource;
     private Single<RootMeal> randomMeal;
@@ -23,7 +23,6 @@ public class MealsRepository implements MealsRepositoryInterface{
     private Single<RootMainMeal> rootMealByIngredient;
     private Single<RootMainMeal> rootMealByCategory;
     private Single<RootMeal> trendingMeals;
-//    private Single<RootMeal> geMightLikeMeals;
 
     private static MealsRepository instance;
 
@@ -37,6 +36,7 @@ public class MealsRepository implements MealsRepositoryInterface{
         }
         return instance;
     }
+
     @Override
     public Single<RootMeal> getRandomMeal() {
         if (randomMeal == null) {
@@ -100,11 +100,13 @@ public class MealsRepository implements MealsRepositoryInterface{
         rootMealByArea = mealsRemoteDataSource.getMealsByArea(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         return rootMealByArea;
     }
+
     @Override
     public Single<RootMeal> searchMealByName(String name) {
-        return mealsRemoteDataSource.searchMealByName(name).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread());
+        return mealsRemoteDataSource.searchMealByName(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 
     }
+
     @Override
     public Single<RootMeal> getMealById(String id) {
         return mealsRemoteDataSource.getMealById(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());

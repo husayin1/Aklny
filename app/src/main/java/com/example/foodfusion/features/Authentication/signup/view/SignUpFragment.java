@@ -56,6 +56,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     public SignUpFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         signUpPresenter = SignUpPresenter.getInstance(this);
-        return  inflater.inflate(R.layout.fragment_signup, container, false);
+        return inflater.inflate(R.layout.fragment_signup, container, false);
     }
 
     @Override
@@ -91,12 +92,12 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
                 Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment);
             }
         });
-        signupBtn.setOnClickListener(v->signUp());
+        signupBtn.setOnClickListener(v -> signUp());
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
 
-        googleSignUpImage.setOnClickListener(v->{
+        googleSignUpImage.setOnClickListener(v -> {
             Intent intent = googleSignInClient.getSignInIntent();
             activityResultLauncher.launch(intent);
             Toast.makeText(this.getContext(), "This Is SignupNBy Google", Toast.LENGTH_SHORT).show();
@@ -106,8 +107,8 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
 
     private void signUp() {
-        String userName = textInputEditTextEmailSignUp.getText().toString();
-        String password = textInputEditTextPasswordSignUp.getText().toString();
+        String userName = String.valueOf(textInputEditTextEmailSignUp.getText());
+        String password = String.valueOf(textInputEditTextPasswordSignUp.getText());
         if (checkValidation(userName, password) && isDataFilled()) {
             signUpPresenter.signUp(userName, password);
         }
@@ -115,17 +116,17 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     private boolean checkValidation(String userName, String password) {
         Toast.makeText(this.getContext(), "email or password is not valid", Toast.LENGTH_SHORT).show();
-        return isValidEmail(userName) && isPassLengthGT7(password)&&checkPasswordEquality()  ;
+        return isValidEmail(userName) && isPassLengthGT7(password) && checkPasswordEquality();
     }
 
     private boolean isDataFilled() {
         if (
                 textInputEditTextEmailSignUp.getText() != null &&
-                !textInputEditTextEmailSignUp.getText().toString().isEmpty() &&
+                        !textInputEditTextEmailSignUp.getText().toString().isEmpty() &&
                         textInputEditTextConfirmPasswordSignUp.getText() != null &&
-                !textInputEditTextConfirmPasswordSignUp.getText().toString().isEmpty() &&
+                        !textInputEditTextConfirmPasswordSignUp.getText().toString().isEmpty() &&
                         textInputEditTextPasswordSignUp.getText() != null &&
-                !textInputEditTextPasswordSignUp.getText().toString().isEmpty()
+                        !textInputEditTextPasswordSignUp.getText().toString().isEmpty()
         )
             return true;
         else {
@@ -135,7 +136,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private boolean checkPasswordEquality() {
-        Toast.makeText(this.getContext(), "passwords are not equal", Toast.LENGTH_SHORT).show();
+
         return textInputEditTextPasswordSignUp.getText().toString().equals(textInputEditTextConfirmPasswordSignUp.getText().toString());
     }
 
@@ -146,37 +147,24 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
 
-
-
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode() == Activity.RESULT_OK){
+            if (result.getResultCode() == Activity.RESULT_OK) {
                 Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                try{
+                try {
                     GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
-                    if(signInAccount!=null){
-                        AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(),null);
+                    if (signInAccount != null) {
+                        AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
                         signUpPresenter.signUpWithGoogle(authCredential);
                     }
-                }catch (ApiException e){
+                } catch (ApiException e) {
                     e.printStackTrace();
                 }
             }
         }
     });
 
-
-    public boolean isPassLengthGT7(String pass) {
-        return pass.length() >= 7;
-    }
-
-
-    private boolean isValidEmail(String s) {
-        String email = s.trim();
-        String emailPattern = "[a-zA-Z\\d._-]+@[a-z]+\\.+[a-z]+";
-        return email.matches(emailPattern);
-    }
 
     @Override
     public void onSignUpSuccess(FirebaseUser user) {
@@ -191,14 +179,24 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void onSuccessSignUpGoogle() {
-//        Toast.makeText(this.getContext(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this.getContext(), MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     @Override
     public void OnFailureSignUpGoogle(String message) {
-        Toast.makeText(requireContext(),"Failed to signup with google", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
     }
+
+    public boolean isPassLengthGT7(String pass) {
+        return pass.length() >= 7;
+    }
+
+    private boolean isValidEmail(String s) {
+        String email = s.trim();
+        String emailPattern = "[a-zA-Z\\d._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
+    }
+
 }

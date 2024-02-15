@@ -14,8 +14,8 @@ public class SearchType implements Parcelable {
     private String type;
 
     public SearchType() {
-        this.name="";
-        this.type="";
+        this.name = "";
+        this.type = "";
     }
 
     protected SearchType(Parcel in) {
@@ -51,7 +51,7 @@ public class SearchType implements Parcelable {
         this.type = type;
     }
 
-    public SearchType (String type,String name) {
+    public SearchType(String type, String name) {
         this.name = name;
         this.type = type;
     }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.foodfusion.R;
@@ -23,7 +24,10 @@ import com.example.foodfusion.localDataSource.MealLocalDataSource;
 import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
 import com.example.foodfusion.model.repositories.meal_models.pojos.MealToMealPlanner;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.utilities.Connectivity;
 import com.example.foodfusion.utilities.DateFormat;
+
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +42,7 @@ public class MealPlanFragment extends Fragment implements MealPlanView,OnDeleteL
     LinearLayoutManager layoutManager;
     MealPlanPresenterInterface mealPlanPresenter;
 
+    Connectivity connectivity;
     public MealPlanFragment() {
         // Required empty public constructor
     }
@@ -51,6 +56,7 @@ public class MealPlanFragment extends Fragment implements MealPlanView,OnDeleteL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        connectivity = new Connectivity(requireContext());
         View view = inflater.inflate(R.layout.fragment_meal_plan, container, false);
         calendarView = view.findViewById(R.id.calendarView);
         recyclerViewMealPlan = view.findViewById(R.id.recyclerViewMealPlan);
@@ -104,7 +110,14 @@ public class MealPlanFragment extends Fragment implements MealPlanView,OnDeleteL
 
     @Override
     public void onClickListener(PojoPlanner meal) {
-        deleteMeal(meal);
+        if(connectivity.isConnectedMobile()||connectivity.isConnectedWifi()){
+            deleteMeal(meal);
+            mealPlanAdapter.notifyDataSetChanged();
+            Toast.makeText(this.getContext(), R.string.removed_item, Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override

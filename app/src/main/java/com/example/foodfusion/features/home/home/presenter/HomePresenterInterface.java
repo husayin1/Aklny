@@ -8,8 +8,8 @@ import io.reactivex.rxjava3.core.Single;
 
 public interface HomePresenterInterface {
     void getRandomMeal();
+
     void getTrendingMeals();
-//    void geMightLikeMeals();
 
     void addToFav(PojoMeal meal, OnClickAddListener onClickAddListener);
 }

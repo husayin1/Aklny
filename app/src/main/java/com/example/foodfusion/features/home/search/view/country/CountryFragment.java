@@ -23,6 +23,7 @@ import com.example.foodfusion.features.home.search.presenter.SearchPresenter;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenterInterface;
 import com.example.foodfusion.features.home.search.view.SearchView;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoArea;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
@@ -81,8 +82,6 @@ public class CountryFragment extends Fragment implements OnCountryClickListener,
         return view;
     }
     private void searchByArea(List<PojoArea> areas) {
-
-
         Observable.create(new ObservableOnSubscribe<String>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Throwable {
@@ -160,12 +159,12 @@ public class CountryFragment extends Fragment implements OnCountryClickListener,
     }
 
     @Override
-    public void showSearchedMealData(ArrayList<PojoMeal> meals) {
+    public void showSearchedMealData(List<PojoMeal> meals) {
 
     }
 
     @Override
-    public void showSearchResultData(RootMainMeal mainMeal) {
+    public void showSearchResultData(List<PojoMainMeal> mainMeal) {
 
     }
 

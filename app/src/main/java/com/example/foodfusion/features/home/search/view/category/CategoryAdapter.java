@@ -23,12 +23,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private List<PojoCategory> categories;
 
     private final OnCategoryClickListener listener;
+
     public void setCategoryList(List<PojoCategory> categories) {
         this.categories = categories;
     }
 
 
-    public CategoryAdapter(Context context, List<PojoCategory> categories , OnCategoryClickListener listener) {
+    public CategoryAdapter(Context context, List<PojoCategory> categories, OnCategoryClickListener listener) {
         this.context = context;
         this.categories = categories;
         this.listener = listener;
@@ -38,7 +39,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.search_by_category_item,parent,false);
+        View v = layoutInflater.inflate(R.layout.search_by_category_item, parent, false);
         CategoryAdapter.ViewHolder vh = new CategoryAdapter.ViewHolder(v);
         return vh;
     }
@@ -66,8 +67,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewCategoryItemName;
         ImageView imageViewCategoryItem;

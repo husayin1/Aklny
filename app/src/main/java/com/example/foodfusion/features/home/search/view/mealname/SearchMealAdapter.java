@@ -1,4 +1,4 @@
-package com.example.foodfusion.features.home.home.view;
+package com.example.foodfusion.features.home.search.view.mealname;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,16 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodfusion.R;
+
+import com.example.foodfusion.features.home.home.view.OnClickListener;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.ViewHolder> {
     List<PojoMeal> meals;
     OnClickListener clickListener;
     Context context;
 
-    public HomeAdapter(Context _context, List<PojoMeal> meals, OnClickListener onClickListener) {
+    public SearchMealAdapter(Context _context, List<PojoMeal> meals, OnClickListener onClickListener) {
         this.meals = meals;
         this.context = _context;
         clickListener = onClickListener;
@@ -30,15 +32,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchMealAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.home_meal, parent, false);
         Log.i("TAG", "onCreateViewHolder:   Creating Home Meal");
-        return new ViewHolder(v);
+        return new SearchMealAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchMealAdapter.ViewHolder holder, int position) {
         holder.textViewName.setText(meals.get(position).strMeal);
         Glide.with(holder.getView().getContext()).load(meals.get(position).strMealThumb).placeholder(R.drawable.molokhia).into(holder.getImageView());
         holder.getView().setOnClickListener(v -> {
@@ -50,7 +52,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         Log.i("TAG", "getItemCount: " + meals.size());
-        return meals.size() - 1;
+        return meals.size();
     }
 
     public void setMeals(List<PojoMeal> meals) {
@@ -84,4 +86,5 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
 
     }
+
 }

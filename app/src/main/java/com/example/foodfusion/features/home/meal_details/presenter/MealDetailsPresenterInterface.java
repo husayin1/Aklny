@@ -8,8 +8,11 @@ import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
 
 public interface MealDetailsPresenterInterface {
     void addToFav(PojoMeal meal, OnClickAddListener onClickAddListener);
-    void addToPlanner(PojoPlanner meal,OnClickAddListener onClickAddListener);
+
+    void addToPlanner(PojoPlanner meal, OnClickAddListener onClickAddListener);
+
     public LiveData<PojoMeal> getFavMealById(String id);
+
     void removeFromFavorite(PojoMeal meal);
 
 }
