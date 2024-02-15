@@ -8,31 +8,34 @@ import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignUpWithGoo
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignUpPresenter implements  SignUpPresenterInterface, SignUpNetworkCallBack, SignUpWithGoogleNetworkCallBack {
+public class SignUpPresenter implements SignUpPresenterInterface, SignUpNetworkCallBack, SignUpWithGoogleNetworkCallBack {
 
     private SignUpViewInterface signUpViewInterface;
     private AuthenticationRepository authenticationRepository;
 
-    private static SignUpPresenter signUpPresenter =null;
-    private SignUpPresenter(SignUpViewInterface signUpViewInterface){
+    private static SignUpPresenter signUpPresenter = null;
+
+    private SignUpPresenter(SignUpViewInterface signUpViewInterface) {
         this.signUpViewInterface = signUpViewInterface;
         authenticationRepository = AuthenticationFireBaseRepo.getInstance();
 
     }
-    public static SignUpPresenter getInstance(SignUpViewInterface signUpViewInterface){
-        if(signUpPresenter ==null){
+
+    public static SignUpPresenter getInstance(SignUpViewInterface signUpViewInterface) {
+        if (signUpPresenter == null) {
             signUpPresenter = new SignUpPresenter(signUpViewInterface);
         }
         return signUpPresenter;
     }
+
     @Override
     public void signUp(String email, String password) {
-        authenticationRepository.signUp(email,password,this);
+        authenticationRepository.signUp(email, password, this);
     }
 
     @Override
     public void signUpWithGoogle(AuthCredential authCredential) {
-        authenticationRepository.signUpWithGoogle(authCredential,this);
+        authenticationRepository.signUpWithGoogle(authCredential, this);
     }
 
     @Override

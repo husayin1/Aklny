@@ -25,6 +25,7 @@ import com.example.foodfusion.features.home.search.presenter.SearchPresenter;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenterInterface;
 import com.example.foodfusion.features.home.search.view.SearchView;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoIngredient;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
@@ -45,7 +46,6 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 public class IngredientFragment extends Fragment implements OnIngredientClickListener, SearchView {
-    //all ingredients
     private final String TAG = " Ingredient Fragment ";
     EditText editTextSearchByIngredient;
     RecyclerView searchByIngredientRecyclerView;
@@ -145,7 +145,7 @@ public class IngredientFragment extends Fragment implements OnIngredientClickLis
     @Override
     public void onIngredientClick(String name) {
         editTextSearchByIngredient.setText("");
-        Toast.makeText(getContext(), name + "from ingredient fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), name + "from ingredient fragment", Toast.LENGTH_SHORT).show();
         SearchType searchType = new SearchType(SearchType.ingredient, name);
 
         IngredientFragmentDirections.ActionIngredientFragmentToSearchResultFragment action = IngredientFragmentDirections.actionIngredientFragmentToSearchResultFragment(searchType);
@@ -154,10 +154,10 @@ public class IngredientFragment extends Fragment implements OnIngredientClickLis
 
     @Override
     public void showIngredientsData(RootIngredient ingredients) {
-        if(ingredients==null){
+        if (ingredients == null) {
             ingredientAdapter.setIngredientList(new ArrayList<>());
             ingredientAdapter.notifyDataSetChanged();
-        }else{
+        } else {
             ingredientList = ingredients.ingredients;
             ingredientAdapter.setIngredientList(ingredientList);
             ingredientAdapter.notifyDataSetChanged();
@@ -180,12 +180,12 @@ public class IngredientFragment extends Fragment implements OnIngredientClickLis
     }
 
     @Override
-    public void showSearchedMealData(ArrayList<PojoMeal> meals) {
+    public void showSearchedMealData(List<PojoMeal> meals) {
 
     }
 
     @Override
-    public void showSearchResultData(RootMainMeal mainMeal) {
+    public void showSearchResultData(List<PojoMainMeal> mainMeal) {
 
     }
 }

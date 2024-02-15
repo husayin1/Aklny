@@ -10,7 +10,6 @@ public class Connectivity {
     private boolean isMobileConn;
 
 
-
     public Connectivity(Context context) {
         ConnectivityManager connMgr =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -27,11 +26,11 @@ public class Connectivity {
         }
     }
 
-    public boolean isConnectedWifi(){
-        return  isWifiConn;
+    public boolean isConnectedWifi() {
+        return isWifiConn;
     }
 
-    public boolean isConnectedMobile(){
+    public boolean isConnectedMobile() {
         return isMobileConn;
     }
 }

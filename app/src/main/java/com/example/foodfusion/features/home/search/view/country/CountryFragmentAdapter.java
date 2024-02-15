@@ -18,7 +18,7 @@ import com.example.foodfusion.model.repositories.meal_models.pojos.PojoArea;
 
 import java.util.List;
 
-public class CountryFragmentAdapter extends RecyclerView.Adapter<CountryFragmentAdapter.ViewHolder>{
+public class CountryFragmentAdapter extends RecyclerView.Adapter<CountryFragmentAdapter.ViewHolder> {
     //adapter for all countries search
 
     private final Context context;

@@ -26,6 +26,7 @@ import com.example.foodfusion.features.home.search.view.country.CountryAdapter;
 import com.example.foodfusion.features.home.search.view.country.OnCountryClickListener;
 import com.example.foodfusion.features.home.search.view.ingredient.IngredientAdapter;
 import com.example.foodfusion.features.home.search.view.ingredient.OnIngredientClickListener;
+import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
@@ -35,15 +36,16 @@ import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
 import com.example.foodfusion.utilities.Connectivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SearchFragment extends Fragment implements OnCountryClickListener, OnCategoryClickListener, OnIngredientClickListener,SearchView {
-    RecyclerView countriesRecyclerView,ingredientsRecyclerView,categoriesRecyclerView;
+public class SearchFragment extends Fragment implements OnCountryClickListener, OnCategoryClickListener, OnIngredientClickListener, SearchView {
+    RecyclerView countriesRecyclerView, ingredientsRecyclerView, categoriesRecyclerView;
     CountryAdapter countryAdapter;
     CategoryAdapter categoryAdapter;
     IngredientAdapter ingredientAdapter;
     SearchPresenterInterface searchPresenter;
     EditText searchView;
-    TextView textViewCountryViewAll,textViewIngredientsViewAll,countrySearch_textView,ingredientSearch_textView,categoriesSearch_textView;
+    TextView textViewCountryViewAll, textViewIngredientsViewAll, countrySearch_textView, ingredientSearch_textView, categoriesSearch_textView;
     Connectivity connectivity;
     LottieAnimationView imageViewEmptyList;
 
@@ -61,7 +63,7 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        searchPresenter = new SearchPresenter(MealsRepository.getInstance(),this);
+        searchPresenter = new SearchPresenter(MealsRepository.getInstance(), this);
         connectivity = new Connectivity(getContext());
 
 
@@ -72,8 +74,8 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
         textViewIngredientsViewAll = view.findViewById(R.id.textViewIngredientsViewAll);
         //
         countrySearch_textView = view.findViewById(R.id.countrySearch_textView);
-        ingredientSearch_textView=view.findViewById(R.id.ingredientSearch_textView);
-        categoriesSearch_textView=view.findViewById(R.id.categoriesSearch_textView);
+        ingredientSearch_textView = view.findViewById(R.id.ingredientSearch_textView);
+        categoriesSearch_textView = view.findViewById(R.id.categoriesSearch_textView);
         //
 
         searchView = view.findViewById(R.id.searchView);
@@ -98,24 +100,20 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
         });
 
 
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         ingredientsRecyclerView.setLayoutManager(layoutManager);
 
-        ingredientAdapter = new IngredientAdapter(this.getContext(),new ArrayList<>(),this);
+        ingredientAdapter = new IngredientAdapter(this.getContext(), new ArrayList<>(), this);
         ingredientsRecyclerView.setAdapter(ingredientAdapter);
 
 
-
-
-
         LinearLayoutManager layoutManagerForCategories = new LinearLayoutManager(getContext());
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(),2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
         layoutManagerForCategories.setOrientation(RecyclerView.VERTICAL);
         categoriesRecyclerView.setLayoutManager(gridLayoutManager);
 
-        categoryAdapter = new CategoryAdapter(getContext(),new ArrayList<>(),this);
+        categoryAdapter = new CategoryAdapter(getContext(), new ArrayList<>(), this);
 
 
         categoriesRecyclerView.setAdapter(categoryAdapter);
@@ -125,9 +123,9 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
         layoutManagerForAreas.setOrientation(RecyclerView.HORIZONTAL);
         countriesRecyclerView.setLayoutManager(layoutManagerForAreas);
 
-        countryAdapter = new CountryAdapter(getContext(),new ArrayList<>(),this);
+        countryAdapter = new CountryAdapter(getContext(), new ArrayList<>(), this);
         countriesRecyclerView.setAdapter(countryAdapter);
-        if(connectivity.isConnectedMobile()||connectivity.isConnectedWifi()){
+        if (connectivity.isConnectedMobile() || connectivity.isConnectedWifi()) {
 
             imageViewEmptyList.setVisibility(View.GONE);
             countrySearch_textView.setVisibility(View.VISIBLE);
@@ -140,7 +138,7 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
             searchPresenter.getAreas();
             searchPresenter.getIngredients();
             searchPresenter.getCategories();
-        }else{
+        } else {
             imageViewEmptyList.setVisibility(View.VISIBLE);
             countrySearch_textView.setVisibility(View.GONE);
             ingredientSearch_textView.setVisibility(View.GONE);
@@ -157,24 +155,24 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
 
     @Override
     public void onCategoryClick(String name) {
-        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
-        SearchType searchType = new SearchType(SearchType.category,name);
+//        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
+        SearchType searchType = new SearchType(SearchType.category, name);
         SearchFragmentDirections.ActionSearchFragmentToSearchResultFragment action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);
     }
 
     @Override
     public void onCountryClick(String name) {
-        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
-        SearchType searchType = new SearchType(SearchType.country,name);
+//        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
+        SearchType searchType = new SearchType(SearchType.country, name);
         SearchFragmentDirections.ActionSearchFragmentToSearchResultFragment action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);
     }
 
     @Override
     public void onIngredientClick(String name) {
-        Toast.makeText(getContext(), name+ " from search Fragment", Toast.LENGTH_SHORT).show();
-        SearchType searchType = new SearchType(SearchType.ingredient,name);
+//        Toast.makeText(getContext(), name + " from search Fragment", Toast.LENGTH_SHORT).show();
+        SearchType searchType = new SearchType(SearchType.ingredient, name);
         SearchFragmentDirections.ActionSearchFragmentToSearchResultFragment action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);
     }
@@ -199,12 +197,12 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
     }
 
     @Override
-    public void showSearchedMealData(ArrayList<PojoMeal> meals) {
+    public void showSearchedMealData(List<PojoMeal> meals) {
 
     }
 
     @Override
-    public void showSearchResultData(RootMainMeal mainMeal) {
+    public void showSearchResultData(List<PojoMainMeal> mainMeal) {
 
     }
 }

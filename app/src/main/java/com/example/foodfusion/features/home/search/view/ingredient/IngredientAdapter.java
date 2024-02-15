@@ -19,8 +19,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.List;
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.ViewHolder> {
-    //ingredient search adapter
-
     private final Context context;
     private List<PojoIngredient> ingredients;
 

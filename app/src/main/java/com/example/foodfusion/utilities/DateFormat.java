@@ -8,14 +8,16 @@ import java.util.Locale;
 
 public class DateFormat {
     public static final String DATE_FORMAT = "yyyy-MM-dd";
-    public static String getString(Date date){
+
+    public static String getString(Date date) {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.US);
-        return  format.format(date);
+        return format.format(date);
     }
-    public static String getString(int year, int month, int dayOfMonth){
+
+    public static String getString(int year, int month, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year,month,dayOfMonth);
+        calendar.set(year, month, dayOfMonth);
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.US);
-        return  format.format(calendar.getTime());
+        return format.format(calendar.getTime());
     }
 }

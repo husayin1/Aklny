@@ -7,10 +7,10 @@
     android:id="@+id/cardViewMainMeal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
     app:cardMaxElevation="6dp"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="16dp">
+    app:cardUseCompatPadding="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,8 +40,8 @@
             android:gravity="center"
             android:textSize="12sp"
 
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewMainMeal"

@@ -52,11 +52,11 @@ import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MealDetailsFragment extends Fragment implements MealDetailsView,OnIngredientClickListener{
+public class MealDetailsFragment extends Fragment implements MealDetailsView, OnIngredientClickListener {
     private final static String TAG = "MealDetailsFragment";
     CircleImageView mealDetailsImage;
-    TextView textViewMealCateItemDetails,textViewMealCountryItemDetails,txtViewMealNameItemDetails,textViewProcedures;
-    ImageView imageViewAddToCalendarItemDetails,imageViewAddToFavITemDetails;
+    TextView textViewMealCateItemDetails, textViewMealCountryItemDetails, txtViewMealNameItemDetails, textViewProcedures;
+    ImageView imageViewAddToCalendarItemDetails, imageViewAddToFavITemDetails;
     RecyclerView recyclerViewIngredientsItemDetails;
     YouTubePlayerView youTubePlayerView;
     PojoMeal pojo;
@@ -65,6 +65,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
     MealDetailsPresenterInterface mealDetailsPresenterInterface;
     Connectivity connectivity;
     boolean isSaved;
+
     public MealDetailsFragment() {
         // Required empty public constructor
     }
@@ -104,7 +105,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
         recyclerViewIngredientsItemDetails.setLayoutManager(linearLayoutManager);
 
 
-        adapter = new MealDetailsAdapter(this.getContext(), new ArrayList<>(),this);
+        adapter = new MealDetailsAdapter(this.getContext(), new ArrayList<>(), this);
         recyclerViewIngredientsItemDetails.setAdapter(adapter);
         adapter.setIngredientWithMeasuresList(getArrayList(pojo));
 
@@ -114,19 +115,17 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);
                 String videoMealDetail = getVideoLink(pojo.getStrYoutube());
-//                youTubePlayer.loadVideo(videoMealDetail,0);
                 youTubePlayer.cueVideo(videoMealDetail, 0);
-//                youTubePlayer.pause();
             }
         });
-        String id= pojo.getIdMeal();
+        String id = pojo.getIdMeal();
         getMealLocal(id);
 
         txtViewMealNameItemDetails.setText(pojo.getStrMeal());
         textViewMealCateItemDetails.setText(pojo.getStrCategory());
         textViewMealCountryItemDetails.setText(pojo.getStrArea());
         textViewProcedures.setText(formatText(pojo.getStrInstructions()));
-        Glide.with(this.getContext())
+        Glide.with(requireContext())
                 .load(pojo.getStrMealThumb())
                 .centerCrop()
                 .placeholder(R.drawable.molokhia)
@@ -135,22 +134,22 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
         imageViewAddToFavITemDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(connectivity.isConnectedMobile()||connectivity.isConnectedWifi()){
-                    if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
-                        if(!isSaved){
+                if (connectivity.isConnectedMobile() || connectivity.isConnectedWifi()) {
+                    if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+                        if (!isSaved) {
                             mealDetailsPresenterInterface.addToFav(pojo, new OnClickAddListener() {
                                 @Override
                                 public void onSuccess() {
-                                    Toast.makeText(getContext(), "Added"+pojo.getStrMeal()+" to favorite", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Added" + pojo.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
                                     imageViewAddToFavITemDetails.setImageResource(R.drawable.saveicon);
                                 }
 
                                 @Override
                                 public void onFailure(String err) {
-                                    Toast.makeText(getContext(), "Failed To Add", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Failed To Save", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        }else{
+                        } else {
                             new AlertDialog.Builder(view.getContext())
                                     .setTitle("UnSave")
                                     .setMessage("Are you sure?")
@@ -160,11 +159,9 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
                                             mealDetailsPresenterInterface.removeFromFavorite(pojo);
                                             imageViewAddToFavITemDetails.setImageResource(R.drawable.save);
                                         }
-                                    }).setNegativeButton(R.string.no,null).show();
+                                    }).setNegativeButton(R.string.no, null).show();
                         }
-                    }else{
-                        //signin
-
+                    } else {
                         new AlertDialog.Builder(getContext())
                                 .setTitle(R.string.sign_up_for_more_features)
                                 .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
@@ -173,9 +170,9 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         goToAuthActivity();
                                     }
-                                }).setNegativeButton(R.string.cancel,null).show();
+                                }).setNegativeButton(R.string.cancel, null).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
                 }
 
@@ -185,8 +182,8 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
         imageViewAddToCalendarItemDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(connectivity.isConnectedMobile()||connectivity.isConnectedWifi()){
-                    if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+                if (connectivity.isConnectedMobile() || connectivity.isConnectedWifi()) {
+                    if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
                         Calendar calendar = Calendar.getInstance();
                         int year = calendar.get(Calendar.YEAR);
                         int month = calendar.get(Calendar.MONTH);
@@ -195,7 +192,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
                         calendar.add(Calendar.DAY_OF_MONTH, 6);
                         int maxDay = calendar.get(Calendar.DAY_OF_MONTH);
                         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                getContext(),
+                                requireContext(),
                                 new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -203,7 +200,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
                                         mealDetailsPresenterInterface.addToPlanner(MealToMealPlanner.MealToMealPlanner(pojo, DateFormat.getString(year, month, day), 0), new OnClickAddListener() {
                                             @Override
                                             public void onSuccess() {
-                                                Toast.makeText(view.getContext(), "Added Successfully to calendar", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(view.getContext(), "Added Successfully to planner", Toast.LENGTH_SHORT).show();
                                                 imageViewAddToCalendarItemDetails.setImageResource(R.drawable.calendar);
                                                 Intent intent = new Intent(Intent.ACTION_INSERT)
                                                         .setData(CalendarContract.Events.CONTENT_URI)
@@ -218,14 +215,14 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
                                                 Toast.makeText(view.getContext(), err, Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                        Toast.makeText(getContext(), "Inserted " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Saved " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
                                         Log.i(TAG, "onDateSet: " + DateFormat.getString(year, month, day));
                                     }
                                 }, year, month, day);
                         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
                         datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                         datePickerDialog.show();
-                    }else{
+                    } else {
                         //sign in
                         new AlertDialog.Builder(getContext())
                                 .setTitle(R.string.sign_up_for_more_features)
@@ -235,39 +232,36 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         goToAuthActivity();
                                     }
-                                }).setNegativeButton(R.string.cancel,null).show();
+                                }).setNegativeButton(R.string.cancel, null).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
-    private void getMealLocal(String id){
+
+    private void getMealLocal(String id) {
         mealDetailsPresenterInterface.getFavMealById(id).observe(getViewLifecycleOwner(), new Observer<PojoMeal>() {
             @Override
             public void onChanged(PojoMeal pojoMeal) {
-                if(pojoMeal!=null){
-                    isSaved=true;
+                if (pojoMeal != null) {
+                    isSaved = true;
                     imageViewAddToFavITemDetails.setImageResource(R.drawable.saveicon);
-                }else{
-                    isSaved= false;
+                } else {
+                    isSaved = false;
                     imageViewAddToFavITemDetails.setImageResource(R.drawable.save);
                 }
             }
         });
     }
+
     private void goToAuthActivity() {
         Intent intent = new Intent(getContext(), AuthenticationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
     }
-/*
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        youTubePlayerView.release();
-    }*/
+
     void makeIngredientsArray(PojoMeal pojo, ArrayList<PojoIngredientWithMeasure> ingredientList) {
         addToList(pojo.strIngredient1, pojo.strMeasure1, ingredientList);
         addToList(pojo.strIngredient2, pojo.strMeasure2, ingredientList);
@@ -291,6 +285,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
         addToList(pojo.strIngredient20, pojo.strMeasure20, ingredientList);
 
     }
+
     void addToList(String strIngredient, String strMeasure, ArrayList<PojoIngredientWithMeasure> ingredientList) {
         if (strIngredient != null && !strIngredient.isEmpty()) {
             String measure;
@@ -298,16 +293,19 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
             ingredientList.add(new PojoIngredientWithMeasure(strIngredient, measure));
         }
     }
+
     ArrayList<PojoIngredientWithMeasure> getArrayList(PojoMeal meal) {
         ArrayList<PojoIngredientWithMeasure> list = new ArrayList<>();
         makeIngredientsArray(meal, list);
         return list;
     }
+
     public String getVideoLink(String link) {
         if (link != null && link.split("\\?v=").length > 1)
             return link.split("\\?v=")[1];
         else return "";
     }
+
     private String formatText(String strInstructions) {
         strInstructions = strInstructions.replace(". ", ".\n\n");
         return strInstructions;
@@ -320,6 +318,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView,OnI
         Navigation.findNavController(requireView()).navigate(action);
 
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

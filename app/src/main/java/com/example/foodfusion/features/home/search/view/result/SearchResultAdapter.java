@@ -17,7 +17,7 @@ import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
 
 import java.util.List;
 
-public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
+public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
     private static final String TAG = "MealResultAdapter";
     private final Context context;
     private List<PojoMainMeal> mainMealsList;

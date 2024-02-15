@@ -38,6 +38,7 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
     GridLayoutManager gridLayoutManager;
     LottieAnimationView imageViewEmptyList;
     Connectivity connectivity;
+
     public FavoriteFragment() {
         // Required empty public constructor
     }
@@ -58,7 +59,7 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
         favoritePresenterInterface = new FavoritePresenter(this,
                 FavAndPlannerRepo.getInstance(getContext())
         );
-        favoriteAdapter = new FavoriteAdapter(new ArrayList<>(), this, getContext(),this);
+        favoriteAdapter = new FavoriteAdapter(new ArrayList<>(), this, getContext(), this);
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerViewFavoriteMeals.setLayoutManager(layoutManager);
@@ -74,14 +75,14 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
         meal.observe(this, new Observer<List<PojoMeal>>() {
             @Override
             public void onChanged(List<PojoMeal> pojo) {
-                if(pojo.isEmpty()){
+                if (pojo.isEmpty()) {
                     imageViewEmptyList.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     imageViewEmptyList.setVisibility(View.GONE);
                 }
-                if(pojo.size()%2==0){
+                if (pojo.size() % 2 == 0) {
                     recyclerViewFavoriteMeals.setLayoutManager(gridLayoutManager);
-                }else{
+                } else {
                     recyclerViewFavoriteMeals.setLayoutManager(layoutManager);
                 }
                 favoriteAdapter.setList(pojo);
@@ -103,11 +104,11 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
 
     @Override
     public void onFavoriteClick(PojoMeal meal) {
-        if(connectivity.isConnectedMobile()||connectivity.isConnectedWifi()){
+        if (connectivity.isConnectedMobile() || connectivity.isConnectedWifi()) {
             deleteMeal(meal);
             favoriteAdapter.notifyDataSetChanged();
             Toast.makeText(this.getContext(), R.string.removed_item, Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
         }
     }

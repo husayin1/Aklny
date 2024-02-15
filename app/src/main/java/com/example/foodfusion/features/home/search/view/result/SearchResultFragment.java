@@ -47,7 +47,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchResultFragment extends Fragment implements OnSearchResultClick, SearchView {
-    private static final String TAG = " SearchResultFragment ";
+    private static final String TAG = " SearchResult ";
     RecyclerView recyclerViewMealsResult;
     TextView textViewSearchResult;
     SearchResultAdapter searchResultAdapter;
@@ -231,20 +231,20 @@ public class SearchResultFragment extends Fragment implements OnSearchResultClic
     }
 
     @Override
-    public void showSearchedMealData(ArrayList<PojoMeal> meals) {
+    public void showSearchedMealData(List<PojoMeal> meals) {
 
     }
 
     @Override
-    public void showSearchResultData(RootMainMeal mainMeal) {
+    public void showSearchResultData(List<PojoMainMeal> mainMeal) {
         if(mainMeal==null){
 
             searchResultAdapter.setMainMealsList(new ArrayList<>());
             searchResultAdapter.notifyDataSetChanged();
         }else {
-            searchResultAdapter.setMainMealsList(mainMeal.mainMeal);
+            searchResultAdapter.setMainMealsList(mainMeal);
             searchResultAdapter.notifyDataSetChanged();
-            searchByMeal(mainMeal.mainMeal);
+            searchByMeal(mainMeal);
             searchResultAdapter.notifyDataSetChanged();
         }
     }

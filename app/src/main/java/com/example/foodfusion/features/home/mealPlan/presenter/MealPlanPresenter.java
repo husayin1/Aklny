@@ -13,16 +13,15 @@ import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
 
 import java.util.List;
 
-public class MealPlanPresenter implements MealPlanPresenterInterface{
+public class MealPlanPresenter implements MealPlanPresenterInterface {
 
     private FavAndPlannerInterface _repo;
     MealPlanView _view;
 
-    public MealPlanPresenter(MealPlanView _view,FavAndPlannerInterface _repo){
-        this._repo=_repo;
-        this._view=_view;
+    public MealPlanPresenter(MealPlanView _view, FavAndPlannerInterface _repo) {
+        this._repo = _repo;
+        this._view = _view;
     }
-
 
 
     @Override

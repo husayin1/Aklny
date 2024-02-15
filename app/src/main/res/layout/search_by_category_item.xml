@@ -24,7 +24,7 @@
             android:id="@+id/imageViewCategoryItem"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:srcCompat="@drawable/fish" />
+            app:srcCompat="@drawable/molokhia" />
 
         <TextView
             android:id="@+id/textViewCategoryItemName"

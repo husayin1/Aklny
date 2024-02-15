@@ -11,26 +11,26 @@ import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.meal_details.view.MealDetailsView;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
 
-public class MealDetailsPresenter implements MealDetailsPresenterInterface{
+public class MealDetailsPresenter implements MealDetailsPresenterInterface {
     private MealDetailsView _view;
-    private MealLocalDataSourceInterface _localSrc;
     private FavAndPlannerInterface _repo;
 
 
     public MealDetailsPresenter(MealDetailsView _view, FavAndPlannerInterface _repo) {
         this._view = _view;
-        this._repo=_repo;
-    }
-    @Override
-    public void addToFav(PojoMeal meal,OnClickAddListener onClickAddListener) {
-        _repo.addToFavorites(meal,onClickAddListener);
-
+        this._repo = _repo;
     }
 
+    @Override
+    public void addToFav(PojoMeal meal, OnClickAddListener onClickAddListener) {
+        _repo.addToFavorites(meal, onClickAddListener);
+
+    }
+
 
     @Override
-    public void addToPlanner(PojoPlanner meal,OnClickAddListener onClickAddListener) {
-        _repo.addToPlanner(meal,onClickAddListener);
+    public void addToPlanner(PojoPlanner meal, OnClickAddListener onClickAddListener) {
+        _repo.addToPlanner(meal, onClickAddListener);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MealDetailsPresenter implements MealDetailsPresenterInterface{
 
     @Override
     public void removeFromFavorite(PojoMeal meal) {
-            _repo.deleteMealFromFavorites(meal);
+        _repo.deleteMealFromFavorites(meal);
     }
 
 }

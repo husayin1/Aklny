@@ -33,11 +33,11 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.ViewHo
     public static String TAG = "MealPlanAdapter";
     OnDetailsListener _listener;
 
-    public MealPlanAdapter(List<PojoPlanner> meal, Context context,OnDeleteListener listener, OnDetailsListener _listener) {
+    public MealPlanAdapter(List<PojoPlanner> meal, Context context, OnDeleteListener listener, OnDetailsListener _listener) {
         this.meal = meal;
         this.context = context;
         this.listener = listener;
-        this._listener=_listener;
+        this._listener = _listener;
     }
 
     public void setList(List<PojoPlanner> updatedMeals) {
@@ -76,7 +76,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.ViewHo
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 listener.onClickListener(pojo);
                             }
-                        }).setNegativeButton(R.string.no,null).show();
+                        }).setNegativeButton(R.string.no, null).show();
 //                listener.onClickListener(pojo);
             }
         });

@@ -11,21 +11,21 @@ import java.util.List;
 
 public class MealLocalDataSource implements MealLocalDataSourceInterface {
     private MealDAO dao;
-    private static  MealLocalDataSource instance = null;
+    private static MealLocalDataSource instance = null;
     private LiveData<List<PojoMeal>> storedMeals;
 
-    private MealLocalDataSource(Context context){
-        MealDataBase db =MealDataBase.getInstance(context.getApplicationContext());
+    private MealLocalDataSource(Context context) {
+        MealDataBase db = MealDataBase.getInstance(context.getApplicationContext());
         dao = db.getMealDao();
         storedMeals = dao.getAllFavMeals();
     }
-    public static MealLocalDataSource getInstance(Context context){
-        if(instance==null){
+
+    public static MealLocalDataSource getInstance(Context context) {
+        if (instance == null) {
             instance = new MealLocalDataSource(context);
         }
         return instance;
     }
-
 
 
     @Override

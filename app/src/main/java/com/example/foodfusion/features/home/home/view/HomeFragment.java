@@ -47,8 +47,8 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
     private static final String TAG = "Home Fragment";
     HomePresenterInterface homePresenter;
     CardView cardView;
-    ImageView imgView, imageViewRandomMealFavorite;
-    TextView meal_name, meal_description,inspired_meal,rest_meals;
+    ImageView imgView, imageViewRandomMealFavorite,imageViewWhiteWithHeartInside;
+    TextView meal_name, meal_description, inspired_meal, rest_meals;
     RecyclerView recyclerView;
     HomeAdapter homeAdapter;
     ConstraintLayout constraintLayoutFragmentHome;
@@ -80,6 +80,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
         imageViewEmptyList = view.findViewById(R.id.homeNetwork);
         inspired_meal = view.findViewById(R.id.inspired_meal);
         rest_meals = view.findViewById(R.id.rest_meals);
+        imageViewWhiteWithHeartInside=view.findViewById(R.id.imageViewWhiteWithHeartInside);
         imageViewRandomMealFavorite = view.findViewById(R.id.imageViewRandomMealFavorite);
 
         constraintLayoutFragmentHome = view.findViewById(R.id.constraintLayoutFragmentHome);
@@ -100,7 +101,12 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(connectivity.isConnectedWifi()||connectivity.isConnectedMobile()){
+        if (!AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+            imageViewRandomMealFavorite.setVisibility(View.GONE);
+            imageViewWhiteWithHeartInside.setVisibility(View.GONE);
+
+        }
+        if (connectivity.isConnectedWifi() || connectivity.isConnectedMobile()) {
             homePresenter.getRandomMeal();
             homePresenter.getTrendingMeals();
             imageViewEmptyList.setVisibility(View.GONE);
@@ -108,13 +114,13 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
 
             inspired_meal.setVisibility(View.VISIBLE);
             rest_meals.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             cardView.setVisibility(View.GONE);
             inspired_meal.setVisibility(View.GONE);
             rest_meals.setVisibility(View.GONE);
 
             imageViewEmptyList.setVisibility(View.VISIBLE);
-            Toast.makeText(getContext(),R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -133,12 +139,12 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
         imageViewRandomMealFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(AuthenticationFireBaseRepo.getInstance().isAuthenticated()){
-                    if(connectivity.isConnectedMobile()||connectivity.isConnectedWifi()){
+                if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+                    if (connectivity.isConnectedMobile() || connectivity.isConnectedWifi()) {
                         homePresenter.addToFav(meals, new OnClickAddListener() {
                             @Override
                             public void onSuccess() {
-                                Toast.makeText(getContext(), "Added Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -148,12 +154,12 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                             }
                         });
                         imageViewRandomMealFavorite.setImageResource(R.drawable.saveicon);
-                        Toast.makeText(getContext(), "Add " + meals.getStrMeal() + " to favorite", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Add " + meals.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    } else {
                         Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
                     }
-                }else{
+                } else {
 
                     new AlertDialog.Builder(getContext())
                             .setTitle(R.string.sign_up_for_more_features)
@@ -163,11 +169,11 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     goToAuthActivity();
                                 }
-                            }).setNegativeButton(R.string.cancel,null).show();
+                            }).setNegativeButton(R.string.cancel, null).show();
                 }
             }
         });
-        Toast.makeText(this.getContext(), "Got Random Data", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this.getContext(), "Check The Daily Meal", Toast.LENGTH_SHORT).show();
         constraintLayoutFragmentHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,6 +189,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
         homeAdapter.setMeals(meals);
         homeAdapter.notifyDataSetChanged();
     }
+
     private void goToAuthActivity() {
         Intent intent = new Intent(getContext(), AuthenticationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

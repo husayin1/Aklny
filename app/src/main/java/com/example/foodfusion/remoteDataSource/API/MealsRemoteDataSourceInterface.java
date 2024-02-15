@@ -11,14 +11,22 @@ import io.reactivex.rxjava3.core.Single;
 public interface MealsRemoteDataSourceInterface {
 
     Single<RootMeal> getRandomMeal();
+
     Single<RootMeal> getTrendingMeals();
-//    Single<RootMeal> geMightLikeMeals();
+
     Single<RootIngredient> getIngredients();
+
     Single<RootCategory> getCategories();
+
     Single<RootArea> getAreas();
+
     Single<RootMainMeal> getMealsByIngredient(String ingredient);
+
     Single<RootMainMeal> getMealsByCategory(String category);
+
     Single<RootMainMeal> getMealsByArea(String country);
+
     Single<RootMeal> searchMealByName(String name);
+
     Single<RootMeal> getMealById(String id);
 }

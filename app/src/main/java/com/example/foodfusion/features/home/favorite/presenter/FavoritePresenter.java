@@ -7,7 +7,6 @@ import com.example.foodfusion.features.home.favorite.view.FavoriteView;
 
 public class FavoritePresenter implements FavoritePresenterInterface {
     private FavoriteView _view;
-//    private MealLocalDataSourceInterface _localSrc;
     private FavAndPlannerInterface _repo;
 
     public FavoritePresenter(FavoriteView _view, FavAndPlannerInterface _repo) {
@@ -15,6 +14,7 @@ public class FavoritePresenter implements FavoritePresenterInterface {
         this._repo = _repo;
 
     }
+
     @Override
     public void getFavoriteMeals() {
         _view.showData(_repo.getFavMealsLiveData());

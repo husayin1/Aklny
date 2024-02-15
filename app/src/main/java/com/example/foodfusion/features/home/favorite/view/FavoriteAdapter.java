@@ -30,11 +30,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     public static String TAG = "FavoriteAdapter";
 
-    public FavoriteAdapter(List<PojoMeal> meal, OnFavoriteClickListener listener, Context context,OnClickDetailsListener listenerForDetails) {
+    public FavoriteAdapter(List<PojoMeal> meal, OnFavoriteClickListener listener, Context context, OnClickDetailsListener listenerForDetails) {
         this.meal = meal;
         this.listener = listener;
         this.context = context;
-        this.listenerForDetails=listenerForDetails;
+        this.listenerForDetails = listenerForDetails;
     }
 
     public void setList(List<PojoMeal> updatedMeals) {
@@ -72,7 +72,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 listener.onFavoriteClick(pojo);
                             }
-                        }).setNegativeButton(R.string.no,null).show();
+                        }).setNegativeButton(R.string.no, null).show();
 //                listener.onFavoriteClick(pojo);
 
             }

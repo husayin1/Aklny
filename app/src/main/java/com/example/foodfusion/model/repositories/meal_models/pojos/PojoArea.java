@@ -10,10 +10,12 @@ public class PojoArea {
     public PojoArea() {
 
     }
-    public PojoArea(String strArea){
+
+    public PojoArea(String strArea) {
         this.strArea = strArea;
         this.thumbnail = getThumbnail();
     }
+
     public String getThumbnail() {
         setThumbnail();
         return thumbnail;
@@ -48,8 +50,8 @@ public class PojoArea {
         countryCode.put("Moroccan", "ma");
         countryCode.put("Polish", "pl");
         countryCode.put("Portuguese", "pt");
-        countryCode.put("Unknown","ps");
-        countryCode.put("Filipino","ph");
+        countryCode.put("Unknown", "ps");
+        countryCode.put("Filipino", "ph");
         this.thumbnail = "https://www.themealdb.com/images/icons/flags/big/64/" + countryCode.get(strArea) + ".png";
     }
 

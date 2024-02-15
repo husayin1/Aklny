@@ -24,16 +24,17 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
-//country search adapter
+    //country search adapter
     private Context context;
     private List<PojoArea> areas;
     OnCountryClickListener listener;
+
     public void setCountryList(List<PojoArea> areas) {
         this.areas = areas;
     }
 
 
-    public CountryAdapter(Context context, List<PojoArea> areas , OnCountryClickListener listener) {
+    public CountryAdapter(Context context, List<PojoArea> areas, OnCountryClickListener listener) {
         this.context = context;
         this.areas = areas;
         this.listener = listener;
@@ -43,7 +44,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     @Override
     public CountryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.search_by_country_item,parent,false);
+        View v = layoutInflater.inflate(R.layout.search_by_country_item, parent, false);
         CountryAdapter.ViewHolder vh = new CountryAdapter.ViewHolder(v);
         return vh;
     }
@@ -52,7 +53,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
         String name = areas.get(position).strArea;
         holder.textViewCountrySearch.setText(areas.get(position).strArea);
-        if(areas.get(position).strArea.equals("Unknown")){
+        if (areas.get(position).strArea.equals("Unknown")) {
             holder.textViewCountrySearch.setText("Palestine");
         }
         String image = areas.get(position).getThumbnail();
@@ -73,8 +74,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     }
 
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewCountrySearch;
         ConstraintLayout countryItemLayout;

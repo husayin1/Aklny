@@ -12,13 +12,13 @@ import com.example.foodfusion.features.home.home.view.HomeView;
 
 import io.reactivex.rxjava3.core.Single;
 
-public class HomePresenter implements HomePresenterInterface{
+public class HomePresenter implements HomePresenterInterface {
     private static final String TAG = "HomePresenter";
     private final HomeView homeView;
     private final FavAndPlannerInterface repo;
     private final MealsRepositoryInterface mealsRepository;
 
-    public HomePresenter(HomeView homeView,FavAndPlannerInterface repo,MealsRepositoryInterface mealsRepository) {
+    public HomePresenter(HomeView homeView, FavAndPlannerInterface repo, MealsRepositoryInterface mealsRepository) {
         this.homeView = homeView;
         this.repo = repo;
         this.mealsRepository = mealsRepository;
@@ -26,8 +26,8 @@ public class HomePresenter implements HomePresenterInterface{
 
     @Override
     public void getRandomMeal() {
-        mealsRepository.getRandomMeal().subscribe((rootMeal,throwable)->{
-            if(rootMeal.meals!=null){
+        mealsRepository.getRandomMeal().subscribe((rootMeal, throwable) -> {
+            if (rootMeal.meals != null) {
                 PojoMeal meal = rootMeal.meals.get(0);
                 homeView.showRandomData(meal);
             }
@@ -37,8 +37,8 @@ public class HomePresenter implements HomePresenterInterface{
 
     @Override
     public void getTrendingMeals() {
-        mealsRepository.getTrendingMeals().subscribe((rootMeal,t)->{
-            if(rootMeal.meals!=null){
+        mealsRepository.getTrendingMeals().subscribe((rootMeal, t) -> {
+            if (rootMeal.meals != null) {
                 homeView.showTrendingMeals(rootMeal.meals);
             }
         });
@@ -58,7 +58,7 @@ public class HomePresenter implements HomePresenterInterface{
 
     @Override
     public void addToFav(PojoMeal meal, OnClickAddListener onClickAddListener) {
-        repo.addToFavorites(meal,onClickAddListener);
+        repo.addToFavorites(meal, onClickAddListener);
     }
 
 /*    @Override

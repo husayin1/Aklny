@@ -16,21 +16,23 @@ import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchPresenter implements SearchPresenterInterface{
+public class SearchPresenter implements SearchPresenterInterface {
     private static final String TAG = "SearchPresenter";
 
-    private MealsRepositoryInterface mealsRepository;
-    private SearchView searchView;
+    private final MealsRepositoryInterface mealsRepository;
+    private final SearchView searchView;
 
-    public SearchPresenter(MealsRepositoryInterface mealsRepository,SearchView searchView){
+    public SearchPresenter(MealsRepositoryInterface mealsRepository, SearchView searchView) {
         this.mealsRepository = mealsRepository;
-        this.searchView=searchView;
+        this.searchView = searchView;
     }
+
     @Override
     public void getIngredients() {
         mealsRepository.getRootIngredients().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -51,6 +53,7 @@ public class SearchPresenter implements SearchPresenterInterface{
                     }
                 });
     }
+
     @Override
     public void getCategories() {
         mealsRepository.getRootCategories().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -75,46 +78,111 @@ public class SearchPresenter implements SearchPresenterInterface{
     @Override
     public void getAreas() {
         mealsRepository.getRootAreas().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe((rootArea ,t)->{
-                    searchView.showCountriesData(rootArea);
+                .subscribe(new SingleObserver<RootArea>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull RootArea rootArea) {
+                        searchView.showCountriesData(rootArea);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
                 });
     }
 
     @Override
     public void getMealByIngredient(String name) {
         mealsRepository.getRootMealByIngredient(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(((mainMeal, throwable) -> {
-                    searchView.showSearchResultData(mainMeal);
-                }));
+                .subscribe(new SingleObserver<RootMainMeal>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull RootMainMeal mainMeal) {
+                        searchView.showSearchResultData(mainMeal.mainMeal);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
     }
 
     @Override
     public void getMealByCountry(String name) {
         mealsRepository.getRootMealByCountry(name).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(((mainMeal, throwable) -> {
-                    searchView.showSearchResultData(mainMeal);
-                }));
+                .subscribe(new SingleObserver<RootMainMeal>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull RootMainMeal mainMeal) {
+                        searchView.showSearchResultData(mainMeal.mainMeal);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
     }
 
     @Override
     public void getMealByCategory(String name) {
 //        return mealsRepository.getRootMealByCategory(name);
         mealsRepository.getRootMealByCategory(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe((mainMeal, throwable) -> {
-                    searchView.showSearchResultData(mainMeal);
+                .subscribe(new SingleObserver<RootMainMeal>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull RootMainMeal mainMeal) {
+                        searchView.showSearchResultData(mainMeal.mainMeal);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
                 });
     }
 
     @Override
     public void searchMealByName(String name) {
-         mealsRepository.searchMealByName(name).subscribeOn(Schedulers.io())
-                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((rootMeal ,t )->{
+        mealsRepository.searchMealByName(name).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<RootMeal>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
-                    searchView.showSearchedMealData(rootMeal.meals);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull RootMeal rootMeal) {
+                        searchView.showSearchedMealData(rootMeal.meals);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
                 });
     }
-    public Single<RootMeal> getMealById(String id){
+
+    public Single<RootMeal> getMealById(String id) {
         return mealsRepository.getMealById(id);
     }
 }

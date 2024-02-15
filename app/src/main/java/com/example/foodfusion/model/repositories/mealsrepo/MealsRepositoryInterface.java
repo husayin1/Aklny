@@ -10,14 +10,22 @@ import io.reactivex.rxjava3.core.Single;
 
 public interface MealsRepositoryInterface {
     Single<RootMeal> getRandomMeal();
+
     Single<RootIngredient> getRootIngredients();
+
     Single<RootCategory> getRootCategories();
+
     Single<RootArea> getRootAreas();
+
     Single<RootMainMeal> getRootMealByIngredient(String name);
+
     Single<RootMainMeal> getRootMealByCategory(String name);
+
     Single<RootMainMeal> getRootMealByCountry(String name);
+
     Single<RootMeal> getTrendingMeals();
-//    Single<RootMeal> geMightLikeMeals();
+
     Single<RootMeal> searchMealByName(String name);
+
     Single<RootMeal> getMealById(String id);
 }

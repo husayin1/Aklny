@@ -7,16 +7,7 @@ import java.util.ArrayList;
 
 public interface HomeView {
     void showRandomData(PojoMeal meals);
+
     void showTrendingMeals(ArrayList<PojoMeal> meals);
-//    void geMightLikeMeals(ArrayList<PojoMeal> meals);
 
-//    void showRandomErrorMsg(String error);
-
-//    void showCategoriesData(List<PojoCategory> categories);
-
-//    void showCategoriesErrorMsg(String error);
-
-//    void showIngredientsData(List<PojoIngredient> meals);
-
-//    void showIngredientsErrorMsg(String error);
 }

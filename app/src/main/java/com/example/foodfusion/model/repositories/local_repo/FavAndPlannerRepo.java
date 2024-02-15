@@ -15,19 +15,19 @@ import com.example.foodfusion.remoteDataSource.remoteFireBaes.realdatabase.RealT
 
 import java.util.List;
 
-public class FavAndPlannerRepo implements FavAndPlannerInterface{
+public class FavAndPlannerRepo implements FavAndPlannerInterface {
     private final static String TAG = "FavPlannerRepo";
     private MealDataBase dataBase;
     private static RealTimeData realTimeData;
     private static FavAndPlannerRepo repository;
 
-    private FavAndPlannerRepo(Context context){
+    private FavAndPlannerRepo(Context context) {
         dataBase = MealDataBase.getInstance(context);
     }
 
-    public static synchronized FavAndPlannerRepo getInstance(Context context){
+    public static synchronized FavAndPlannerRepo getInstance(Context context) {
         realTimeData = new RealTimeData();
-        if(repository==null){
+        if (repository == null) {
             repository = new FavAndPlannerRepo(context);
         }
         return repository;
@@ -127,7 +127,7 @@ public class FavAndPlannerRepo implements FavAndPlannerInterface{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                realTimeData.deleteFavMeal(meal.idMeal, ()-> dataBase.getMealDao().deleteMealFromFavorite(meal));
+                realTimeData.deleteFavMeal(meal.idMeal, () -> dataBase.getMealDao().deleteMealFromFavorite(meal));
             }
         }).start();
 
@@ -153,7 +153,7 @@ public class FavAndPlannerRepo implements FavAndPlannerInterface{
     }
 
     @Override
-    public LiveData<PojoPlanner> getMealFromWeekPlanById(String id){
+    public LiveData<PojoPlanner> getMealFromWeekPlanById(String id) {
         return dataBase.getMealDao().getPlannerMealById(id);
     }
 }
