@@ -140,13 +140,13 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                             mealDetailsPresenterInterface.addToFav(pojo, new OnClickAddListener() {
                                 @Override
                                 public void onSuccess() {
-                                    Toast.makeText(getContext(), "Added" + pojo.getStrMeal() + " to favorite", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Added" + pojo.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
                                     imageViewAddToFavITemDetails.setImageResource(R.drawable.saveicon);
                                 }
 
                                 @Override
                                 public void onFailure(String err) {
-                                    Toast.makeText(getContext(), "Failed To Add", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Failed To Save", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         } else {
@@ -200,7 +200,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                                         mealDetailsPresenterInterface.addToPlanner(MealToMealPlanner.MealToMealPlanner(pojo, DateFormat.getString(year, month, day), 0), new OnClickAddListener() {
                                             @Override
                                             public void onSuccess() {
-                                                Toast.makeText(view.getContext(), "Added Successfully to calendar", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(view.getContext(), "Added Successfully to planner", Toast.LENGTH_SHORT).show();
                                                 imageViewAddToCalendarItemDetails.setImageResource(R.drawable.calendar);
                                                 Intent intent = new Intent(Intent.ACTION_INSERT)
                                                         .setData(CalendarContract.Events.CONTENT_URI)
@@ -215,7 +215,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                                                 Toast.makeText(view.getContext(), err, Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                        Toast.makeText(getContext(), "Inserted " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Saved " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
                                         Log.i(TAG, "onDateSet: " + DateFormat.getString(year, month, day));
                                     }
                                 }, year, month, day);

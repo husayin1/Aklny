@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.HomeFragment, R.id.SearchFragment, R.id.FavoriteFragment, R.id.MealPlanFragment).build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

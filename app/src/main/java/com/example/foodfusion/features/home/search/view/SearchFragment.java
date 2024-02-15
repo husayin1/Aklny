@@ -155,7 +155,7 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
 
     @Override
     public void onCategoryClick(String name) {
-        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
         SearchType searchType = new SearchType(SearchType.category, name);
         SearchFragmentDirections.ActionSearchFragmentToSearchResultFragment action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);
@@ -163,7 +163,7 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
 
     @Override
     public void onCountryClick(String name) {
-        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), name + "from search fragment", Toast.LENGTH_SHORT).show();
         SearchType searchType = new SearchType(SearchType.country, name);
         SearchFragmentDirections.ActionSearchFragmentToSearchResultFragment action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);
@@ -171,7 +171,7 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
 
     @Override
     public void onIngredientClick(String name) {
-        Toast.makeText(getContext(), name + " from search Fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), name + " from search Fragment", Toast.LENGTH_SHORT).show();
         SearchType searchType = new SearchType(SearchType.ingredient, name);
         SearchFragmentDirections.ActionSearchFragmentToSearchResultFragment action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchType);
         Navigation.findNavController(requireView()).navigate(action);

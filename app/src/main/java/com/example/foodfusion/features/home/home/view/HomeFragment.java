@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                         homePresenter.addToFav(meals, new OnClickAddListener() {
                             @Override
                             public void onSuccess() {
-                                Toast.makeText(getContext(), "Added Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                             }
                         });
                         imageViewRandomMealFavorite.setImageResource(R.drawable.saveicon);
-                        Toast.makeText(getContext(), "Add " + meals.getStrMeal() + " to favorite", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Add " + meals.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
@@ -173,7 +173,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                 }
             }
         });
-        Toast.makeText(this.getContext(), "Got Random Data", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(), "Check The Daily Meal", Toast.LENGTH_SHORT).show();
         constraintLayoutFragmentHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
