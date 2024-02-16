@@ -85,6 +85,19 @@
             app:layout_constraintTop_toTopOf="@+id/imageViewAddToFavITemDetails"
             app:layout_constraintVertical_bias="0.0" />
 
+
+        <ImageView
+            android:id="@+id/imageViewAddToMobile"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/mobile"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewAddToCalendarItemDetails"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/imageViewAddToCalendarItemDetails"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewAddToCalendarItemDetails" />
+
         <TextView
             android:id="@+id/txtViewMealNameItemDetails"
             android:layout_width="0dp"

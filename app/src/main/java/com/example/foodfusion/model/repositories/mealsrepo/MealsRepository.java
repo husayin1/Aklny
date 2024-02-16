@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MealsRepository implements MealsRepositoryInterface {
     private static final String TAG = "MealsRepo";
-    private MealsRemoteDataSourceInterface mealsRemoteDataSource;
+    private final MealsRemoteDataSourceInterface mealsRemoteDataSource;
     private Single<RootMeal> randomMeal;
     private Single<RootIngredient> rootIngredient;
     private Single<RootCategory> rootCategory;
@@ -62,7 +62,7 @@ public class MealsRepository implements MealsRepositoryInterface {
 
     public Single<RootIngredient> getRootIngredients() {
         if (rootIngredient == null) {
-            rootIngredient = mealsRemoteDataSource.getIngredients().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+            rootIngredient = mealsRemoteDataSource.getIngredients();
         }
         return rootIngredient;
     }
@@ -70,7 +70,7 @@ public class MealsRepository implements MealsRepositoryInterface {
     @Override
     public Single<RootCategory> getRootCategories() {
         if (rootCategory == null) {
-            rootCategory = mealsRemoteDataSource.getCategories().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+            rootCategory = mealsRemoteDataSource.getCategories();
         }
         return rootCategory;
     }
@@ -78,33 +78,38 @@ public class MealsRepository implements MealsRepositoryInterface {
     @Override
     public Single<RootArea> getRootAreas() {
         if (rootArea == null) {
-            rootArea = mealsRemoteDataSource.getAreas().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+            rootArea = mealsRemoteDataSource.getAreas();
         }
         return rootArea;
     }
 
     @Override
     public Single<RootMainMeal> getRootMealByIngredient(String id) {
-        rootMealByIngredient = mealsRemoteDataSource.getMealsByIngredient(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        if (rootMealByIngredient == null) {
+            rootMealByIngredient = mealsRemoteDataSource.getMealsByIngredient(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return rootMealByIngredient;
     }
 
     @Override
     public Single<RootMainMeal> getRootMealByCategory(String name) {
-        rootMealByCategory = mealsRemoteDataSource.getMealsByCategory(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        if (rootMealByCategory == null) {
+            rootMealByCategory = mealsRemoteDataSource.getMealsByCategory(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return rootMealByCategory;
     }
 
     @Override
     public Single<RootMainMeal> getRootMealByCountry(String name) {
-        rootMealByArea = mealsRemoteDataSource.getMealsByArea(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        if (rootMealByArea == null) {
+            rootMealByArea = mealsRemoteDataSource.getMealsByArea(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return rootMealByArea;
     }
 
     @Override
     public Single<RootMeal> searchMealByName(String name) {
-        return mealsRemoteDataSource.searchMealByName(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-
+        return mealsRemoteDataSource.searchMealByName(name);
     }
 
     @Override

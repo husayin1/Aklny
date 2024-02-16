@@ -51,10 +51,11 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SearchType searchType = new SearchType();
         String name = ingredients.get(holder.getAbsoluteAdapterPosition()).getStrIngredient();
         holder.textViewIngredientNameItem.setText(ingredients.get(holder.getAbsoluteAdapterPosition()).getStrIngredient());
-        Glide.with(holder.itemView.getContext()).load("https://www.themealdb.com/images/ingredients/" + name + "-Small.png").placeholder(R.drawable.molokhia).error(R.drawable.molokhia).into(holder.imageViewIngredientImageItem);
+        Glide
+                .with(holder.itemView.getContext())
+                .load("https://www.themealdb.com/images/ingredients/" + name + "-Small.png").placeholder(R.drawable.molokhia).error(R.drawable.molokhia).into(holder.imageViewIngredientImageItem);
         holder.ingredientLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

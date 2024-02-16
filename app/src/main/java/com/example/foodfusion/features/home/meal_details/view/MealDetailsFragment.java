@@ -56,7 +56,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     private final static String TAG = "MealDetailsFragment";
     CircleImageView mealDetailsImage;
     TextView textViewMealCateItemDetails, textViewMealCountryItemDetails, txtViewMealNameItemDetails, textViewProcedures;
-    ImageView imageViewAddToCalendarItemDetails, imageViewAddToFavITemDetails;
+    ImageView imageViewAddToCalendarItemDetails, imageViewAddToFavITemDetails,imageViewAddToMobile;
     RecyclerView recyclerViewIngredientsItemDetails;
     YouTubePlayerView youTubePlayerView;
     PojoMeal pojo;
@@ -104,6 +104,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewIngredientsItemDetails.setLayoutManager(linearLayoutManager);
 
+        imageViewAddToMobile= view.findViewById(R.id.imageViewAddToMobile);
 
         adapter = new MealDetailsAdapter(this.getContext(), new ArrayList<>(), this);
         recyclerViewIngredientsItemDetails.setAdapter(adapter);
@@ -180,6 +181,60 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
         });
 
         imageViewAddToCalendarItemDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (connectivity.isConnectedMobile() || connectivity.isConnectedWifi()) {
+                    if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
+                        Calendar calendar = Calendar.getInstance();
+                        int year = calendar.get(Calendar.YEAR);
+                        int month = calendar.get(Calendar.MONTH);
+                        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                        calendar.add(Calendar.DAY_OF_MONTH, 6);
+                        int maxDay = calendar.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                                requireContext(),
+                                new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                        String selectedDay = day + "/" + (month + 1) + "/" + year;
+                                        mealDetailsPresenterInterface.addToPlanner(MealToMealPlanner.MealToMealPlanner(pojo, DateFormat.getString(year, month, day), 0), new OnClickAddListener() {
+                                            @Override
+                                            public void onSuccess() {
+                                                Toast.makeText(view.getContext(), "Added Successfully to planner", Toast.LENGTH_SHORT).show();
+                                                imageViewAddToCalendarItemDetails.setImageResource(R.drawable.calendar);
+                                            }
+
+                                            @Override
+                                            public void onFailure(String err) {
+                                                Toast.makeText(view.getContext(), err, Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        Toast.makeText(getContext(), "Saved " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
+                                        Log.i(TAG, "onDateSet: " + DateFormat.getString(year, month, day));
+                                    }
+                                }, year, month, day);
+                        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                        datePickerDialog.show();
+                    } else {
+                        //sign in
+                        new AlertDialog.Builder(getContext())
+                                .setTitle(R.string.sign_up_for_more_features)
+                                .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
+                                .setPositiveButton(R.string.sign_up, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        goToAuthActivity();
+                                    }
+                                }).setNegativeButton(R.string.cancel, null).show();
+                    }
+                } else {
+                    Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        imageViewAddToMobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (connectivity.isConnectedMobile() || connectivity.isConnectedWifi()) {

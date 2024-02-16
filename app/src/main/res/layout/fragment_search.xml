@@ -93,6 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:background="@drawable/search_bar"
+            android:backgroundTint="@color/yellow"
             android:clickable="true"
             android:drawableStart="@drawable/baseline_search_24"
             android:focusable="false"

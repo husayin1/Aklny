@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +86,48 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         TextInputEditTextPasswordLogin = view.findViewById(R.id.TextInputEditTextPasswordLogin);
         btn_login = view.findViewById(R.id.btn_login);
         skip_textView_login = view.findViewById(R.id.skip_textView_login);
+        TextInputEditTextEmailLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!isValidEmail(editable.toString())){
+                    TextInputEditTextEmailLogin.setError("Please Enter valid email");
+                }else{
+                    TextInputEditTextEmailLogin.setError(null);
+                }
+
+            }
+        });
+        TextInputEditTextPasswordLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!isPassLengthGT7(editable.toString())){
+                    TextInputEditTextPasswordLogin.setError("At least 7 numbers");
+                }else{
+                    TextInputEditTextPasswordLogin.setError(null);
+                }
+            }
+        });
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -120,7 +164,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void onSuccess(FirebaseUser user) {
-//        Toast.makeText(this.getContext(), "SignedInSuccessfully", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this.getContext(), "Signed in Successfully", Toast.LENGTH_SHORT).show();
         goToMainActivity();
     }
 
@@ -196,4 +240,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             }
         }
     });
+    public boolean isPassLengthGT7(String pass) {
+        return pass.length() >= 7;
+    }
+
 }
