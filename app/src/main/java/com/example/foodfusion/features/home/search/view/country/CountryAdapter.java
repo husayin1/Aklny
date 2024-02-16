@@ -25,7 +25,7 @@ import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
     //country search adapter
-    private Context context;
+    private final Context context;
     private List<PojoArea> areas;
     OnCountryClickListener listener;
 
@@ -57,7 +57,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             holder.textViewCountrySearch.setText("Palestine");
         }
         String image = areas.get(position).getThumbnail();
-        Glide.with(holder.itemView.getContext()).load(image).placeholder(R.drawable.molokhia).error(R.drawable.molokhia).into(holder.imgView);
+        Glide
+                .with(holder.itemView.getContext())
+                .load(image)
+                .placeholder(R.drawable.molokhia)
+                .error(R.drawable.molokhia)
+                .into(holder.imgView);
 
         holder.countryItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override

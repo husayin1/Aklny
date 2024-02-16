@@ -54,7 +54,7 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
     SearchPresenterInterface searchPresenter;
 
     SearchMealAdapter searchAdapter;
-
+    LottieAnimationView search_empty;
     public SearchMealFragment() {
         // Required empty public constructor
     }
@@ -75,6 +75,7 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
         searchAdapter = new SearchMealAdapter(this.getContext(), new ArrayList<>(), this);
         searchByMealNameRecyclerView.setLayoutManager(gridLayoutManager);
         searchByMealNameRecyclerView.setAdapter(searchAdapter);
+        search_empty = view.findViewById(R.id.search_empty);
         editTextSearchByMealName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -177,9 +178,11 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
         if(meals!=null){
             searchAdapter.setMeals(meals);
             searchAdapter.notifyDataSetChanged();
+            search_empty.setVisibility(View.GONE);
         }else{
             searchAdapter.setMeals(new ArrayList<>());
             searchAdapter.notifyDataSetChanged();
+            search_empty.setVisibility(View.VISIBLE);
         }
 //        searching(meals);
     }

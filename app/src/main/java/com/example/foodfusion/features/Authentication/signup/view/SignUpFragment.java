@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +87,64 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         textInputEditTextConfirmPasswordSignUp = view.findViewById(R.id.textInputEditTextConfirmPasswordSignUp);
         textInputEditTextPasswordSignUp = view.findViewById(R.id.textInputEditTextPasswordSignUp);
 
+        textInputEditTextEmailSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!isValidEmail(editable.toString())){
+                    textInputEditTextEmailSignUp.setError("Please Enter valid email");
+                }
+
+            }
+        });
+        textInputEditTextPasswordSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!isPassLengthGT7(editable.toString()))
+                    textInputEditTextPasswordSignUp.setError("At least 7 numbers");
+                else
+                    textInputEditTextPasswordSignUp.setError(null);
+            }
+        });
+        textInputEditTextConfirmPasswordSignUp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!checkPasswordEquality())
+                    textInputEditTextConfirmPasswordSignUp.setError("Passwords are not equal");
+                else
+                    textInputEditTextConfirmPasswordSignUp.setError(null);
+            }
+        });
+
         firebaseAuth = FirebaseAuth.getInstance();
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +194,6 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private boolean checkPasswordEquality() {
-
         return textInputEditTextPasswordSignUp.getText().toString().equals(textInputEditTextConfirmPasswordSignUp.getText().toString());
     }
 
@@ -172,7 +231,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void OnSignUpFailure(String message) {
-//        Toast.makeText(this.getContext(), "Cant SignUp now", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(), "this email exist", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -185,7 +244,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void OnFailureSignUpGoogle(String message) {
-//        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
     }
 
     public boolean isPassLengthGT7(String pass) {

@@ -10,7 +10,12 @@ import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMeal
 import com.example.foodfusion.model.repositories.mealsrepo.MealsRepositoryInterface;
 import com.example.foodfusion.features.home.home.view.HomeView;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenter implements HomePresenterInterface {
     private static final String TAG = "HomePresenter";
@@ -26,22 +31,50 @@ public class HomePresenter implements HomePresenterInterface {
 
     @Override
     public void getRandomMeal() {
-        mealsRepository.getRandomMeal().subscribe((rootMeal, throwable) -> {
-            if (rootMeal.meals != null) {
-                PojoMeal meal = rootMeal.meals.get(0);
-                homeView.showRandomData(meal);
+        mealsRepository.getRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<RootMeal>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull RootMeal rootMeal) {
+                if (rootMeal.meals != null) {
+                    PojoMeal meal = rootMeal.meals.get(0);
+                    homeView.showRandomData(meal);
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
             }
         });
+
     }
 
 
     @Override
     public void getTrendingMeals() {
-        mealsRepository.getTrendingMeals().subscribe((rootMeal, t) -> {
-            if (rootMeal.meals != null) {
-                homeView.showTrendingMeals(rootMeal.meals);
-            }
-        });
+        mealsRepository.getTrendingMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SingleObserver<RootMeal>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onSuccess(@NonNull RootMeal rootMeal) {
+                                if (rootMeal.meals != null) {
+                                    homeView.showTrendingMeals(rootMeal.meals);
+                                }
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+                        });
     }
 
 /*
