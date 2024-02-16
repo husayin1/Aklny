@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     app:cardElevation="4dp"
     app:cardMaxElevation="6dp"
-    android:backgroundTint="@color/yellow"
+    android:backgroundTint="@color/white"
     app:cardUseCompatPadding="true"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
