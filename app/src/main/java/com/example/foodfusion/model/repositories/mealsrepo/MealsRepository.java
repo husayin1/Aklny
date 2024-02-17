@@ -85,26 +85,17 @@ public class MealsRepository implements MealsRepositoryInterface {
 
     @Override
     public Single<RootMainMeal> getRootMealByIngredient(String id) {
-        if (rootMealByIngredient == null) {
-            rootMealByIngredient = mealsRemoteDataSource.getMealsByIngredient(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        }
-        return rootMealByIngredient;
+        return mealsRemoteDataSource.getMealsByIngredient(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public Single<RootMainMeal> getRootMealByCategory(String name) {
-        if (rootMealByCategory == null) {
-            rootMealByCategory = mealsRemoteDataSource.getMealsByCategory(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        }
-        return rootMealByCategory;
+        return mealsRemoteDataSource.getMealsByCategory(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public Single<RootMainMeal> getRootMealByCountry(String name) {
-        if (rootMealByArea == null) {
-            rootMealByArea = mealsRemoteDataSource.getMealsByArea(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        }
-        return rootMealByArea;
+        return mealsRemoteDataSource.getMealsByArea(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override

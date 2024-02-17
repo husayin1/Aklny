@@ -111,14 +111,12 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
             homePresenter.getTrendingMeals();
             imageViewEmptyList.setVisibility(View.GONE);
             cardView.setVisibility(View.VISIBLE);
-
             inspired_meal.setVisibility(View.VISIBLE);
             rest_meals.setVisibility(View.VISIBLE);
         } else {
             cardView.setVisibility(View.GONE);
             inspired_meal.setVisibility(View.GONE);
             rest_meals.setVisibility(View.GONE);
-
             imageViewEmptyList.setVisibility(View.VISIBLE);
             Toast.makeText(getContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_SHORT).show();
         }
