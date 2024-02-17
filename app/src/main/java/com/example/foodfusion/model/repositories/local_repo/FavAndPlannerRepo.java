@@ -119,12 +119,7 @@ public class FavAndPlannerRepo implements FavAndPlannerInterface {
 
     @Override
     public void deleteMealFromPlanner(PojoPlanner planner) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                realTimeData.deletePlannedMeal(planner.id, ()->dataBase.getMealDao().deleteMealFromPlanner(planner));
-            }
-        }).start();
+        realTimeData.deletePlannedMeal(planner.id, () -> new Thread(() -> dataBase.getMealDao().deleteMealFromPlanner(planner)).start());
     }
 
     @Override
