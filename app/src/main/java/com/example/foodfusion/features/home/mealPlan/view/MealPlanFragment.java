@@ -41,7 +41,6 @@ public class MealPlanFragment extends Fragment implements MealPlanView,OnDeleteL
     LottieAnimationView imageViewEmptyListMeals;
     LinearLayoutManager layoutManager;
     MealPlanPresenterInterface mealPlanPresenter;
-
     Connectivity connectivity;
     public MealPlanFragment() {
         // Required empty public constructor
@@ -91,7 +90,7 @@ public class MealPlanFragment extends Fragment implements MealPlanView,OnDeleteL
 
     @Override
     public void showData(List<PojoPlanner> meal) {
-        Log.i(TAG, "showData: from meal plan ffraggment"+meal.size());
+        Log.i(TAG, "showData: from meal plan fraggment"+meal.size());
         if(meal.isEmpty()){
             imageViewEmptyListMeals.setVisibility(View.VISIBLE);
             mealPlanAdapter.setList(new ArrayList<>());
@@ -99,12 +98,14 @@ public class MealPlanFragment extends Fragment implements MealPlanView,OnDeleteL
         }else{
             imageViewEmptyListMeals.setVisibility(View.GONE);
             mealPlanAdapter.setList(meal);
+            Log.i(TAG, "showData: "+meal.get(0).strMeal);
             mealPlanAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public void deleteMeal(PojoPlanner meal) {
+        Log.i(TAG, "deleteMeal: meal "+meal.strMeal);
         mealPlanPresenter.removeItemFromPlanner(meal);
     }
 

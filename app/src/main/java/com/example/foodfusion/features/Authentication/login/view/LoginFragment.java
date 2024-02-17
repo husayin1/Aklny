@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,7 +149,10 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             }
         });
 
-        btn_login.setOnClickListener(v -> login());
+        btn_login.setOnClickListener(v -> {
+            login();
+            Log.i("TAG", "onViewCreated:succ ");
+        });
         skip_textView_login.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
                     .setTitle("Wait! Are you sure?")
@@ -164,12 +168,14 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void onSuccess(FirebaseUser user) {
+        Log.i("TAG", "onSuccess: "+user.getDisplayName());
 //        Toast.makeText(this.getContext(), "Signed in Successfully", Toast.LENGTH_SHORT).show();
         goToMainActivity();
     }
 
     @Override
     public void onFailure(String message) {
+        Log.i("TAG", "onFailure: ");
         Toast.makeText(this.getContext(), "email or password is not valid", Toast.LENGTH_SHORT).show();
     }
 
@@ -194,6 +200,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         if (checkValidation() && isValidEmail(userName)) {
             loginPresenter.login(userName, password);
         }
+        Log.i("TAG", "login: "+userName);
     }
 
     private boolean checkValidation() {
