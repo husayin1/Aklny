@@ -316,7 +316,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     private void goToAuthActivity() {
         Intent intent = new Intent(getActivity(), AuthenticationActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(intent);
+        startActivity(intent);
     }
 
     void makeIngredientsArray(PojoMeal pojo, ArrayList<PojoIngredientWithMeasure> ingredientList) {

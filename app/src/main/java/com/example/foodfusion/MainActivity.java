@@ -40,17 +40,14 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
     GoogleSignInOptions gso;
     Connectivity connectivity;
-//    MealsRepositoryInterface _repo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).getRandomMeal();
         AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).getTrendingMeals();
-//        _repo = MealsRepository.getInstance();
-//        _repo.getRandomMeal();
-//        _repo.getTrendingMeals();
-        connectivity = new Connectivity(this);
+
+        connectivity = new Connectivity(MainActivity.this);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("555667483551-p94tuutqrtkt2gvl3iicu0ejipcr3q8n.apps.googleusercontent.com")
                 .requestEmail()
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.HomeFragment, R.id.SearchFragment, R.id.FavoriteFragment, R.id.MealPlanFragment).build();
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottom_navigation, navController);
 
@@ -102,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             toolbar.setVisibility(View.GONE);
             navController.addOnDestinationChangedListener((controller, destination, args) -> {
                 if (destination.getId() == R.id.FavoriteFragment || destination.getId() == R.id.MealPlanFragment) {
-                    new AlertDialog.Builder(this)
+                    new AlertDialog.Builder(MainActivity.this)
                             .setTitle(R.string.sign_up_for_more_features)
                             .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
                             .setPositiveButton(R.string.sign_up, new DialogInterface.OnClickListener() {
@@ -147,15 +144,13 @@ public class MainActivity extends AppCompatActivity {
         if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
             AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).refreshMeals();
             AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).refreshPlanner();
-//            FavAndPlannerRepo.getInstance(this.getApplicationContext()).refreshMeals();
-//            FavAndPlannerRepo.getInstance(this.getApplicationContext()).refreshPlanner();
         }
     }
 
     private void goToAuthActivity() {
         Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
         startActivity(intent);
-
+        finish();
     }
 
 

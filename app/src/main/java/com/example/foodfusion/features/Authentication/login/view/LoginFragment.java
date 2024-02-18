@@ -57,9 +57,6 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     FirebaseAuth firebaseAuth;
     GoogleSignInClient googleSignInClient;
     ImageView googleSignInImage;
-    Context context;
-
-    AuthenticationActivity activity;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -75,14 +72,13 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        loginPresenter = LoginPresenter.getInstance(this);
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loginPresenter = LoginPresenter.getInstance(this);
         txt_login = view.findViewById(R.id.txt_login);
         txt_login_description = view.findViewById(R.id.txt_login_description);
         tv_signUp = view.findViewById(R.id.tv_signUp);
@@ -226,8 +222,9 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(this.requireActivity(),MainActivity.class);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+//        requireActivity().finish();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {

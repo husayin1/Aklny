@@ -70,7 +70,13 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         connectivity = new Connectivity(requireContext());
 
         recyclerView = view.findViewById(R.id.recycelrViewTrendingMeals);
@@ -94,14 +100,6 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(homeAdapter);
         homePresenter = new HomePresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(getContext())));
-
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         if (!AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
             imageViewRandomMealFavorite.setVisibility(View.GONE);
             imageViewWhiteWithHeartInside.setVisibility(View.GONE);
@@ -121,6 +119,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
             imageViewEmptyList.setVisibility(View.VISIBLE);
             Toast.makeText(getContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
