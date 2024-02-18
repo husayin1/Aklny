@@ -2,6 +2,7 @@ package com.example.foodfusion.features.Authentication.login.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,7 +57,9 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     FirebaseAuth firebaseAuth;
     GoogleSignInClient googleSignInClient;
     ImageView googleSignInImage;
+    Context context;
 
+    AuthenticationActivity activity;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -65,6 +68,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -100,9 +104,9 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!isValidEmail(editable.toString())){
+                if (!isValidEmail(editable.toString())) {
                     TextInputEditTextEmailLogin.setError("Please Enter valid email");
-                }else{
+                } else {
                     TextInputEditTextEmailLogin.setError(null);
                 }
 
@@ -121,14 +125,13 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!isPassLengthGT7(editable.toString())){
+                if (!isPassLengthGT7(editable.toString())) {
                     TextInputEditTextPasswordLogin.setError("At least 7 numbers");
-                }else{
+                } else {
                     TextInputEditTextPasswordLogin.setError(null);
                 }
             }
         });
-
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -168,8 +171,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void onSuccess(FirebaseUser user) {
-        Log.i("TAG", "onSuccess: "+user.getDisplayName());
-//        Toast.makeText(this.getContext(), "Signed in Successfully", Toast.LENGTH_SHORT).show();
+        Log.i("TAG", "onSuccess: " + user.getDisplayName());
         goToMainActivity();
     }
 
@@ -181,11 +183,11 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void onSuccessSignInGoogle() {
-//        Toast.makeText(this.getContext(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
+/*//        Toast.makeText(this.getContext(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(requireContext(), MainActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-//        goToMainActivity();
+        startActivity(intent);*/
+        goToMainActivity();
     }
     //husayn@
 
@@ -200,7 +202,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         if (checkValidation() && isValidEmail(userName)) {
             loginPresenter.login(userName, password);
         }
-        Log.i("TAG", "login: "+userName);
+        Log.i("TAG", "login: " + userName);
     }
 
     private boolean checkValidation() {
@@ -224,10 +226,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(requireContext(), MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(this.requireActivity(),MainActivity.class);
         startActivity(intent);
-//        getActivity().finish();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -247,8 +247,13 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             }
         }
     });
+
     public boolean isPassLengthGT7(String pass) {
         return pass.length() >= 7;
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
 }

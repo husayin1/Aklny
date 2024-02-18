@@ -36,6 +36,7 @@ import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
 import com.example.foodfusion.features.home.home.presenter.HomePresenter;
 import com.example.foodfusion.features.home.home.presenter.HomePresenterInterface;
 import com.example.foodfusion.features.home.home.view.HomeFragmentDirections.*;
+import com.example.foodfusion.model.repositories.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 
 
@@ -92,7 +93,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
         homeAdapter = new HomeAdapter(this.getContext(), new ArrayList<>(), this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(homeAdapter);
-        homePresenter = new HomePresenter(this, FavAndPlannerRepo.getInstance(getContext()), MealsRepository.getInstance());
+        homePresenter = new HomePresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(getContext())));
 
 
         return view;
@@ -127,7 +128,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
     @Override
     public void showRandomData(PojoMeal meals) {
         Log.i(TAG, "showData: " + meals);
-        Glide.with(this.getContext())
+        Glide.with(this)
                 .load(meals.strMealThumb)
                 .centerCrop()
                 .placeholder(R.drawable.molokhia)
@@ -198,9 +199,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
     public void onClick(PojoMeal meal, View view) {
         Toast.makeText(getContext(), meal.strMeal, Toast.LENGTH_SHORT).show();
         ActionHomeFragment2ToMealDetailsFragment2 actions = HomeFragmentDirections.actionHomeFragment2ToMealDetailsFragment2(meal);
-        Navigation.findNavController(getView()).navigate(actions);
+        Navigation.findNavController(view).navigate(actions);
         Log.i(TAG, "onClick:FragmentHome clicked on " + meal.strMeal);
     }
-
-
 }

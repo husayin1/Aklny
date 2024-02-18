@@ -24,6 +24,8 @@ import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.favorite.presenter.FavoritePresenter;
 import com.example.foodfusion.features.home.favorite.presenter.FavoritePresenterInterface;
 import com.example.foodfusion.features.home.meal_details.view.OnClickDetailsListener;
+import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repositories.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
         imageViewEmptyList = view.findViewById(R.id.imageViewEmptyList);
         recyclerViewFavoriteMeals = view.findViewById(R.id.recyclerViewFavoriteMeals);
         favoritePresenterInterface = new FavoritePresenter(this,
-                FavAndPlannerRepo.getInstance(getContext())
+                AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(getContext()))
         );
         favoriteAdapter = new FavoriteAdapter(new ArrayList<>(), this, getContext(), this);
         gridLayoutManager = new GridLayoutManager(getContext(), 2);

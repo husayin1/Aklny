@@ -33,6 +33,7 @@ import com.example.foodfusion.features.home.home.view.OnClickListener;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenter;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenterInterface;
 import com.example.foodfusion.features.home.search.view.SearchView;
+import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoArea;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
@@ -41,6 +42,7 @@ import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCate
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
 import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repositories.repo.AppRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,7 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_meal, container, false);
-        searchPresenter = new SearchPresenter(MealsRepository.getInstance(), this);
+        searchPresenter = new SearchPresenter(AppRepo.getInstance(MealsRepository.getInstance(), FavAndPlannerRepo.getInstance(getContext())), this);
         editTextSearchByMealName = view.findViewById(R.id.editTextSearchByMealName);
         searchByMealNameRecyclerView = view.findViewById(R.id.searchByMealNameRecyclerView);
         editTextSearchByMealName.requestFocus();

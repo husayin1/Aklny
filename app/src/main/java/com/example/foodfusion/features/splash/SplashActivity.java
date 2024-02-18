@@ -17,7 +17,7 @@ import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_SCREEN_TIME_OUT = 5000;
+    private static final int SPLASH_SCREEN_TIME_OUT = 3000;
     private static final String TAG = "SplashActivity";
     private static final String firstTimeOnBoarding = "firstTime";
     private static final String SharePrefName = "mySharedPref";

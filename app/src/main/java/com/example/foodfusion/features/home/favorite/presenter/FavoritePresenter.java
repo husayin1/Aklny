@@ -1,18 +1,16 @@
 package com.example.foodfusion.features.home.favorite.presenter;
 
-import com.example.foodfusion.localDataSource.MealLocalDataSourceInterface;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerInterface;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.favorite.view.FavoriteView;
+import com.example.foodfusion.model.repositories.repo.AppRepo;
 
 public class FavoritePresenter implements FavoritePresenterInterface {
     private FavoriteView _view;
-    private FavAndPlannerInterface _repo;
+    private AppRepo _repo;
 
-    public FavoritePresenter(FavoriteView _view, FavAndPlannerInterface _repo) {
+    public FavoritePresenter(FavoriteView _view, AppRepo _repo) {
         this._view = _view;
         this._repo = _repo;
-
     }
 
     @Override

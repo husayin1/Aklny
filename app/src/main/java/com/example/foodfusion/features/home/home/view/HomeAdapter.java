@@ -40,7 +40,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
         holder.textViewName.setText(meals.get(position).strMeal);
-        Glide.with(holder.getView().getContext()).load(meals.get(position).strMealThumb).placeholder(R.drawable.molokhia).into(holder.getImageView());
+        Glide.with(context).load(meals.get(position).strMealThumb).placeholder(R.drawable.molokhia).into(holder.getImageView());
         holder.getView().setOnClickListener(v -> {
             clickListener.onClick(meals.get(position), holder.view);
             Log.i("TAG", "onBindViewHolder: " + position);

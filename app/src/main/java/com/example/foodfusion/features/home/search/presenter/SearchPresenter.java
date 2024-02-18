@@ -1,22 +1,16 @@
 package com.example.foodfusion.features.home.search.presenter;
 
-import com.example.foodfusion.features.home.home.view.HomeView;
 import com.example.foodfusion.features.home.search.view.SearchView;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoIngredient;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
 import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMeal;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepositoryInterface;
+import com.example.foodfusion.model.repositories.repo.AppRepo;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -25,10 +19,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class SearchPresenter implements SearchPresenterInterface {
     private static final String TAG = "SearchPresenter";
 
-    private final MealsRepositoryInterface mealsRepository;
+    private final AppRepo mealsRepository;
     private final SearchView searchView;
 
-    public SearchPresenter(MealsRepositoryInterface mealsRepository, SearchView searchView) {
+    public SearchPresenter(AppRepo mealsRepository, SearchView searchView) {
         this.mealsRepository = mealsRepository;
         this.searchView = searchView;
     }

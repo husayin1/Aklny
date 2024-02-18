@@ -22,6 +22,8 @@ import com.example.foodfusion.model.repositories.authentication_repository.Authe
 import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
 import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
 import com.example.foodfusion.model.repositories.mealsrepo.MealsRepositoryInterface;
+
+import com.example.foodfusion.model.repositories.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,14 +40,16 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
     GoogleSignInOptions gso;
     Connectivity connectivity;
-    MealsRepositoryInterface _repo;
+//    MealsRepositoryInterface _repo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        _repo = MealsRepository.getInstance();
-        _repo.getRandomMeal();
-        _repo.getTrendingMeals();
+        AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).getRandomMeal();
+        AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).getTrendingMeals();
+//        _repo = MealsRepository.getInstance();
+//        _repo.getRandomMeal();
+//        _repo.getTrendingMeals();
         connectivity = new Connectivity(this);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("555667483551-p94tuutqrtkt2gvl3iicu0ejipcr3q8n.apps.googleusercontent.com")
@@ -71,8 +75,10 @@ public class MainActivity extends AppCompatActivity {
                                             goToAuthActivity();
                                         }
                                     });
-                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllFav();
-                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllWeekPlan();
+                                    AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).deleteAllFav();
+                                    AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).deleteAllWeekPlan();
+//                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllFav();
+//                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllWeekPlan();
                                 }
                             }).setNegativeButton(R.string.no, null).show();
                 }
@@ -139,15 +145,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
-            FavAndPlannerRepo.getInstance(this.getApplicationContext()).refreshMeals();
-            FavAndPlannerRepo.getInstance(this.getApplicationContext()).refreshPlanner();
+            AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).refreshMeals();
+            AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).refreshPlanner();
+//            FavAndPlannerRepo.getInstance(this.getApplicationContext()).refreshMeals();
+//            FavAndPlannerRepo.getInstance(this.getApplicationContext()).refreshPlanner();
         }
     }
 
     private void goToAuthActivity() {
         Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
         startActivity(intent);
-        finish();
+
     }
 
 

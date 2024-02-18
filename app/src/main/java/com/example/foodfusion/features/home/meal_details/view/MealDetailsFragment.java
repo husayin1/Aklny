@@ -39,6 +39,8 @@ import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.meal_details.presenter.MealDetailsPresenter;
 import com.example.foodfusion.features.home.meal_details.presenter.MealDetailsPresenterInterface;
 import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repositories.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 import com.example.foodfusion.utilities.ConvertMealToString;
 import com.example.foodfusion.utilities.DateFormat;
@@ -86,7 +88,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mealDetailsPresenterInterface = new MealDetailsPresenter(this, FavAndPlannerRepo.getInstance(this.getContext()));
+        mealDetailsPresenterInterface = new MealDetailsPresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(this.getContext())));
         connectivity = new Connectivity(requireContext());
 
         mealDetailsImage = view.findViewById(R.id.mealDetailsImage);
@@ -312,8 +314,8 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     }
 
     private void goToAuthActivity() {
-        Intent intent = new Intent(getContext(), AuthenticationActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(getActivity(), AuthenticationActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
     }
 
