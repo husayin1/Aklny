@@ -72,6 +72,8 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
 
         return inflater.inflate(R.layout.fragment_home, container, false);
 
+
+
     }
 
     @Override
@@ -119,8 +121,6 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
             imageViewEmptyList.setVisibility(View.VISIBLE);
             Toast.makeText(getContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
 
@@ -191,7 +191,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
     private void goToAuthActivity() {
         Intent intent = new Intent(getContext(), AuthenticationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(intent);
+        startActivity(intent);
     }
 
     @Override
