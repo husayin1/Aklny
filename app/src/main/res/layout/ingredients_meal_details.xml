@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/IngredientConstraint"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/IngredientConstraint"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_width="120dp"
+    android:layout_height="wrap_content">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageViewIngredientImageBGItem"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ingredientCardView"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/ingredients_item_background"
-        android:backgroundTint="@color/pure"
+        app:cardCornerRadius="36dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_oval="true" />
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewIngredientImageItem_mealDetails"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/molokhia"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintTop_toTopOf="@+id/imageViewIngredientImageBGItem"
-        app:riv_oval="true"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewIngredientImageItem_mealDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="ContentDescription"
+            android:padding="8dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+    </com.google.android.material.card.MaterialCardView>
 
 
     <TextView
@@ -38,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintEnd_toEndOf="@+id/ingredientCardView"
+        app:layout_constraintStart_toStartOf="@+id/ingredientCardView"
+        app:layout_constraintTop_toBottomOf="@+id/ingredientCardView"
         tools:text="Mulukhiyah" />
 
     <TextView
@@ -50,8 +47,8 @@
         android:layout_marginTop="4dp"
         android:textColor="@color/black"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
-        app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
+        app:layout_constraintEnd_toEndOf="@+id/ingredientCardView"
+        app:layout_constraintStart_toStartOf="@+id/ingredientCardView"
         app:layout_constraintTop_toBottomOf="@+id/textViewIngredientNameItem_mealDetails"
         tools:text="1 sliced" />
 </androidx.constraintlayout.widget.ConstraintLayout>

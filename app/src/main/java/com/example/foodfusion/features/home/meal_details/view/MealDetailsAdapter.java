@@ -64,7 +64,7 @@ public class MealDetailsAdapter extends RecyclerView.Adapter<MealDetailsAdapter.
         holder.textViewIngredientMeasureItem.setText(ingredientWithMeasuresList.get(position).getIngredientMeasure());
         holder.textViewIngredientNameItem_mealDetails.setText(ingredientWithMeasuresList.get(position).getIngredientName());
         imageUrl = "https://www.themealdb.com/images/ingredients/" + ingredientWithMeasuresList.get(position).getIngredientName() + ".png";
-        Glide.with(
+        /*Glide.with(
                         holder.getView().getContext())
                 .load(imageUrl)
                 .placeholder(R.drawable.molokhia).into(holder.getImageView());
@@ -73,7 +73,7 @@ public class MealDetailsAdapter extends RecyclerView.Adapter<MealDetailsAdapter.
             public void onClick(View view) {
                 _listener.onIngredientClickListener(item);
             }
-        });
+        });*/
 
         Glide.with(context)
                 .load(imageUrl)
@@ -110,7 +110,7 @@ public class MealDetailsAdapter extends RecyclerView.Adapter<MealDetailsAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final CircleImageView imageViewIngredientImageItem_mealDetails;
+        private final ImageView imageViewIngredientImageItem_mealDetails;
         private final TextView textViewIngredientNameItem_mealDetails;
         private final TextView textViewIngredientMeasureItem;
 
