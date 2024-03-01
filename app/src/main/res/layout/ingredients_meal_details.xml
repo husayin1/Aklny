@@ -20,8 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true" />
-
-    <com.makeramen.roundedimageview.RoundedImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewIngredientImageItem_mealDetails"
         android:layout_width="90dp"
         android:layout_height="90dp"
@@ -30,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBGItem"
         app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBGItem"
         app:layout_constraintTop_toTopOf="@+id/imageViewIngredientImageBGItem"
-        app:riv_oval="true" />
+        app:riv_oval="true"/>
+
 
     <TextView
         android:id="@+id/textViewIngredientNameItem_mealDetails"

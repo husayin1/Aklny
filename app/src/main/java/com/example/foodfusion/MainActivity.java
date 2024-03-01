@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
                                     });
                                     AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).deleteAllFav();
                                     AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(MainActivity.this)).deleteAllWeekPlan();
-//                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllFav();
-//                                    FavAndPlannerRepo.getInstance(MainActivity.this).deleteAllWeekPlan();
                                 }
                             }).setNegativeButton(R.string.no, null).show();
                 }
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             toolbar.setVisibility(View.GONE);
             navController.addOnDestinationChangedListener((controller, destination, args) -> {
                 if (destination.getId() == R.id.FavoriteFragment || destination.getId() == R.id.MealPlanFragment) {
-                    new AlertDialog.Builder(MainActivity.this)
+                    new AlertDialog.Builder(this)
                             .setTitle(R.string.sign_up_for_more_features)
                             .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
                             .setPositiveButton(R.string.sign_up, new DialogInterface.OnClickListener() {

@@ -13,23 +13,16 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MealsRepository implements MealsRepositoryInterface {
-    private static final String TAG = "MealsRepo";
     private final MealsRemoteDataSourceInterface mealsRemoteDataSource;
     private Single<RootMeal> randomMeal;
     private Single<RootIngredient> rootIngredient;
     private Single<RootCategory> rootCategory;
     private Single<RootArea> rootArea;
-    private Single<RootMainMeal> rootMealByArea;
-    private Single<RootMainMeal> rootMealByIngredient;
-    private Single<RootMainMeal> rootMealByCategory;
     private Single<RootMeal> trendingMeals;
-
     private static MealsRepository instance;
-
     private MealsRepository() {
         this.mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
     }
-
     public static synchronized MealsRepository getInstance() {
         if (instance == null) {
             instance = new MealsRepository();
