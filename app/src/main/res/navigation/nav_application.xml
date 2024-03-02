@@ -52,7 +52,7 @@
         android:name="com.example.foodfusion.features.home.meal_details.view.MealDetailsFragment">
         <argument
             android:name="TransferMeal"
-            app:argType="com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal" />
+            app:argType="com.example.foodfusion.model.meal_models.pojos.PojoMeal" />
         <action
             android:id="@+id/action_MealDetailsFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />

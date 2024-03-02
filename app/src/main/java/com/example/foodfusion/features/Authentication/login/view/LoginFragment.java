@@ -2,6 +2,7 @@ package com.example.foodfusion.features.Authentication.login.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,13 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodfusion.features.Authentication.AuthenticationActivity;
 import com.example.foodfusion.features.Authentication.login.presenter.LoginPresenter;
 import com.example.foodfusion.features.Authentication.login.presenter.LoginPresenterInterface;
 import com.example.foodfusion.MainActivity;
 import com.example.foodfusion.R;
-import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationFireBaseRepo;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -57,7 +55,6 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     GoogleSignInClient googleSignInClient;
     ImageView googleSignInImage;
 
-
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -65,6 +62,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -100,9 +98,9 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!isValidEmail(editable.toString())){
+                if (!isValidEmail(editable.toString())) {
                     TextInputEditTextEmailLogin.setError("Please Enter valid email");
-                }else{
+                } else {
                     TextInputEditTextEmailLogin.setError(null);
                 }
 
@@ -121,19 +119,18 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!isPassLengthGT7(editable.toString())){
+                if (!isPassLengthGT7(editable.toString())) {
                     TextInputEditTextPasswordLogin.setError("At least 7 numbers");
-                }else{
+                } else {
                     TextInputEditTextPasswordLogin.setError(null);
                 }
             }
         });
 
 
-
         firebaseAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
 
         googleSignInImage.setOnClickListener(v -> {
             Intent intent = googleSignInClient.getSignInIntent();
@@ -154,7 +151,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             Log.i("TAG", "onViewCreated:succ ");
         });
         skip_textView_login.setOnClickListener(v -> {
-            new AlertDialog.Builder(getContext())
+            new AlertDialog.Builder(requireActivity())
                     .setTitle("Wait! Are you sure?")
                     .setMessage("You will miss out on personalized content and saving our delicious recipes.")
                     .setPositiveButton("Yes, Iam sure", new DialogInterface.OnClickListener() {
@@ -168,30 +165,28 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void onSuccess(FirebaseUser user) {
-        Log.i("TAG", "onSuccess: "+user.getDisplayName());
-//        Toast.makeText(this.getContext(), "Signed in Successfully", Toast.LENGTH_SHORT).show();
+        Log.i("TAG", "onSuccess: " + user.getDisplayName());
         goToMainActivity();
     }
 
     @Override
     public void onFailure(String message) {
         Log.i("TAG", "onFailure: ");
-        Toast.makeText(this.getContext(), "email or password is not valid", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "email or password is not valid", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccessSignInGoogle() {
-//        Toast.makeText(this.getContext(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(requireContext(), MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+      Toast.makeText(requireActivity(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-//        goToMainActivity();
     }
     //husayn@
 
     @Override
     public void OnFailureSignInGoogle(String message) {
-        Toast.makeText(requireContext(), "Failed to Sign in with google", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "Failed to Sign in with google", Toast.LENGTH_SHORT).show();
     }
 
     private void login() {
@@ -200,7 +195,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         if (checkValidation() && isValidEmail(userName)) {
             loginPresenter.login(userName, password);
         }
-        Log.i("TAG", "login: "+userName);
+        Log.i("TAG", "login: " + userName);
     }
 
     private boolean checkValidation() {
@@ -212,7 +207,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         )
             return true;
         else {
-            Toast.makeText(this.getContext(), "Please fill data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Please fill data", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -224,10 +219,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(requireContext(), MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
-//        getActivity().finish();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -247,8 +240,13 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             }
         }
     });
+
     public boolean isPassLengthGT7(String pass) {
         return pass.length() >= 7;
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
 }

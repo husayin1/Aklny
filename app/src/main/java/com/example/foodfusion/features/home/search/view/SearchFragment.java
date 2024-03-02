@@ -26,13 +26,14 @@ import com.example.foodfusion.features.home.search.view.country.CountryAdapter;
 import com.example.foodfusion.features.home.search.view.country.OnCountryClickListener;
 import com.example.foodfusion.features.home.search.view.ingredient.IngredientAdapter;
 import com.example.foodfusion.features.home.search.view.ingredient.OnIngredientClickListener;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.meal_models.pojos.PojoMainMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.root_pojos.RootArea;
+import com.example.foodfusion.model.meal_models.root_pojos.RootCategory;
+import com.example.foodfusion.model.meal_models.root_pojos.RootIngredient;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 
 import java.util.ArrayList;
@@ -63,8 +64,8 @@ public class SearchFragment extends Fragment implements OnCountryClickListener, 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        searchPresenter = new SearchPresenter(MealsRepository.getInstance(), this);
-        connectivity = new Connectivity(getContext());
+        searchPresenter = new SearchPresenter(AppRepo.getInstance(MealsRepository.getInstance(), FavAndPlannerRepo.getInstance(getContext())), this);
+        connectivity = new Connectivity(requireContext());
 
 
         countriesRecyclerView = view.findViewById(R.id.countriesRecyclerView);

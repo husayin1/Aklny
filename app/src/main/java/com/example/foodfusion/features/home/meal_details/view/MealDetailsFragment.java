@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.CalendarContract;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,20 +28,19 @@ import com.bumptech.glide.Glide;
 import com.example.foodfusion.R;
 import com.example.foodfusion.features.Authentication.AuthenticationActivity;
 import com.example.foodfusion.features.home.search.view.result.SearchType;
-import com.example.foodfusion.localDataSource.MealLocalDataSource;
-import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationFireBaseRepo;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
-import com.example.foodfusion.model.repositories.local_repo.OnClickAddListener;
-import com.example.foodfusion.model.repositories.meal_models.pojos.MealToMealPlanner;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoIngredientWithMeasure;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.authentication_repository.AuthenticationFireBaseRepo;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.local_repo.OnClickAddListener;
+import com.example.foodfusion.model.meal_models.pojos.MealToMealPlanner;
+import com.example.foodfusion.model.meal_models.pojos.PojoIngredientWithMeasure;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.meal_details.presenter.MealDetailsPresenter;
 import com.example.foodfusion.features.home.meal_details.presenter.MealDetailsPresenterInterface;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 import com.example.foodfusion.utilities.ConvertMealToString;
 import com.example.foodfusion.utilities.DateFormat;
-import com.google.android.material.datepicker.MaterialDatePicker;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -86,7 +84,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mealDetailsPresenterInterface = new MealDetailsPresenter(this, FavAndPlannerRepo.getInstance(this.getContext()));
+        mealDetailsPresenterInterface = new MealDetailsPresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(this.getContext())));
         connectivity = new Connectivity(requireContext());
 
         mealDetailsImage = view.findViewById(R.id.mealDetailsImage);
@@ -312,9 +310,9 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     }
 
     private void goToAuthActivity() {
-        Intent intent = new Intent(getContext(), AuthenticationActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(intent);
+        Intent intent = new Intent(getActivity(), AuthenticationActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     void makeIngredientsArray(PojoMeal pojo, ArrayList<PojoIngredientWithMeasure> ingredientList) {

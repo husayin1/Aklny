@@ -1,10 +1,6 @@
 package com.example.foodfusion.features.home.search.presenter;
 
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMeal;
+import com.example.foodfusion.model.meal_models.root_pojos.RootMeal;
 
 import io.reactivex.rxjava3.core.Single;
 

@@ -13,21 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.foodfusion.R;
 import com.example.foodfusion.features.home.mealPlan.presenter.MealPlanPresenter;
 import com.example.foodfusion.features.home.mealPlan.presenter.MealPlanPresenterInterface;
-import com.example.foodfusion.localDataSource.MealLocalDataSource;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
-import com.example.foodfusion.model.repositories.meal_models.pojos.MealToMealPlanner;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.meal_models.pojos.MealToMealPlanner;
+import com.example.foodfusion.model.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 import com.example.foodfusion.utilities.DateFormat;
-
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,7 +58,7 @@ public class MealPlanFragment extends Fragment implements MealPlanView,OnDeleteL
         calendarView = view.findViewById(R.id.calendarView);
         recyclerViewMealPlan = view.findViewById(R.id.recyclerViewMealPlan);
         imageViewEmptyListMeals = view.findViewById(R.id.imageViewEmptyListMeals);
-        mealPlanPresenter = new MealPlanPresenter(this, FavAndPlannerRepo.getInstance(getContext()));
+        mealPlanPresenter = new MealPlanPresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(getContext())));
         layoutManager = new LinearLayoutManager(this.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 

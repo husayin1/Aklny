@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodfusion.R;
-import com.example.foodfusion.features.home.search.view.result.SearchType;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoIngredient;
+import com.example.foodfusion.model.meal_models.pojos.PojoIngredient;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;

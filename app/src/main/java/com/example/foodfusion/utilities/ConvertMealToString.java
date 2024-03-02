@@ -1,6 +1,6 @@
 package com.example.foodfusion.utilities;
 
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 
 public class ConvertMealToString {
     public static String getMealString(PojoMeal meal) {

@@ -31,6 +31,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -83,4 +86,5 @@ dependencies {
     implementation ("io.reactivex.rxjava3:rxjava:3.1.6")
     implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
     implementation("androidx.room:room-rxjava3:$2.6.1")
+    implementation ("androidx.palette:palette:1.0.0")
 }

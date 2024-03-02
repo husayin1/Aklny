@@ -1,22 +1,20 @@
 package com.example.foodfusion.features.home.meal_details.presenter;
 
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.foodfusion.localDataSource.MealLocalDataSourceInterface;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerInterface;
-import com.example.foodfusion.model.repositories.local_repo.OnClickAddListener;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.local_repo.OnClickAddListener;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.meal_details.view.MealDetailsView;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.repo.AppRepo;
 
 public class MealDetailsPresenter implements MealDetailsPresenterInterface {
     private MealDetailsView _view;
-    private FavAndPlannerInterface _repo;
+    private AppRepo _repo;
 
 
-    public MealDetailsPresenter(MealDetailsView _view, FavAndPlannerInterface _repo) {
+    public MealDetailsPresenter(MealDetailsView _view, AppRepo _repo) {
         this._view = _view;
         this._repo = _repo;
     }

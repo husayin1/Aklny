@@ -2,7 +2,7 @@ package com.example.foodfusion.features.home.favorite.view;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 
 import java.util.List;
 

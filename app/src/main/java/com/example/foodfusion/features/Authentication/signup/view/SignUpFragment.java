@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodfusion.databinding.FragmentSignupBinding;
 import com.example.foodfusion.features.Authentication.signup.presenter.SignUpPresenter;
 import com.example.foodfusion.features.Authentication.signup.presenter.SignUpPresenterInterface;
 import com.example.foodfusion.MainActivity;
@@ -42,17 +43,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 
 public class SignUpFragment extends Fragment implements SignUpViewInterface {
-    Button backBtn;
-    TextInputEditText textInputEditTextEmailSignUp;
-    TextInputEditText textInputEditTextPasswordSignUp;
-    TextInputEditText textInputEditTextConfirmPasswordSignUp;
-    Button signupBtn;
-    TextView txt_signup;
-    TextView txt_signup_word;
     SignUpPresenterInterface signUpPresenter;
     FirebaseAuth firebaseAuth;
     GoogleSignInClient googleSignInClient;
-    ImageView googleSignUpImage;
+    FragmentSignupBinding binding;
     public static final String TAG = "SignUpFragment";
 
     public SignUpFragment() {
@@ -69,25 +63,15 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         signUpPresenter = SignUpPresenter.getInstance(this);
-        return inflater.inflate(R.layout.fragment_signup, container, false);
+        binding = FragmentSignupBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        backBtn = view.findViewById(R.id.haveAccountButton);
-        signupBtn = view.findViewById(R.id.btnSignUp);
-        googleSignUpImage = view.findViewById(R.id.googleSignUpImage);
-
-        txt_signup = view.findViewById(R.id.txt_signup);
-        txt_signup_word = view.findViewById(R.id.txt_signup_word);
-
-        textInputEditTextEmailSignUp = view.findViewById(R.id.textInputEditTextEmailSignUp);
-        textInputEditTextConfirmPasswordSignUp = view.findViewById(R.id.textInputEditTextConfirmPasswordSignUp);
-        textInputEditTextPasswordSignUp = view.findViewById(R.id.textInputEditTextPasswordSignUp);
-
-        textInputEditTextEmailSignUp.addTextChangedListener(new TextWatcher() {
+        binding.textInputEditTextEmailSignUp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -101,12 +85,12 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(!isValidEmail(editable.toString())){
-                    textInputEditTextEmailSignUp.setError("Please Enter valid email");
+                    binding.textInputEditTextEmailSignUp.setError("Please Enter valid email");
                 }
 
             }
         });
-        textInputEditTextPasswordSignUp.addTextChangedListener(new TextWatcher() {
+        binding.textInputEditTextPasswordSignUp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -120,12 +104,12 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(!isPassLengthGT7(editable.toString()))
-                    textInputEditTextPasswordSignUp.setError("At least 7 numbers");
+                    binding.textInputEditTextPasswordSignUp.setError("At least 7 numbers");
                 else
-                    textInputEditTextPasswordSignUp.setError(null);
+                    binding.textInputEditTextPasswordSignUp.setError(null);
             }
         });
-        textInputEditTextConfirmPasswordSignUp.addTextChangedListener(new TextWatcher() {
+        binding.textInputEditTextConfirmPasswordSignUp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -139,35 +123,32 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(!checkPasswordEquality())
-                    textInputEditTextConfirmPasswordSignUp.setError("Passwords are not equal");
+                    binding.textInputEditTextConfirmPasswordSignUp.setError("Passwords are not equal");
                 else
-                    textInputEditTextConfirmPasswordSignUp.setError(null);
+                    binding.textInputEditTextConfirmPasswordSignUp.setError(null);
             }
         });
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment);
-            }
-        });
-        signupBtn.setOnClickListener(v -> signUp());
+        binding.haveAccountButton.setOnClickListener(v->
+                Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment));
+        binding.btnSignUp.setOnClickListener(v -> signUp());
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
 
-        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
 
-        googleSignUpImage.setOnClickListener(v -> {
+
+        binding.googleSignUpImage.setOnClickListener(v -> {
             Intent intent = googleSignInClient.getSignInIntent();
             activityResultLauncher.launch(intent);
         });
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
 
     }
 
 
     private void signUp() {
-        String userName = String.valueOf(textInputEditTextEmailSignUp.getText());
-        String password = String.valueOf(textInputEditTextPasswordSignUp.getText());
+        String userName = String.valueOf(binding.textInputEditTextEmailSignUp.getText());
+        String password = String.valueOf(binding.textInputEditTextPasswordSignUp.getText());
         if (checkValidation(userName, password) && isDataFilled()) {
             signUpPresenter.signUp(userName, password);
         }
@@ -179,28 +160,28 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     private boolean isDataFilled() {
         if (
-                textInputEditTextEmailSignUp.getText() != null &&
-                        !textInputEditTextEmailSignUp.getText().toString().isEmpty() &&
-                        textInputEditTextConfirmPasswordSignUp.getText() != null &&
-                        !textInputEditTextConfirmPasswordSignUp.getText().toString().isEmpty() &&
-                        textInputEditTextPasswordSignUp.getText() != null &&
-                        !textInputEditTextPasswordSignUp.getText().toString().isEmpty()
+                binding.textInputEditTextEmailSignUp.getText() != null &&
+                        !binding.textInputEditTextEmailSignUp.getText().toString().isEmpty() &&
+                        binding.textInputEditTextConfirmPasswordSignUp.getText() != null &&
+                        !binding.textInputEditTextConfirmPasswordSignUp.getText().toString().isEmpty() &&
+                        binding.textInputEditTextPasswordSignUp.getText() != null &&
+                        !binding.textInputEditTextPasswordSignUp.getText().toString().isEmpty()
         )
             return true;
         else {
-            Toast.makeText(this.getContext(), "Please Fill data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Please Fill data", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
 
     private boolean checkPasswordEquality() {
-        return textInputEditTextPasswordSignUp.getText().toString().equals(textInputEditTextConfirmPasswordSignUp.getText().toString());
+        return binding.textInputEditTextPasswordSignUp.getText().toString().equals(binding.textInputEditTextConfirmPasswordSignUp.getText().toString());
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(this.getContext(), MainActivity.class);
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.getContext().startActivity(intent);
+        requireActivity().startActivity(intent);
     }
 
 
@@ -225,26 +206,26 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void onSignUpSuccess(FirebaseUser user) {
-        Toast.makeText(this.getContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
         goToMainActivity();
     }
 
     @Override
     public void OnSignUpFailure(String message) {
-        Toast.makeText(this.getContext(), "this email exist", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "this email exist", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccessSignUpGoogle() {
-        Toast.makeText(this.getContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this.getContext(), MainActivity.class);
+        Toast.makeText(requireActivity(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     @Override
     public void OnFailureSignUpGoogle(String message) {
-        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
     }
 
     public boolean isPassLengthGT7(String pass) {

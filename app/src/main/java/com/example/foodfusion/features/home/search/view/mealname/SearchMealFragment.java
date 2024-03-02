@@ -2,10 +2,6 @@ package com.example.foodfusion.features.home.search.view.mealname;
 
 import android.content.Context;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.*;
-import io.reactivex.rxjava3.disposables.Disposable;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,35 +13,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.foodfusion.R;
-import com.example.foodfusion.features.home.home.view.HomeAdapter;
-import com.example.foodfusion.features.home.home.view.HomeFragmentDirections;
 import com.example.foodfusion.features.home.home.view.OnClickListener;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenter;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenterInterface;
 import com.example.foodfusion.features.home.search.view.SearchView;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoArea;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.meal_models.pojos.PojoMainMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.root_pojos.RootArea;
+import com.example.foodfusion.model.meal_models.root_pojos.RootCategory;
+import com.example.foodfusion.model.meal_models.root_pojos.RootIngredient;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repo.AppRepo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class SearchMealFragment extends Fragment implements SearchView, OnClickListener {
     private static final String TAG = "SearchMealFragment";
@@ -64,7 +54,7 @@ public class SearchMealFragment extends Fragment implements SearchView, OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_meal, container, false);
-        searchPresenter = new SearchPresenter(MealsRepository.getInstance(), this);
+        searchPresenter = new SearchPresenter(AppRepo.getInstance(MealsRepository.getInstance(), FavAndPlannerRepo.getInstance(getContext())), this);
         editTextSearchByMealName = view.findViewById(R.id.editTextSearchByMealName);
         searchByMealNameRecyclerView = view.findViewById(R.id.searchByMealNameRecyclerView);
         editTextSearchByMealName.requestFocus();

@@ -1,10 +1,10 @@
 package com.example.foodfusion.features.Authentication.signup.presenter;
 
 import com.example.foodfusion.features.Authentication.signup.view.SignUpViewInterface;
-import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationFireBaseRepo;
-import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationRepository;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignUpNetworkCallBack;
-import com.example.foodfusion.remoteDataSource.remoteFireBaes.auth.SignUpWithGoogleNetworkCallBack;
+import com.example.foodfusion.model.authentication_repository.AuthenticationFireBaseRepo;
+import com.example.foodfusion.model.authentication_repository.AuthenticationRepository;
+import com.example.foodfusion.network.remoteFireBaes.auth.SignUpNetworkCallBack;
+import com.example.foodfusion.network.remoteFireBaes.auth.SignUpWithGoogleNetworkCallBack;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 

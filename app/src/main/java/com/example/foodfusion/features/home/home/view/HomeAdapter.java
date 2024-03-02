@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodfusion.R;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
         holder.textViewName.setText(meals.get(position).strMeal);
-        Glide.with(holder.getView().getContext()).load(meals.get(position).strMealThumb).placeholder(R.drawable.molokhia).into(holder.getImageView());
+        Glide.with(context).load(meals.get(position).strMealThumb).placeholder(R.drawable.molokhia).into(holder.getImageView());
         holder.getView().setOnClickListener(v -> {
             clickListener.onClick(meals.get(position), holder.view);
             Log.i("TAG", "onBindViewHolder: " + position);
