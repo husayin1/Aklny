@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodfusion.R;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoCategory;
+import com.example.foodfusion.model.meal_models.pojos.PojoCategory;
 
 import java.util.List;
 

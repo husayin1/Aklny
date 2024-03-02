@@ -1,12 +1,12 @@
 package com.example.foodfusion.features.home.home.presenter;
 
 
-import com.example.foodfusion.model.repositories.local_repo.OnClickAddListener;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMeal;
+import com.example.foodfusion.model.local_repo.OnClickAddListener;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.root_pojos.RootMeal;
 
 import com.example.foodfusion.features.home.home.view.HomeView;
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.repo.AppRepo;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;

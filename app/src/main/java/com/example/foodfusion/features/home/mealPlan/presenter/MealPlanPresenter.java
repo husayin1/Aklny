@@ -7,8 +7,8 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import com.example.foodfusion.features.home.mealPlan.view.MealPlanView;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.repo.AppRepo;
 
 import java.util.List;
 

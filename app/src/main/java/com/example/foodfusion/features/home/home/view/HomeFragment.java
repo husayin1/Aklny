@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -27,22 +26,19 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.foodfusion.R;
 import com.example.foodfusion.features.Authentication.AuthenticationActivity;
-import com.example.foodfusion.localDataSource.MealLocalDataSource;
-import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationFireBaseRepo;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
-import com.example.foodfusion.model.repositories.local_repo.OnClickAddListener;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.authentication_repository.AuthenticationFireBaseRepo;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.local_repo.OnClickAddListener;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
 import com.example.foodfusion.features.home.home.presenter.HomePresenter;
 import com.example.foodfusion.features.home.home.presenter.HomePresenterInterface;
 import com.example.foodfusion.features.home.home.view.HomeFragmentDirections.*;
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 
 
 import java.util.ArrayList;
-
-import io.reactivex.rxjava3.disposables.Disposable;
 
 public class HomeFragment extends Fragment implements HomeView, OnClickListener {
     private static final String TAG = "Home Fragment";
@@ -79,7 +75,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        connectivity = new Connectivity(requireContext());
+        connectivity = new Connectivity(requireActivity());
 
         recyclerView = view.findViewById(R.id.recycelrViewTrendingMeals);
         cardView = view.findViewById(R.id.cardView);
@@ -98,10 +94,10 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
 
 
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        homeAdapter = new HomeAdapter(this.getContext(), new ArrayList<>(), this);
+        homeAdapter = new HomeAdapter(requireActivity(), new ArrayList<>(), this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(homeAdapter);
-        homePresenter = new HomePresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(getContext())));
+        homePresenter = new HomePresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(requireActivity())));
         if (!AuthenticationFireBaseRepo.getInstance().isAuthenticated()) {
             imageViewRandomMealFavorite.setVisibility(View.GONE);
             imageViewWhiteWithHeartInside.setVisibility(View.GONE);
@@ -119,7 +115,7 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
             inspired_meal.setVisibility(View.GONE);
             rest_meals.setVisibility(View.GONE);
             imageViewEmptyList.setVisibility(View.VISIBLE);
-            Toast.makeText(getContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -142,24 +138,24 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
                         homePresenter.addToFav(meals, new OnClickAddListener() {
                             @Override
                             public void onSuccess() {
-                                Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireActivity(), "Done", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onFailure(String err) {
-                                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireActivity(), "Failed", Toast.LENGTH_SHORT).show();
 
                             }
                         });
                         imageViewRandomMealFavorite.setImageResource(R.drawable.saveicon);
-                        Toast.makeText(getContext(), "Add " + meals.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), "Add " + meals.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(requireContext(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireActivity(), R.string.please_check_your_internet_connection_and_try_again, Toast.LENGTH_LONG).show();
                     }
                 } else {
 
-                    new AlertDialog.Builder(getContext())
+                    new AlertDialog.Builder(requireActivity())
                             .setTitle(R.string.sign_up_for_more_features)
                             .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
                             .setPositiveButton(R.string.sign_up, new DialogInterface.OnClickListener() {
@@ -189,14 +185,14 @@ public class HomeFragment extends Fragment implements HomeView, OnClickListener 
     }
 
     private void goToAuthActivity() {
-        Intent intent = new Intent(getContext(), AuthenticationActivity.class);
+        Intent intent = new Intent(requireActivity(), AuthenticationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     @Override
     public void onClick(PojoMeal meal, View view) {
-        Toast.makeText(getContext(), meal.strMeal, Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), meal.strMeal, Toast.LENGTH_SHORT).show();
         ActionHomeFragment2ToMealDetailsFragment2 actions = HomeFragmentDirections.actionHomeFragment2ToMealDetailsFragment2(meal);
         Navigation.findNavController(view).navigate(actions);
         Log.i(TAG, "onClick:FragmentHome clicked on " + meal.strMeal);

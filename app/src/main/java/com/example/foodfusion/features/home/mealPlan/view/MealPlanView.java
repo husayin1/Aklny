@@ -1,8 +1,6 @@
 package com.example.foodfusion.features.home.mealPlan.view;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.meal_models.pojos.PojoPlanner;
 
 import java.util.List;
 

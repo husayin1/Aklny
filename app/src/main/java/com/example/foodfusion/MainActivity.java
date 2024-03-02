@@ -12,18 +12,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.foodfusion.features.Authentication.AuthenticationActivity;
-import com.example.foodfusion.model.repositories.authentication_repository.AuthenticationFireBaseRepo;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepositoryInterface;
+import com.example.foodfusion.model.authentication_repository.AuthenticationFireBaseRepo;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
 
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

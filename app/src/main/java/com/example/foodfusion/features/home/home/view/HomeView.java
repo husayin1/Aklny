@@ -1,7 +1,6 @@
 package com.example.foodfusion.features.home.home.view;
 
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 
 import java.util.ArrayList;
 

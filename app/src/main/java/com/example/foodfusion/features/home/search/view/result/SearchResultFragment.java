@@ -17,22 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.foodfusion.R;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenter;
 import com.example.foodfusion.features.home.search.presenter.SearchPresenterInterface;
 import com.example.foodfusion.features.home.search.view.SearchView;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoIngredient;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMainMeal;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootArea;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootCategory;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootIngredient;
-import com.example.foodfusion.model.repositories.meal_models.root_pojos.RootMainMeal;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.meal_models.pojos.PojoMainMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.root_pojos.RootArea;
+import com.example.foodfusion.model.meal_models.root_pojos.RootCategory;
+import com.example.foodfusion.model.meal_models.root_pojos.RootIngredient;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repo.AppRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +41,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchResultFragment extends Fragment implements OnSearchResultClick, SearchView {
     private static final String TAG = " SearchResult ";

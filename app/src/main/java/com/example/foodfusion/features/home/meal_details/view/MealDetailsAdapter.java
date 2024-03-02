@@ -22,12 +22,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.foodfusion.R;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoIngredientWithMeasure;
-import com.makeramen.roundedimageview.RoundedImageView;
+import com.example.foodfusion.model.meal_models.pojos.PojoIngredientWithMeasure;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MealDetailsAdapter extends RecyclerView.Adapter<MealDetailsAdapter.ViewHolder> {
 

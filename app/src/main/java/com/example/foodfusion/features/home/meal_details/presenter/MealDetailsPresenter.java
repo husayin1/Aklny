@@ -3,11 +3,11 @@ package com.example.foodfusion.features.home.meal_details.presenter;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.foodfusion.model.repositories.local_repo.OnClickAddListener;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.local_repo.OnClickAddListener;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.meal_details.view.MealDetailsView;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.meal_models.pojos.PojoPlanner;
+import com.example.foodfusion.model.repo.AppRepo;
 
 public class MealDetailsPresenter implements MealDetailsPresenterInterface {
     private MealDetailsView _view;

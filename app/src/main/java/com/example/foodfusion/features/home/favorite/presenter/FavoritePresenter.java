@@ -1,8 +1,8 @@
 package com.example.foodfusion.features.home.favorite.presenter;
 
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.favorite.view.FavoriteView;
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.repo.AppRepo;
 
 public class FavoritePresenter implements FavoritePresenterInterface {
     private FavoriteView _view;

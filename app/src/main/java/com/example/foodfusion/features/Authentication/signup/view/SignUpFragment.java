@@ -141,7 +141,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
-        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
 
     }
 
@@ -169,7 +169,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
         )
             return true;
         else {
-            Toast.makeText(this.getContext(), "Please Fill data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Please Fill data", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -179,9 +179,9 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(this.getContext(), MainActivity.class);
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.getContext().startActivity(intent);
+        requireActivity().startActivity(intent);
     }
 
 
@@ -206,26 +206,26 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
 
     @Override
     public void onSignUpSuccess(FirebaseUser user) {
-        Toast.makeText(this.getContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
         goToMainActivity();
     }
 
     @Override
     public void OnSignUpFailure(String message) {
-        Toast.makeText(this.getContext(), "this email exist", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "this email exist", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccessSignUpGoogle() {
-        Toast.makeText(this.getContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this.getContext(), MainActivity.class);
+        Toast.makeText(requireActivity(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     @Override
     public void OnFailureSignUpGoogle(String message) {
-        Toast.makeText(requireContext(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireActivity(), "SignUp with google Failed!", Toast.LENGTH_SHORT).show();
     }
 
     public boolean isPassLengthGT7(String pass) {

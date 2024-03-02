@@ -1,10 +1,6 @@
 package com.example.foodfusion.features.home.mealPlan.presenter;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoPlanner;
-
-import java.util.List;
+import com.example.foodfusion.model.meal_models.pojos.PojoPlanner;
 
 public interface MealPlanPresenterInterface {
 

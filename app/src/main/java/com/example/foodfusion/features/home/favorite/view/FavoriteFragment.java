@@ -13,19 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.foodfusion.R;
-import com.example.foodfusion.localDataSource.MealLocalDataSource;
-import com.example.foodfusion.model.repositories.local_repo.FavAndPlannerRepo;
-import com.example.foodfusion.model.repositories.meal_models.pojos.PojoMeal;
+import com.example.foodfusion.model.local_repo.FavAndPlannerRepo;
+import com.example.foodfusion.model.meal_models.pojos.PojoMeal;
 import com.example.foodfusion.features.home.favorite.presenter.FavoritePresenter;
 import com.example.foodfusion.features.home.favorite.presenter.FavoritePresenterInterface;
 import com.example.foodfusion.features.home.meal_details.view.OnClickDetailsListener;
-import com.example.foodfusion.model.repositories.mealsrepo.MealsRepository;
-import com.example.foodfusion.model.repositories.repo.AppRepo;
+import com.example.foodfusion.model.mealsrepo.MealsRepository;
+import com.example.foodfusion.model.repo.AppRepo;
 import com.example.foodfusion.utilities.Connectivity;
 
 import java.util.ArrayList;
