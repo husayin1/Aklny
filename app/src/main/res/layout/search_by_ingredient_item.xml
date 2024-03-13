@@ -5,47 +5,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ingredientLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="120dp"
     android:layout_height="wrap_content">
 
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/imageViewIngredientImageBackGroundItem"
-        android:layout_width="92dp"
-        android:layout_height="92dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/ingredients_item_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_oval="true" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:layout_centerInParent="true"
-        android:layout_margin="16dp"
-        android:foregroundGravity="center"
-        app:cardCornerRadius="160dp"
-        app:cardElevation="4dp"
-        app:cardMaxElevation="6dp"
+        app:cardCornerRadius="36dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:id="@+id/imageViewIngredientImageItem"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:src="@drawable/molokhia"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewIngredientImageBackGroundItem"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewIngredientImageBackGroundItem"
-            app:layout_constraintStart_toStartOf="@+id/imageViewIngredientImageBackGroundItem"
-            app:layout_constraintTop_toTopOf="@+id/imageViewIngredientImageBackGroundItem"
-            app:riv_oval="true" />
-    </androidx.cardview.widget.CardView>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="ContentDescription"
+            android:padding="8dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+    </com.google.android.material.card.MaterialCardView>
+
 
     <TextView
         android:id="@+id/textViewIngredientNameItem"

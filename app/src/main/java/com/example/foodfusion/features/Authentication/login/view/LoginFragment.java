@@ -130,7 +130,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
         firebaseAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
 
         googleSignInImage.setOnClickListener(v -> {
             Intent intent = googleSignInClient.getSignInIntent();
@@ -151,7 +151,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
             Log.i("TAG", "onViewCreated:succ ");
         });
         skip_textView_login.setOnClickListener(v -> {
-            new AlertDialog.Builder(requireActivity())
+            new AlertDialog.Builder(requireContext())
                     .setTitle("Wait! Are you sure?")
                     .setMessage("You will miss out on personalized content and saving our delicious recipes.")
                     .setPositiveButton("Yes, Iam sure", new DialogInterface.OnClickListener() {
@@ -172,21 +172,22 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     @Override
     public void onFailure(String message) {
         Log.i("TAG", "onFailure: ");
-        Toast.makeText(requireActivity(), "email or password is not valid", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "email or password is not valid", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccessSignInGoogle() {
-      Toast.makeText(requireActivity(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(requireActivity(), MainActivity.class);
+      Toast.makeText(requireContext(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(requireContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        requireActivity().finish();
     }
     //husayn@
 
     @Override
     public void OnFailureSignInGoogle(String message) {
-        Toast.makeText(requireActivity(), "Failed to Sign in with google", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Failed to Sign in with google", Toast.LENGTH_SHORT).show();
     }
 
     private void login() {
@@ -207,7 +208,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         )
             return true;
         else {
-            Toast.makeText(requireActivity(), "Please fill data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Please fill data", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -219,8 +220,9 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(requireContext(), MainActivity.class);
         startActivity(intent);
+        requireActivity().finish();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
