@@ -1,16 +1,26 @@
 package com.example.foodfusion.features.home.search.view.ingredient;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.foodfusion.R;
 import com.example.foodfusion.model.meal_models.pojos.PojoIngredient;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -44,17 +54,40 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View v = layoutInflater.inflate(R.layout.search_by_ingredient_item, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String name = ingredients.get(holder.getAbsoluteAdapterPosition()).getStrIngredient();
         holder.textViewIngredientNameItem.setText(ingredients.get(holder.getAbsoluteAdapterPosition()).getStrIngredient());
-        Glide
-                .with(holder.itemView.getContext())
-                .load("https://www.themealdb.com/images/ingredients/" + name + "-Small.png").placeholder(R.drawable.molokhia).error(R.drawable.molokhia).into(holder.imageViewIngredientImageItem);
+        Glide.with(context)
+                .load("https://www.themealdb.com/images/ingredients/" + name + "-Small.png")
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.molokhia)
+                        .error(R.drawable.molokhia))
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        holder.imageViewIngredientImageItem.setImageDrawable(resource);
+
+                        Bitmap bitmap = Bitmap.createBitmap(resource.getIntrinsicWidth(), resource.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(bitmap);
+                        resource.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        resource.draw(canvas);
+
+                        Palette.from(bitmap).generate(palette -> {
+                            int dominantColor = palette.getDominantColor(ContextCompat.getColor(context, android.R.color.black));
+                            holder.imageViewIngredientImageItem.setBackgroundColor(dominantColor);
+                        });
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        holder.imageViewIngredientImageItem.setBackgroundColor(ContextCompat.getColor(context, android.R.color.black));
+                    }
+                });
+
         holder.ingredientLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +105,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewIngredientNameItem;
-        RoundedImageView imageViewIngredientImageItem;
+        ImageView imageViewIngredientImageItem;
         ConstraintLayout ingredientLayout;
         View layout;
 

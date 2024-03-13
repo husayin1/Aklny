@@ -84,7 +84,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mealDetailsPresenterInterface = new MealDetailsPresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(this.getContext())));
+        mealDetailsPresenterInterface = new MealDetailsPresenter(this, AppRepo.getInstance(MealsRepository.getInstance(),FavAndPlannerRepo.getInstance(requireContext())));
         connectivity = new Connectivity(requireContext());
 
         mealDetailsImage = view.findViewById(R.id.mealDetailsImage);
@@ -98,13 +98,13 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
         recyclerViewIngredientsItemDetails = view.findViewById(R.id.recyclerViewIngredientsItemDetails);
         youTubePlayerView = view.findViewById(R.id.youTubePlayerView);
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager = new LinearLayoutManager(requireContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewIngredientsItemDetails.setLayoutManager(linearLayoutManager);
 
         imageViewAddToMobile= view.findViewById(R.id.imageViewAddToMobile);
 
-        adapter = new MealDetailsAdapter(this.getContext(), new ArrayList<>(), this);
+        adapter = new MealDetailsAdapter(requireContext(), new ArrayList<>(), this);
         recyclerViewIngredientsItemDetails.setAdapter(adapter);
         adapter.setIngredientWithMeasuresList(getArrayList(pojo));
 
@@ -139,17 +139,17 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                             mealDetailsPresenterInterface.addToFav(pojo, new OnClickAddListener() {
                                 @Override
                                 public void onSuccess() {
-                                    Toast.makeText(getContext(), "Added" + pojo.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), "Added" + pojo.getStrMeal() + " to Saved", Toast.LENGTH_SHORT).show();
                                     imageViewAddToFavITemDetails.setImageResource(R.drawable.saveicon);
                                 }
 
                                 @Override
                                 public void onFailure(String err) {
-                                    Toast.makeText(getContext(), "Failed To Save", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), "Failed To Save", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         } else {
-                            new AlertDialog.Builder(view.getContext())
+                            new AlertDialog.Builder(requireContext())
                                     .setTitle("UnSave")
                                     .setMessage("Are you sure?")
                                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -161,7 +161,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                                     }).setNegativeButton(R.string.no, null).show();
                         }
                     } else {
-                        new AlertDialog.Builder(getContext())
+                        new AlertDialog.Builder(requireContext())
                                 .setTitle(R.string.sign_up_for_more_features)
                                 .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
                                 .setPositiveButton(R.string.sign_up, new DialogInterface.OnClickListener() {
@@ -199,16 +199,16 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                                         mealDetailsPresenterInterface.addToPlanner(MealToMealPlanner.MealToMealPlanner(pojo, DateFormat.getString(year, month, day), 0), new OnClickAddListener() {
                                             @Override
                                             public void onSuccess() {
-                                                Toast.makeText(view.getContext(), "Added Successfully to planner", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(requireContext(), "Added Successfully to planner", Toast.LENGTH_SHORT).show();
                                                 imageViewAddToCalendarItemDetails.setImageResource(R.drawable.calendar);
                                             }
 
                                             @Override
                                             public void onFailure(String err) {
-                                                Toast.makeText(view.getContext(), err, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(requireContext(), err, Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                        Toast.makeText(getContext(), "Saved " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(), "Saved " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
                                         Log.i(TAG, "onDateSet: " + DateFormat.getString(year, month, day));
                                     }
                                 }, year, month, day);
@@ -217,7 +217,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                         datePickerDialog.show();
                     } else {
                         //sign in
-                        new AlertDialog.Builder(getContext())
+                        new AlertDialog.Builder(requireContext())
                                 .setTitle(R.string.sign_up_for_more_features)
                                 .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
                                 .setPositiveButton(R.string.sign_up, new DialogInterface.OnClickListener() {
@@ -253,7 +253,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                                         mealDetailsPresenterInterface.addToPlanner(MealToMealPlanner.MealToMealPlanner(pojo, DateFormat.getString(year, month, day), 0), new OnClickAddListener() {
                                             @Override
                                             public void onSuccess() {
-                                                Toast.makeText(view.getContext(), "Added Successfully to planner", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(requireContext(), "Added Successfully to planner", Toast.LENGTH_SHORT).show();
                                                 imageViewAddToCalendarItemDetails.setImageResource(R.drawable.calendar);
                                                 Intent intent = new Intent(Intent.ACTION_INSERT)
                                                         .setData(CalendarContract.Events.CONTENT_URI)
@@ -265,10 +265,10 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
 
                                             @Override
                                             public void onFailure(String err) {
-                                                Toast.makeText(view.getContext(), err, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(requireContext(), err, Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                        Toast.makeText(getContext(), "Saved " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(), "Saved " + pojo.strMeal + " In " + selectedDay, Toast.LENGTH_SHORT).show();
                                         Log.i(TAG, "onDateSet: " + DateFormat.getString(year, month, day));
                                     }
                                 }, year, month, day);
@@ -277,7 +277,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
                         datePickerDialog.show();
                     } else {
                         //sign in
-                        new AlertDialog.Builder(getContext())
+                        new AlertDialog.Builder(requireContext())
                                 .setTitle(R.string.sign_up_for_more_features)
                                 .setMessage(R.string.add_your_food_preferences_plan_your_meals_and_more)
                                 .setPositiveButton(R.string.sign_up, new DialogInterface.OnClickListener() {
@@ -310,9 +310,9 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView, On
     }
 
     private void goToAuthActivity() {
-        Intent intent = new Intent(getActivity(), AuthenticationActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(requireContext(), AuthenticationActivity.class);
         startActivity(intent);
+        requireActivity().finish();
     }
 
     void makeIngredientsArray(PojoMeal pojo, ArrayList<PojoIngredientWithMeasure> ingredientList) {
