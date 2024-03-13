@@ -179,9 +179,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     public void onSuccessSignInGoogle() {
       Toast.makeText(requireContext(), "Sign up with google Successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(requireContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        requireActivity().finish();
     }
     //husayn@
 
@@ -221,8 +220,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     private void goToMainActivity() {
         Intent intent = new Intent(requireContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        requireActivity().finish();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
