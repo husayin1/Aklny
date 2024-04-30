@@ -13,20 +13,13 @@ public class SignUpPresenter implements SignUpPresenterInterface, SignUpNetworkC
     private SignUpViewInterface signUpViewInterface;
     private AuthenticationRepository authenticationRepository;
 
-    private static SignUpPresenter signUpPresenter = null;
 
-    private SignUpPresenter(SignUpViewInterface signUpViewInterface) {
+    public SignUpPresenter(SignUpViewInterface signUpViewInterface) {
         this.signUpViewInterface = signUpViewInterface;
         authenticationRepository = AuthenticationFireBaseRepo.getInstance();
 
     }
 
-    public static SignUpPresenter getInstance(SignUpViewInterface signUpViewInterface) {
-        if (signUpPresenter == null) {
-            signUpPresenter = new SignUpPresenter(signUpViewInterface);
-        }
-        return signUpPresenter;
-    }
 
     @Override
     public void signUp(String email, String password) {

@@ -70,7 +70,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        loginPresenter = LoginPresenter.getInstance(this);
+        loginPresenter =new LoginPresenter(this);
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 

@@ -11,19 +11,12 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginPresenter implements LoginPresenterInterface, LoginNetworkCallBack, SignInWithGoogleNetworkCallBack {
     private LoginViewInterface loginViewInterface;
     private AuthenticationRepository authenticationRepository;
-    private static LoginPresenter loginPresenter = null;
 
-    private LoginPresenter(LoginViewInterface loginViewInterface) {
+    public LoginPresenter(LoginViewInterface loginViewInterface) {
         this.loginViewInterface = loginViewInterface;
         authenticationRepository = AuthenticationFireBaseRepo.getInstance();
     }
 
-    public static LoginPresenter getInstance(LoginViewInterface loginViewInterface) {
-        if (loginPresenter == null) {
-            loginPresenter = new LoginPresenter(loginViewInterface);
-        }
-        return loginPresenter;
-    }
 
     @Override
     public void login(String email, String password) {

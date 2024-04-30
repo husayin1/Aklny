@@ -62,7 +62,7 @@ public class SignUpFragment extends Fragment implements SignUpViewInterface {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        signUpPresenter = SignUpPresenter.getInstance(this);
+        signUpPresenter = new SignUpPresenter(this);
         binding = FragmentSignupBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
